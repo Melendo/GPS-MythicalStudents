@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <title>Crear Coleccion</title>
+</head>
+
+<body>
+
+    <%- include("snowflake")%>
+
+    <div class="div_introduction">
+        <header>
+            <div class="header">
+            </div>
+        </header>
+    </div>
+
+    <div class="container">
+        <div class="row vh-80 justify-content-center align-items-center">
+            <div class="col-auto bg-light p-5 rounded">
+                <form action="/crearInstalacion" method="POST" enctype="multipart/form-data">
+                    <h1 class="display-6 text-center">Crear Coleccion</h1>
+
+                            <div class="input-group p-2">
+                                <input type="text" name="nombre" class="form-control" id="floatingInput"
+                                    placeholder="Nombre" required>
+                            </div>
+
+                            <div class="input-group p-2">
+                                <input type="text" name="descripcion" class="form-control" id="floatingInput"
+                                    placeholder="Descripcion de la Coleccion" required>
+                            </div>
+
+                            <div class="input-group p-2">
+                                <h6 class="titulo t_imagen">Imagen</h6>
+                                <input type="file" name="foto" class="form-control" id="floatingInput"
+                                    placeholder="Foto" required>
+                            </div>                             
+
+                            <div class="input-group p-2">
+                                <label class="titulo" for="categorias">Categorías:</label>
+                                <select name="categorias[]" id="categorias" class="form-select" multiple required>
+                                    <optgroup label="Deportes">
+                                        <option>Baloncesto</option>
+                                        <option>Futbol</option>
+                                        <option>Padel</option>
+                                        <option>Tenis</option>
+                                    </optgroup>
+                                    <optgroup label="Animales">
+                                        <option>Marinos</option>
+                                        <option>Domesticos</option>
+                                        <option>Mitologicos</option>
+                                        <option>Voladores</option>
+                                    </optgroup>
+                                    <!-- Agrega más opciones de categorías según sea necesario -->
+                                </select>
+                            </div>
+                            <br>
+
+                            <button type="submit" class="btn btn-primary w-100 boton">Crear coleccion</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
