@@ -1,38 +1,35 @@
 
 function validarFormCrearColeccion() {
-
     var nombre = $("#nombreColección").val();
-    if (!consultarNombreColeccion(nombre)) {
+    if (!consultarNombreColeccion(nombre)) 
         return false;
+    else {
+        insertarColeccion();
+        return true;
     }
-    return true;
 }
 
-
-
-
-
 function consultarNombreColeccion(nombre) {
-    // Realizar la solicitud AJAX al backend    
+    // Realizar la solicitud AJAX al router     
     $.ajax({
-        url: "/crearColeccion/consultarNombre?nombre=" + nombre,
+        url: "/crearColeccion/consultarNombre?",
         type: "GET",
         success: function (reservas) {
-            if (reservas.length > 0)
+            if (reservas.length > 0) {
+                alert("Ya existe una coleccion con ese nombre");
                 return false;
+            }
             else
                 return true;
         },
         error: function (error) {
-            console.error("Error al realizar la consulta: PETICION DE NOMBRE", error);
+            alert("Error al realizar la consulta: PETICION DE NOMBRE", error);
+            return false;
         }
     });
 }
 
-$('#formularioCrearColeccion').submit(function (event) {
-
-    event.preventDefault(); // Evita que el formulario se envíe de manera convencional
-
+function insertarColeccion() {
     // Obtiene los datos del formulario
     var formData = {
         nombre: $('#nombreColección').val(),
@@ -53,7 +50,7 @@ $('#formularioCrearColeccion').submit(function (event) {
         error: function (xhr, status, error) {
             // Maneja cualquier error que ocurra durante la solicitud AJAX
             console.error(error);
-            alert('Ha ocurrido un error al crear la coleccion.\n' + error);
+            alert('Ha ocurrido un error al crear la coleccion.\n');
         }
     });
-});
+}
