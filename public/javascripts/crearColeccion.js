@@ -2,70 +2,65 @@ $(document).ready(function() {
 
     $("#formularioCrearColeccion").submit(function(event) {
         event.preventDefault();
-        nombre = $('#nombreColección').val();
-        descripcion = $('#descripcionColección').val();
-        imagen = $('#imagenColección').val();
-        categorias = $('#categoriasColección').val();
+        var nombre = $('#nombreColección').val();
+        var descripcion = $('#descripcionColección').val();
+        var imagen = $('#imagenColección').val();
+        var categorias = $('#categoriasColección').val();
         
         validarFormCrearColeccion(nombre, descripcion, imagen, categorias);
     })
 
     function validarFormCrearColeccion(nombre, descripcion, imagen, categorias) {
-        if (consultarNombreColeccion(nombre)) {
-            return false;
-        } 
-        else {
-            insertarColeccion(nombre, descripcion, imagen, categorias);
-            return true;
-        }
+        consultarNombreColeccion(nombre)
+            .then(function(existe) {
+                if (!existe) {
+                    insertarColeccion(nombre, descripcion, imagen, categorias);
+                } else {
+                    alert("El nombre de la colección ya existe en la base de datos");
+                    // Aquí puedes mostrar algún mensaje de error al usuario si lo deseas
+                }
+            })
+            .catch(function(error) {
+                console.error("Error al validar el formulario:", error);
+                // Aquí puedes manejar el error de la manera que desees
+            });
     }
     
     function consultarNombreColeccion(nombre) {
-        // Realizar la solicitud AJAX al router     
-        $.ajax({
-            url: "/crearColeccion/consultarNombre",
-            type: "GET",
-            data: nombre,
-            success: function (existe) {
-                if (existe) {
-                    //alert("Existe en la base de datos, se siente")
-                    return true;
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                url: "/crearColeccion/consultarNombre",
+                type: "GET",
+                data: { nombre: nombre }, // Debes enviar los datos en un objeto
+                success: function(existe) {
+                    resolve(existe);
+                },
+                error: function(error) {
+                    reject(error);
                 }
-                else {
-                    //alert("No existe en la base de datos")
-                    return false;
-                }
-            },
-            error: function (error) {
-                console.log(nombre);
-                alert("Error al realizar la consulta: PETICION DE NOMBRE", error);
-                return false;
-            }
+            });
         });
     }
     
     function insertarColeccion(nombre, descripcion, imagen, categorias) {
-        // Obtiene los datos del formulario
         var formData = {
-            nombre, descripcion, imagen, categorias
+            nombre: nombre,
+            descripcion: descripcion,
+            imagen: imagen,
+            categorias: categorias
         };
         
-        // Envía la solicitud AJAX al servidor
         $.ajax({
             type: 'POST',
-            url: '/crearColeccion/insertarColeccion', // Ajusta la URL según tu servidor
+            url: '/crearColeccion/insertarColeccion',
             data: formData,
-            success: function (insertado) {
-                
-                // Maneja la respuesta del servidor (si es necesario)
-                alert('¡Coleccion Creada con Exito!');
+            success: function(insertado) {
+                alert('¡Colección creada con éxito!');
             },
-            error: function (error) {
-                // Maneja cualquier error que ocurra durante la solicitud AJAX
-                console.error(error);
-                alert('Ha ocurrido un error al crear la coleccion.\n');
+            error: function(error) {
+                console.error("Error al insertar la colección:", error);
+                alert('Ha ocurrido un error al crear la colección.\n');
             }
         });
     }
-})
-
+});
