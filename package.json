@@ -16,5 +16,8 @@
     "mysql": "^2.18.1",
     "mysql-sessions": "^1.0.1",
     "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
