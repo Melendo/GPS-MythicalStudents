@@ -32,21 +32,51 @@ router.get('/consultarNombre', function(req, res) {
 router.post('/insertarColeccion', multerFactory.single('foto'), (req, res) => {
     
     db.getConnection(function (error, con) {
-        const querySql = 'INSERT INTO mm_coleccion (nombre, imagen, descripcion) VALUES (?, ?, ?)';
-
-        let { nombre, descripcion, categorias } = req.body;
+        const querySqlInsertColeccion = 'INSERT INTO mm_coleccion (nombre, imagen, descripcion) VALUES (?, ?, ?)';
+        const querySqlSelectUltimaColeccion = 'SELECT MAX(id) AS id FROM mm_coleccion'; // Obtener el último ID insertado
+        const querySqlSelectIdsCategorias = 'SELECT id FROM mm_categorias WHERE categoria IN (?)'; // Obtener IDs de categorías
+        const querySqlInsertCategoriasColeccion = 'INSERT INTO mm_categorias_coleccion (id_coleccion, id_categoria) VALUES (?, ?)'; // Insertar en la tabla categorias_coleccion
+        
+        let { nombre, descripcion } = req.body;
+        let categorias = req.body.categorias.split(',');
         // Verificar si req.file está definido antes de acceder a req.file.buffer
         let foto = req.file ? req.file.buffer : null;
-
-        con.query(querySql, [nombre, "foto", descripcion], (error, result) => {
+        
+        con.query(querySqlInsertColeccion, [nombre, "foto", descripcion], (error, result) => {
             if (error) {
                 throw error;
             }
 
-            con.release();
+            // Obtener el ID de la última colección insertada
+            con.query(querySqlSelectUltimaColeccion, (error, rows) => {
+                if (error) {
+                    throw error;
+                }
+                
+                const idColeccion = rows[0].id;
 
-            res.json({ insertado: true });
-        });
+                // Obtener los IDs de las categorías
+                con.query(querySqlSelectIdsCategorias, [categorias], (error, rows) => {
+                    if (error) {
+                        throw error;
+                    }
+                    
+                    const idsCategorias = rows.map(row => row.id);
+
+                    // Insertar en la tabla categorias_coleccion
+                    idsCategorias.forEach(idCategoria => {
+                        con.query(querySqlInsertCategoriasColeccion, [idColeccion, idCategoria], (error, result) => {
+                            if (error) {
+                                throw error;
+                            }
+                        });
+                    });
+
+                    con.release();
+                    res.json({ insertado: true });
+                });
+            });
+        });
     });
     
   });

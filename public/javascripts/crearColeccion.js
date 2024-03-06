@@ -6,6 +6,7 @@ $(document).ready(function() {
         var descripcion = $('#descripcionColección').val();
         var imagen = $('#imagenColección').val();
         var categorias = $('#categoriasColección').val();
+        categorias = categorias.join(','); // Convertir a cadena separada por comas
         
         validarFormCrearColeccion(nombre, descripcion, imagen, categorias);
     })
