@@ -2,12 +2,11 @@ $(document).ready(function() {
 
     $("#formularioCrearColeccion").submit(function(event) {
         event.preventDefault();
-        var nombre = $('#nombreColección').val();
-        var descripcion = $('#descripcionColección').val();
-        var imagen = $('#imagenColección').val();
-        var categorias = $('#categoriasColección').val();
+        var nombre = $('#nombreColeccion').val();
+        var descripcion = $('#descripcionColeccion').val();
+        var imagen = $('#imagenColeccion')[0].files[0];
+        var categorias = $('#categoriasColeccion').val();
         categorias = categorias.join(','); // Convertir a cadena separada por comas
-        
         validarFormCrearColeccion(nombre, descripcion, imagen, categorias);
     })
 
@@ -44,16 +43,17 @@ $(document).ready(function() {
     }
     
     function insertarColeccion(nombre, descripcion, imagen, categorias) {
-        var formData = {
-            nombre: nombre,
-            descripcion: descripcion,
-            imagen: imagen,
-            categorias: categorias
-        };
+        const formData = new FormData();
+        formData.append('nombre', nombre);
+        formData.append('descripcion', descripcion);
+        formData.append('imagen', imagen);
+        formData.append('categorias', categorias);
         
         $.ajax({
             type: 'POST',
             url: '/crearColeccion/insertarColeccion',
+            processData: false,
+            contentType: false,
             data: formData,
             success: function(insertado) {
                 alert('¡Colección creada con éxito!');

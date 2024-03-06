@@ -29,7 +29,7 @@ router.get('/consultarNombre', function(req, res) {
 
 
 
-router.post('/insertarColeccion', multerFactory.single('foto'), (req, res) => {
+router.post('/insertarColeccion', multerFactory.single('imagen'), (req, res) => {
     
     db.getConnection(function (error, con) {
         const querySqlInsertColeccion = 'INSERT INTO mm_coleccion (nombre, imagen, descripcion) VALUES (?, ?, ?)';
@@ -39,10 +39,11 @@ router.post('/insertarColeccion', multerFactory.single('foto'), (req, res) => {
         
         let { nombre, descripcion } = req.body;
         let categorias = req.body.categorias.split(',');
+        
         // Verificar si req.file está definido antes de acceder a req.file.buffer
         let foto = req.file ? req.file.buffer : null;
         
-        con.query(querySqlInsertColeccion, [nombre, "foto", descripcion], (error, result) => {
+        con.query(querySqlInsertColeccion, [nombre, foto, descripcion], (error, result) => {
             if (error) {
                 throw error;
             }

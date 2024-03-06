@@ -32,24 +32,23 @@
                         <h1 class="display-6 text-center">Crear Coleccion</h1>
 
                         <div class="input-group p-2">
-                            <input type="text" name="nombre" class="form-control" id="nombreColección"
+                            <input type="text" name="nombre" class="form-control" id="nombreColeccion"
                                 placeholder="Nombre" required>
                         </div>
 
                         <div class="input-group p-2">
-                            <input type="text" name="descripcion" class="form-control" id="descripcionColección"
+                            <input type="text" name="descripcion" class="form-control" id="descripcionColeccion"
                                 placeholder="Descripcion de la Coleccion" required>
                         </div>
 
                         <div class="input-group p-2">
                             <h6 class="titulo t_imagen">Imagen</h6>
-                            <input type="file" name="foto" class="form-control" id="imagenColección" placeholder="Foto"
-                                accept=".png, .jpg, .jpeg, .webp" required>
+                            <input type="file" name="imagenColeccion" class="form-control" id="imagenColeccion" accept="image/*" required>
                         </div>
 
                         <div class="input-group p-2">
                             <label class="titulo" for="categorias">Categorías:</label>
-                            <select name="categorias[]" id="categoriasColección" class="form-select" multiple required>
+                            <select name="categorias[]" id="categoriasColeccion" class="form-select" multiple required>
                                     <option>Deportes</option>
                                     <option>Futbol</option>
                                     <option>Personas</option>
