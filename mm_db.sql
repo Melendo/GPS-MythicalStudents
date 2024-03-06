@@ -117,12 +117,6 @@ ALTER TABLE `mm_coleccion`
 ALTER TABLE `mm_categorias_coleccion`
   ADD CONSTRAINT `mm_categorias_coleccion_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `mm_categorias` (`id`);
 
---
--- Filtros para la tabla `mm_coleccion`
---
-ALTER TABLE `mm_coleccion`
-  ADD CONSTRAINT `mm_coleccion_ibfk_1` FOREIGN KEY (`id`) REFERENCES `mm_categorias_coleccion` (`id_coleccion`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
