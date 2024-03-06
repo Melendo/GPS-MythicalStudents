@@ -11,33 +11,36 @@ $(document).ready(function() {
     })
 
     function validarFormCrearColeccion(nombre, descripcion, imagen, categorias) {
-        if (consultarNombreColeccion(nombre)) {
-            insertarColeccion(nombre, descripcion, imagen, categorias);
-        }
-        else {
-            alert("El nombre de la colección ya existe en la base de datos");
-        }
+        consultarNombreColeccion(nombre)
+            .then(function(existe) {
+                if (!existe) {
+                    insertarColeccion(nombre, descripcion, imagen, categorias);
+                } else {
+                    alert("El nombre de la colección ya existe en la base de datos");
+                    // Aquí puedes mostrar algún mensaje de error al usuario si lo deseas
+                }
+            })
+            .catch(function(error) {
+                console.error("Error al validar el formulario:", error);
+                // Aquí puedes manejar el error de la manera que desees
+            });
     }
     
     function consultarNombreColeccion(nombre) {
-        $.ajax({
-            url: "/crearColeccion/consultarNombre",
-            type: "GET",
-            data: { nombre: nombre },
-            success: function(existe) {
-                if (existe) {
-                    return false;
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                url: "/crearColeccion/consultarNombre",
+                type: "GET",
+                data: { nombre: nombre }, // Debes enviar los datos en un objeto
+                success: function(existe) {
+                    resolve(existe);
+                },
+                error: function(error) {
+                    reject(error);
                 }
-                else {
-                    return true;
-                }
-            },
-            error: function(error) {
-                console.error("Error al hacer get:", error);
-                alert("Error al realizar la consulta: PETICION DE NOMBRE", error);
-                return false;
-            }
+            });
         });
+    
     }
     
     function insertarColeccion(nombre, descripcion, imagen, categorias) {

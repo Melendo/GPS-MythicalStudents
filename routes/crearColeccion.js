@@ -10,7 +10,7 @@ router.get('/consultarNombre', function(req, res) {
     db.getConnection(function (error, con) {
         const querySql = 'SELECT * FROM mm_coleccion WHERE nombre = ?';
         var nombre = req.query.nombre;
-        con.query(querySql, [nombre], async (error, result) => {
+        con.query(querySql, [nombre], (error, result) => {
             if (error) {
                 throw error;
             }
