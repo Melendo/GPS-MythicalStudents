@@ -15,9 +15,6 @@
 </head>
 
 <body>
-
-    <%- include("snowflake")%>
-
         <div class="div_introduction">
             <header>
                 <div class="header">
@@ -57,7 +54,40 @@
                                 <!-- Agrega más opciones de categorías según sea necesario -->
                             </select>
                         </div>
-                        <br>
+                        <div class="container2">
+                            <div class="select-btn">
+                                <span class="btn-text">Selecciona coleccion</span>
+                                <span class="arrow-dwn">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </span>
+                            </div>
+                            <ul class="list-items">
+                                <li class="item">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">Deportes</span>
+                                </li>
+                                <li class="item">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">Futbol</span>
+                                </li>
+                                <li class="item">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">Personas</span>
+                                </li>
+                                <li class="item">
+                                    <span class="checkbox">
+                                        <i class="fa-solid fa-check check-icon"></i>
+                                    </span>
+                                    <span class="item-text">Matematicas</span>
+                                </li>
+                            </ul>
+                        </div>
 
                         <button type="submit" class="btn btn-primary w-100 boton">Crear coleccion</button>
                     </form>
@@ -65,10 +95,38 @@
             </div>
         </div>
 
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/i18n/defaults-es_ES.min.js"></script>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
 <script src="/javascripts/crearColeccion.js"></script>
 
+</html>
+
+<script>const selectBtn = document.querySelector(".select-btn"),
+    items = document.querySelectorAll(".item");
+
+selectBtn.addEventListener("click", () => {
+  selectBtn.classList.toggle("open");
+});
+
+items.forEach(item => {
+  item.addEventListener("click", () => {
+      item.classList.toggle("checked");
+
+      let checked = document.querySelectorAll(".checked"),
+          btnText = document.querySelector(".btn-text");
+
+          if(checked && checked.length > 0){
+              btnText.innerText = `${checked.length} Selected`;
+          }else{
+              btnText.innerText = "Select Language";
+          }
+  });
+})
+</script>
 </html>
