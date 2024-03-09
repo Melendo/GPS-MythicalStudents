@@ -2,16 +2,13 @@
 const request = require('supertest');
 const express = require('express');
 
-// Mock de la función de consulta de la base de datos
 jest.mock('../../connection/connection.js', () => ({
   getConnection: jest.fn((callback) => {
     const mockConnection = {
       query: jest.fn((query, params, callback) => {
         if (query === 'SELECT * FROM mm_coleccion WHERE nombre = ?' && params[0] === 'nombreExistente') {
-          // Simular resultado de la consulta si el nombre existe en la base de datos
           callback(null, [{ id: 1, nombre: 'nombreExistente' }]);
         } else {
-          // Simular resultado de la consulta si el nombre no existe en la base de datos
           callback(null, []);
         }
       }),
@@ -21,9 +18,8 @@ jest.mock('../../connection/connection.js', () => ({
   })
 }));
 
-const router = require('../../routes/crearColeccion.js'); // Asegúrate de importar tu archivo de rutas
+const router = require('../../routes/crearColeccion.js');
 
-// Creamos una aplicación de Express para probar el endpoint
 const app = express();
 app.use('/', router);
 
