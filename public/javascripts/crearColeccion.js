@@ -2,23 +2,29 @@ $(document).ready(function() {
 
     $("#formularioCrearColeccion").submit(function(event) {
         event.preventDefault();
+
+        var formData = new FormData(this); // Serializa el formulario
+
         var nombre = $('#nombreColeccion').val();
         var descripcion = $('#descripcionColeccion').val();
         var imagen = $('#imagenColeccion')[0].files[0];
-        var categorias = $('#categoriasColeccion').val();
-        categorias = categorias.join(','); // Convertir a cadena separada por comas
+        var categorias = obtenerCategoriasSeleccionadas();
         validarFormCrearColeccion(nombre, descripcion, imagen, categorias);
     })
 
     function validarFormCrearColeccion(nombre, descripcion, imagen, categorias) {
         consultarNombreColeccion(nombre)
             .then(function(existe) {
-                if (!existe) {
-                    insertarColeccion(nombre, descripcion, imagen, categorias);
-                } else {
-                    alert("El nombre de la colección ya existe en la base de datos");
-                    // Aquí puedes mostrar algún mensaje de error al usuario si lo deseas
+                if (categorias.length < 1) alert("Seleccione al menos una categoria");
+                else{
+                    if (!existe) {
+                        insertarColeccion(nombre, descripcion, imagen, categorias);
+                    } else {
+                        alert("El nombre de la colección ya existe en la base de datos");
+                        // Aquí puedes mostrar algún mensaje de error al usuario si lo deseas
+                    }
                 }
+                
             })
             .catch(function(error) {
                 console.error("Error al validar el formulario:", error);
@@ -64,5 +70,13 @@ $(document).ready(function() {
                 alert('Ha ocurrido un error al crear la colección.\n');
             }
         });
+    }
+
+    function obtenerCategoriasSeleccionadas() {
+        var categorias = [];
+        $(".item.checked .item-text").each(function() {
+            categorias.push($(this).text());
+        });
+        return categorias.join(','); // Devuelve las categorías como una cadena separada por comas
     }
 });

@@ -42,18 +42,7 @@
                             <h6 class="titulo t_imagen">Imagen</h6>
                             <input type="file" name="imagenColeccion" class="form-control" id="imagenColeccion" accept="image/*" required>
                         </div>
-
-                        <div class="input-group p-2">
-                            <label class="titulo" for="categorias">Categorías:</label>
-                            <select name="categorias[]" id="categoriasColeccion" class="form-select" multiple required>
-                                    <option>Deportes</option>
-                                    <option>Futbol</option>
-                                    <option>Personas</option>
-                                    <option>Matematicas</option>
-
-                                <!-- Agrega más opciones de categorías según sea necesario -->
-                            </select>
-                        </div>
+                        
                         <div class="container2">
                             <div class="select-btn">
                                 <span class="btn-text">Selecciona coleccion</span>
@@ -124,9 +113,26 @@ items.forEach(item => {
           if(checked && checked.length > 0){
               btnText.innerText = `${checked.length} Selected`;
           }else{
-              btnText.innerText = "Select Language";
+              btnText.innerText = "Selecciona categoria";
           }
   });
 })
 </script>
+
+<script>// Selecciona todos los elementos .item-text dentro de div.container2
+    const itemTexts = document.querySelectorAll('.container2 .item-text');
+    
+    // Crea un arreglo para almacenar los textos de los elementos .item-text
+    const categories = [];
+    
+    // Recorre todos los elementos .item-text y agrega sus textos al arreglo categories
+    itemTexts.forEach(itemText => {
+        categories.push(itemText.textContent.trim()); // Agrega el texto sin espacios adicionales
+    });
+    
+
+    // Une los elementos del arreglo categories en una cadena separada por comas
+    const selectedCategories = categories.join(',');
+    // Establece la cadena de categorÃ­as como el valor del elemento con el id categoriasColeccion
+    $('#categoriasColeccion').val(selectedCategories);</script>
 </html>
