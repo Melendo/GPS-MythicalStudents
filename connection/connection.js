@@ -2,9 +2,9 @@ var mysql = require('mysql');
 
 
 var con = mysql.createPool({
-    host: "db_myth",
-    user: "mythmingle",
-    password: "2StkpKE3B9JDP",
+    host: "localhost",
+    user: "root",
+    password: "",
     database: "mm_db",
 });
 

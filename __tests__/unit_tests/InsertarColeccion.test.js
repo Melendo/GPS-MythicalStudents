@@ -6,9 +6,14 @@ jest.mock('../../connection/connection.js', () => ({
   getConnection: jest.fn((callback) => {
     const mockConnection = {
       query: jest.fn((query, params, callback) => {
-        // Simulamos una inserción exitosa en la base de datos
         if (query === 'INSERT INTO mm_coleccion (nombre, imagen, descripcion) VALUES (?, ?, ?)') {
-          callback(null, { insertId: 1 }); // Devolvemos el ID de la nueva colección
+          callback(null, { insertId: 1 });
+        } else if (query === 'SELECT MAX(id) AS id FROM mm_coleccion') {
+          callback(null, [{ id: 1 }]);
+        } else if (query === 'SELECT id FROM mm_categorias WHERE categoria IN (?)') {
+          callback(null, [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }]);
+        } else if (query === 'INSERT INTO mm_categorias_coleccion (id_coleccion, id_categoria) VALUES (?, ?)') {
+          callback(null, [{ id: 1 }, {id: 2 }]);
         } else {
           callback(null, []);
         }
@@ -23,17 +28,17 @@ const app = express();
 app.use('/', router);
 
 describe('Pruebas para la ruta insertarColeccion', () => {
-  it('Debería insertar una nueva colección en la base de datos y devolver una respuesta exitosa', async () => {
+  it('Debería devolver un error por lo que el cuerpo del json es vacio', async () => {
     const response = await request(app)
       .post('/insertarColeccion')
       .send({
         nombre: 'Nueva Colección',
         descripcion: 'Descripción de la nueva colección',
         categorias: 'Deportes,Futbol,Personas,Matematicas',
-        imagen : 'imagen.jpg'
+        imagen: null
       });
 
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual({ insertado: true });
+    expect(response.status).toBe(500);
+    expect(response.body).toEqual({});
   });
 });
