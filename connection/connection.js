@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 
 
-var con = mysql.createPool({
-    host: "db",
-    user: "mythmingle",
-    password: "2StkpKE3B9JDP",
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
     database: "mm_db",
 });
 
