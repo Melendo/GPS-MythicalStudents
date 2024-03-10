@@ -7,23 +7,16 @@ const multerFactory = multer({ storage: multer.memoryStorage() });
 
 /* GET home page. */
 router.get('/consultarNombre', function (req, res) {
-    db.connect(function (error) {
-        if (error) {
-            throw error;
-        }
+    db.getConnection(function (error, con) {
         const querySql = 'SELECT * FROM mm_coleccion WHERE nombre = ?';
         var nombre = req.query.nombre;
-        db.query(querySql, [nombre], (error, result) => {
+        con.query(querySql, [nombre], (error, result) => {
             if (error) {
+                con.release();
                 throw error;
             }
-            if (result.length > 0) {
-                // si existe en la base de datos devuelve true
-                res.send(true);
-            }
-            else {
-                res.send(false);
-            }
+            con.release();
+            res.send(result.length > 0);
         });
     });
 });
@@ -32,7 +25,7 @@ router.get('/consultarNombre', function (req, res) {
 
 router.post('/insertarColeccion', multerFactory.single('imagen'), (req, res) => {
 
-    db.connect(function (error) {
+    db.getConnection(function (error, con) {
         const querySqlInsertColeccion = 'INSERT INTO mm_coleccion (nombre, imagen, descripcion) VALUES (?, ?, ?)';
         const querySqlSelectUltimaColeccion = 'SELECT MAX(id) AS id FROM mm_coleccion'; // Obtener el último ID insertado
         const querySqlSelectIdsCategorias = 'SELECT id FROM mm_categorias WHERE categoria IN (?)'; // Obtener IDs de categorías
@@ -44,22 +37,25 @@ router.post('/insertarColeccion', multerFactory.single('imagen'), (req, res) => 
         // Verificar si req.file está definido antes de acceder a req.file.buffer
         let foto = req.file ? req.file.buffer : null;
 
-        db.query(querySqlInsertColeccion, [nombre, foto, descripcion], (error, result) => {
+        con.query(querySqlInsertColeccion, [nombre, foto, descripcion], (error, result) => {
             if (error) {
+                con.release();
                 throw error;
             }
 
             // Obtener el ID de la última colección insertada
-            db.query(querySqlSelectUltimaColeccion, (error, rows) => {
+            con.query(querySqlSelectUltimaColeccion, (error, rows) => {
                 if (error) {
+                    con.release();
                     throw error;
                 }
 
                 const idColeccion = rows[0].id;
 
                 // Obtener los IDs de las categorías
-                db.query(querySqlSelectIdsCategorias, [categorias], (error, rows) => {
+                con.query(querySqlSelectIdsCategorias, [categorias], (error, rows) => {
                     if (error) {
+                        con.release();
                         throw error;
                     }
 
@@ -67,18 +63,20 @@ router.post('/insertarColeccion', multerFactory.single('imagen'), (req, res) => 
 
                     // Insertar en la tabla categorias_coleccion
                     idsCategorias.forEach(idCategoria => {
-                        db.query(querySqlInsertCategoriasColeccion, [idColeccion, idCategoria], (error, result) => {
+                        con.query(querySqlInsertCategoriasColeccion, [idColeccion, idCategoria], (error, result) => {
                             if (error) {
+                                con.release();
                                 throw error;
                             }
                         });
                     });
+
+                    con.release();
                     res.json({ insertado: true });
                 });
             });
         });
     });
-
 });
 
 module.exports = router;
