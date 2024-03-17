@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Sobres</title>
+    <style>
+        /* Estilos para la lista horizontal */
+        .sobre-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+        }
+        .sobre-item {
+            margin-right: 20px;
+        }
+        /* Estilos para cada sobre */
+        .sobre {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Sobres Disponibles</h1>
+    <ul class="sobre-list">
+        <% for (var i = 0; i < sobres.length; i++) { %>
+            <li class="sobre-item">
+                <div class="sobre">
+                    <h2><%= sobres[i].nombre %></h2>
+                    <p>Precio: $<%= sobres[i].precio %></p>
+                    <button>Comprar</button>
+                </div>
+            </li>
+        <% } %>
+    </ul>
+</body>
+</html>
