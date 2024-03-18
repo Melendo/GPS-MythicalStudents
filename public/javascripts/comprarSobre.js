@@ -1,11 +1,11 @@
 $(document).ready(function() {
 
     $("#comprar").on('click', function() {
-        //var idSobre = #('#sobre').val();
+        
         $.ajax({
-            url: "/comprarCromo",
+            url: "/comprarSobre/" + id,
             type: "POST",
-            data: { idSobre }, // Debes enviar los datos en un objeto
+            data: { },
             success: function(response) {
                 if (response.success) {
                     alert(response.mensaje);
@@ -15,7 +15,7 @@ $(document).ready(function() {
                 }
             },
             error: function(error) {
-                console.error("Error al realizar el proceso de compra de cromo:", error);
+                console.error("Error al realizar el proceso de compra de sobre:", error);
             }
         });
     })
