@@ -8,7 +8,13 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 const mysqlSession = require("express-mysql-session");
 
-const MySQLStore = mysqlSession(session);
+//const MySQLStore = mysqlSession(session);
+
+const sessionOptions = session({
+  saveUninitialized: false,
+  secret: "a",
+  resave: false,
+});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -28,6 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(sessionOptions);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

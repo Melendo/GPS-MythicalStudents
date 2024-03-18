@@ -3,8 +3,7 @@ var router = express.Router();
 const db = require('../connection/connection.js');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('crearColeccion', { title: 'Express' });
+router.get('/', function(req, res) {
   db.getConnection(function (error, con) {
     const querySql = 'SELECT * FROM usuario WHERE id = 1';
 
