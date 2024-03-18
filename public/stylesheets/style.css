@@ -123,3 +123,50 @@ a {
 .item.checked .check-icon{
   transform: scale(1);
 }
+
+
+
+
+/* footer*/
+.bg-custom {
+  background-color: rgb(95, 70, 138);
+  padding: 10px;
+}
+
+.navbar-nav .nav-link {
+  color: white; /* Color del texto blanco */
+}
+
+.navbar-nav .nav-link.active {
+ 
+  background-color: rgb(75, 50, 120); /* Color de fondo morado más oscuro */
+  color: white;
+}
+
+.imagen_icono{
+  height: 50px;
+}
+
+
+header{
+  margin-bottom: 60px;
+}
+
+.titulo-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgb(95, 70, 138); /* Color de fondo del título */
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.titulo {
+  text-align: center;
+  color: white;
+}
+
+.div_introduction{
+  margin-bottom: 70px;
+}
