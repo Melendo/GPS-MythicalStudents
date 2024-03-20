@@ -20,10 +20,12 @@ body {
     padding: 20px; /* Añade espacio alrededor de la lista */
 }
 .sobre-item {
-    margin-right: 20px;
+    margin: auto;
     text-align: center;
+    justify-content: center;
+    align-items: center;
 }
-.sobre-item h2{
+.sobre-item h4{
     font-family:'Courier New', Courier, monospace;
     text-align: center;
 }
@@ -35,7 +37,7 @@ body {
 /* Estilos para cada sobre */
 .sobre {
     text-align: center;
-    width: 200px; /* Aumenta el ancho de los sobres */
+    width: 220px; /* Aumenta el ancho de los sobres */
     height: 400px;
     padding: 20px; /* Aumenta el espacio interior para hacer los sobres más grandes */
     border-radius: 10px; /* Aumenta el radio de borde para hacer los sobres más redondeados */

@@ -11,9 +11,8 @@ router.get('/', function (req, res, next) {
             con.release();
             throw error;
         }
-        
         const sqlAlbumes = "SELECT sobre.* FROM sobre, album_personal WHERE sobre.ALBUM = album_personal.ID_ALBUM AND album_personal.ID_USU = ?"
-        con.query(sqlAlbumes, [req.sessions.user.id], (error, result) => {
+        con.query(sqlAlbumes, ["1"], (error, result) => {
             if (error) {
                 con.release();
                 throw error;
