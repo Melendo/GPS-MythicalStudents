@@ -35,11 +35,11 @@ router.post('/:id', (req, res) => {
                 }
     
                 else {
-                    if (monUsuario < sobresResult.COSTE) {
+                    if (monUsuario < sobresResult.PRECIO) {
                         res.json({ success: false, mensajeError: "Monedas insuficientes" });
                     }
                     else {
-                        var resta = monUsuario - sobresResult.COSTE;
+                        var resta = monUsuario - sobresResult.PRECIO;
                         con.query(querySqlRestarMonedas, [resta, idUsuario], (error, restaResult) => {
                             if (error) {
                                 con.release();
