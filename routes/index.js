@@ -25,7 +25,7 @@ router.get('/', function(req, res) {
           con.release();
           throw error;
         }
-        con.release();
+        
         req.session.albumes = albumes;
 
         res.render('index', { user: req.session.user, albumes: req.session.albumes, title: "Pagina Principal" });
