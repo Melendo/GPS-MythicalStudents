@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     $("#comprar").on('click', function() {
-        
+        var id = $(this).data('id');
         $.ajax({
             url: "/comprarSobre/" + id,
             type: "POST",
