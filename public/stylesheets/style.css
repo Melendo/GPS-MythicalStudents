@@ -2,9 +2,9 @@
 
 
 body {
-  padding: 50px;
+  padding: 50px; 
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: linear-gradient(454deg,#413079,#9CF5D2 );
+  background:rgb(51, 37, 77);;
 }
 
 a {
@@ -174,6 +174,9 @@ a {
   height: 80px;
 }
 
+#logo{
+  height:450px;
+}
 
 header{
   margin-bottom: 60px;
@@ -197,3 +200,20 @@ header{
 .div_introduction{
   margin-bottom: 70px;
 }
+
+.contenedor_cuestionario_botton{
+  align-items: center; /* Centra verticalmente */
+  justify-content: space-between;
+  width: 50%; /* Ancho del contenedor (50% del ancho de la ventana) */
+  height: 50%; /* Altura del contenedor (50% de la altura de la ventana) */
+  max-width: 500px; /* Ancho máximo del contenedor */
+  max-height: 400px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  text-align: center;
+  padding: 20px;
+  justify-content: center; /* Centrado horizontal */
+  align-items: center;
+  background-color:rgb(95, 70, 138);;
+}
+
