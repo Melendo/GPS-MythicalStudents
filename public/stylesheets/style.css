@@ -124,6 +124,33 @@ a {
   transform: scale(1);
 }
 
+/* header*/
+.header {
+  background-color: rgb(95, 70, 138); /* Color de fondo del encabezado */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.titulo-container {
+  display: flex;
+  align-items: center; /* Centra verticalmente */
+  justify-content: space-between; /* Distribuye los elementos en el espacio disponible */
+}
+
+.titulo {
+  color: white; /* Color del texto del título */
+  margin: 0 auto; /* Centra horizontalmente */
+}
+
+.monedas-container {
+  display: flex;
+  align-items: center; /* Centra verticalmente */
+}
+
+.monedas-icon, .monedas-cantidad {
+  color: white; /* Color del texto de las monedas */
+  margin-left: 10px; /* Espacio entre el icono y el contador de monedas */
+  font-size: 25px;
+}
 
 
 
@@ -144,7 +171,7 @@ a {
 }
 
 .imagen_icono{
-  height: 50px;
+  height: 80px;
 }
 
 
