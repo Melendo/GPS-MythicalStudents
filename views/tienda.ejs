@@ -19,9 +19,8 @@
 <body>
 
     <div class="div_introduction">
-        <header>
-            <%- include("titulo") %>
-        </header>
+
+        <%- include("titulo") %>
     </div>
     <div class="container sobre-list">
         <div class="row">
@@ -31,8 +30,8 @@
                         <h4><b>
                                 <%= sobres[i].NOMBRE %>
                             </b></h4>
-                        <div class="sobre">
-                            <!-- aquí va la imagen bonica-->
+                        <div>
+                            <img class="sobre" src="/tienda/imagen<%= sobres[i].ID%>">
                         </div>
                         <div class="row">
                             <div class="col-6 my-1">
@@ -48,7 +47,7 @@
                 <% } %>
         </div>
     </div>
-    <%- include("layout_principal") %>
+    <footer><%- include("layout_principal") %></footer>
 
 </body>
 
