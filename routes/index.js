@@ -3,32 +3,33 @@ var router = express.Router();
 const db = require('../connection/connection.js');
 
 /* GET home page. */
-router.get('/', async (req, res, next) => {
+router.get('/', function(req, res) {
+  //cuando se haga lo de los multiples usuarios:
+  //var user = req.session.user (que habra sido definido previamente en iniciar sesion)
+  //lo mismo con los albumes personales
+
   db.getConnection(function (error, con) {
-    const querySql = 'SELECT * FROM usuario WHERE ID = 1';
+    const querySqlUsuario = 'SELECT * FROM usuario WHERE ID = 1';
+    const querySqlAlbumes = 'SELECT * FROM album_personal WHERE ID_USU = 1';
 
-    /*var usuario = {
-      id: 1,
-      nombre: "usuario",
-      apellido1: "coleccionista",
-      apellido2: "base",
-      mail: "usuariobase@mm.es",
-      nombre_usuario: "UsuarioBase",
-      contraseña: "12345",
-      monedas: 100
-    }
-
-    global.users = usuario;*/
-
-    
-    con.query(querySql, [], (error, result) => {
+    con.query(querySqlUsuario, [], (error, usuarios) => {
       if (error) {
         con.release();
         throw error;
       }
       con.release();
-      req.session.user = result;
-      res.render('index', { user: req.session?.user, title: "Pagina Principal" });
+      req.session.user = usuarios[0];
+
+      con.query(querySqlAlbumes, [], (error, albumes) => {
+        if (error) {
+          con.release();
+          throw error;
+        }
+        
+        req.session.albumes = albumes;
+
+        res.render('index', { user: req.session.user, albumes: req.session.albumes, title: "Pagina Principal" });
+      });
     });
 
 
