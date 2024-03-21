@@ -10,11 +10,28 @@ const mysqlSession = require("express-mysql-session");
 
 const MySQLStore = mysqlSession(session);
 
+const sessionStore = new MySQLStore({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "mm_db"
+});
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var tiendaRouter = require('./routes/tienda');
 var crearColeccionRouter = require('./routes/crearColeccion');
 
 var app = express(); 
+
+const middlewareSession = session({
+  saveUninitialized: false,
+  secret: "foobar34",
+  resave: false,
+  store: sessionStore
+});
+
+app.use(middlewareSession);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -29,8 +46,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: 'xdrtjxyzxdryjzxdrkgseyt',
+  resave: false,
+  saveUninitialized: true
+}));
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/tienda', tiendaRouter);
 app.use('/crearColeccion', crearColeccionRouter);
 
 // catch 404 and forward to error handler
