@@ -20,16 +20,7 @@ router.get('/', function(req, res) {
       con.release();
       req.session.user = usuarios[0];
 
-      con.query(querySqlAlbumes, [], (error, albumes) => {
-        if (error) {
-          con.release();
-          throw error;
-        }
-        
-        req.session.albumes = albumes;
-
-        res.render('abrirSobre', { user: req.session.user, albumes: req.session.albumes, title: "Pagina Principal" });
-      });
+      res.render('index', { user: req.session.user, title: "Pagina Principal" });
     });
 
 
