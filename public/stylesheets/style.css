@@ -4,7 +4,7 @@
 body {
   padding: 50px; 
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background:rgb(89 94 150);;
+  background:linear-gradient(rgb(89 94 150), rgb(78, 139, 136));
 }
 
 a {
@@ -211,20 +211,20 @@ header{
  
  .contenedor-cuestionario-button {
   background-color: rgb(74 80 140); 
-  font-family: Monaco, monospace;
-  font-size: 35px;
+  font-size: 2vw;
   color: #fff; 
   padding: 10px 20px; 
-  border-radius: 5px; 
+  border-radius: 59px; 
   text-decoration: none; 
   transition: background-color 0.3s; 
   display: flex; 
   justify-content: center; 
   align-items: center; 
-  height: 100px; 
-  max-width: 500px; 
-  max-height: 400px; 
+  min-height: 10vw; 
+  max-height: 20vw; /* Altura relativa al tamaño de la ventana */
+  max-width: 30vw; /* Ancho máximo relativo al tamaño de la ventana */
   margin: 0 auto; 
+  margin-right: 2vw; 
 }
 /* Estilo para cuando se pasa el ratón por encima del botón */
 .contenedor-cuestionario-button:hover:hover {
@@ -233,10 +233,10 @@ header{
 }
 
 .contenedor-cuestionario-button .imagen_icono {
-  width: 60px; /* Ancho de la imagen */
+  width: 4vw; /* Ancho de la imagen */
   height: auto; /* Altura automática para mantener la proporción */
-  margin-right: 50px; /* Espacio a la derecha de la imagen */
-  margin-left: 50px; /* Espacio a la izquierda de la imagen */
+  margin-right: 2vw; /* Espacio a la derecha de la imagen */
+  margin-left: 2vw; /* Espacio a la izquierda de la imagen */
 }
 
 /*--------------------------------------------------------*/
