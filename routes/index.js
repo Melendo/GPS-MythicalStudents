@@ -10,7 +10,6 @@ router.get('/', function(req, res) {
 
   db.getConnection(function (error, con) {
     const querySqlUsuario = 'SELECT * FROM usuario WHERE ID = 1';
-    const querySqlAlbumes = 'SELECT * FROM album_personal WHERE ID_USU = 1';
 
     con.query(querySqlUsuario, [], (error, usuarios) => {
       if (error) {

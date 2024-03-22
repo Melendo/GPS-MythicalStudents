@@ -17,6 +17,7 @@ router.post('/:id', (req, res) => {
         const querySqlCromosEnCromosPersonal = 'SELECT * FROM cromos_personal WHERE ID_CROMO = ?';
         const querySqlCromoRepetido = 'UPDATE cromos_personal SET CANTIDAD = CANTIDAD + 1 WHERE ID_USU = ? AND ID_CROMO = ?';
         const querySqlCromoNuevo = 'INSERT INTO cromos_personal (ID_USU, ID_CROMO, CANTIDAD) VALUES (?, ?, 1)';
+        const querySqlNombreCromo = 'SELECT NOMBRE FROM cromos WHERE NUM_CROMO = ? AND ALBUM = ?';
 
         con.query(querySqlSobre, [idSobre], (error, sobresResult) => {
             if (error) {
@@ -36,7 +37,7 @@ router.post('/:id', (req, res) => {
     
                 else {
                     if (monUsuario < sobresResult.PRECIO) {
-                        res.json({ success: false, mensajeError: "Monedas insuficientes" });
+                        res.json({ success: false, mensajeError: "Monedas insuficientes", album: sobresResult.ALBUM, nombres: null });
                     }
                     else {
                         var resta = monUsuario - sobresResult.PRECIO;
@@ -48,16 +49,27 @@ router.post('/:id', (req, res) => {
 
                             con.query(querySqlCromos, [sobresResult.ALBUM], (error, totalCromos) => {
                                 var numerosAleatorios = generarNumerosAleatorios(totalCromos, sobresResult.NUM_CROMOS);
-                                
+                                var nombresCromos = [];
+
                                 numerosAleatorios.forEach(numero => {
-                                    connection.query(querySqlCromosEnCromosPersonal, [numero], (error, results) => {
+                                    con.query(querySqlNombreCromo, [numero, sobresResult.ALBUM], (error, nombreResult) => {
                                         if (error) {
                                             con.release();
                                             throw error;
                                         }
-                                
+    
+                                        nombresCromos.push(nombreResult);
+    
+                                    });
+
+                                    con.query(querySqlCromosEnCromosPersonal, [numero], (error, results) => {
+                                        if (error) {
+                                            con.release();
+                                            throw error;
+                                        }
+
                                         if (results.length > 0) {
-                                            connection.query(querySqlCromoRepetido, [idUsuario, numero], (error, results) => {
+                                            con.query(querySqlCromoRepetido, [idUsuario, numero], (error, results) => {
                                                 if (error) {
                                                     con.release();
                                                     throw error;
@@ -65,7 +77,7 @@ router.post('/:id', (req, res) => {
                                             });
                                         } 
                                         else {
-                                            connection.query(querySqlCromoNuevo, [idUsuario, numero], (error, results) => {
+                                            con.query(querySqlCromoNuevo, [idUsuario, numero], (error, results) => {
                                                 if (error) {
                                                     con.release();
                                                     throw error;
@@ -75,7 +87,7 @@ router.post('/:id', (req, res) => {
                                     });
                                 });
 
-                                res.json({ success: true, mensaje: "Compra realizada correctamente" });
+                                res.json({ success: true, mensaje: "Compra realizada correctamente.", album: sobresResult.ALBUM, nombres: nombresCromos });
                             });                           
                         });
                     }
