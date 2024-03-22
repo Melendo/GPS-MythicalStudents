@@ -1,13 +1,8 @@
-@@ -1,243 +1,243 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 
 body {
   padding: 50px; 
-  font-family: Monaco, monospace; /* Fuente Monaco */
-  background:linear-gradient(rgb(89 94 150), rgb(78, 139, 136));
-  padding: 50px; 
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-family: Monaco, monospace; /* Fuente Monaco */
   background:linear-gradient(rgb(89 94 150), rgb(78, 139, 136));
 }
@@ -246,126 +241,9 @@ header{
 
 /*--------------------------------------------------------*/
 
-/* header*/
-.header {
-  background-color: rgb(95, 70, 138); /* Color de fondo del encabezado */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
-}
-
-.titulo-container {
-  display: flex;
-  align-items: center; /* Centra verticalmente */
-  justify-content: space-between; /* Distribuye los elementos en el espacio disponible */
-}
-
-.titulo {
-  color: white; /* Color del texto del título */
-  margin: 0 auto; /* Centra horizontalmente */
-}
-
-.monedas-container {
-  display: flex;
-  align-items: center; /* Centra verticalmente */
-}
-
-.monedas-icon, .monedas-cantidad {
-  color: white; /* Color del texto de las monedas */
-  margin-left: 10px; /* Espacio entre el icono y el contador de monedas */
-  font-size: 25px;
-}
-
-
-
-/* footer*/
-.bg-custom {
-  background-color: rgb(95, 70, 138);
-  padding: 10px;
-}
-
-.navbar-nav .nav-link {
-  color: white; /* Color del texto blanco */
-}
-
-.navbar-nav .nav-link.active {
- 
-  background-color: rgb(75, 50, 120); /* Color de fondo morado más oscuro */
-  color: white;
-}
-
-.imagen_icono{
-  height: 80px;
-}
-
-#logo{
-  height:450px;
-}
-
-header{
-  margin-bottom: 60px;
-}
-
-.titulo-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: rgb(95, 70, 138); /* Color de fondo del título */
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
-}
-
-.titulo {
-  text-align: center;
-  color: white;
-}
-
-.div_introduction{
-  margin-bottom: 70px;
-}
-
-/*-----------PAGINA PRINCIPAL---------------------------------*/
-#logo {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 2px; 
-}
-
- 
- .contenedor-cuestionario-button {
-  background-color: rgb(74 80 140); 
-  font-size: 2vw;
-  color: #fff; 
-  padding: 10px 20px; 
-  border-radius: 59px; 
-  text-decoration: none; 
-  transition: background-color 0.3s; 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  min-height: 10vw; 
-  max-height: 20vw; /* Altura relativa al tamaño de la ventana */
-  max-width: 30vw; /* Ancho máximo relativo al tamaño de la ventana */
-  margin: 0 auto; 
-  margin-right: 2vw; 
-}
-/* Estilo para cuando se pasa el ratón por encima del botón */
-.contenedor-cuestionario-button:hover:hover {
-  background-color: rgb(31 37 97); /* Color de fondo al pasar el ratón */
-  color: #fff; /* Color del texto al pasar el ratón */
-}
-
-.contenedor-cuestionario-button .imagen_icono {
-  width: 4vw; /* Ancho de la imagen */
-  height: auto; /* Altura automática para mantener la proporción */
-  margin-right: 2vw; /* Espacio a la derecha de la imagen */
-  margin-left: 2vw; /* Espacio a la izquierda de la imagen */
-}
-
-/*--------------------------------------------------------*/
-
 /*--------------ESTILOS PARA PANTALLA DE ABRIR SOBRE-------------*/
-.sobre-container {
-  background-color: #1A1C59;
+#sobre-container {
+  background-color: rgb(31 37 97);
   padding: 20px;
   border-radius: 10px;
   max-width: 300px; /* Ancho máximo del botón */
@@ -380,7 +258,7 @@ header{
   overflow: hidden;
 }
 
-.image-container {
+#image-container {
   background-color: rgb(22, 22, 22); /* Fondo negro */
   width: 300px; /* Ancho del contenedor */
   height: 300px; /* Altura del contenedor */
@@ -390,14 +268,14 @@ header{
   overflow: hidden; /* Para ocultar el exceso de la imagen */
 }
 
-.image-container img {
+#image-container img {
   max-width: 100%; /* Tamaño máximo de la imagen */
   max-height: 100%; /* Tamaño máximo de la imagen */
   width: auto; /* Para mantener la proporción de aspecto de la imagen */
   height: auto; /* Para mantener la proporción de aspecto de la imagen */
 }
 
-img {
+#apertura-sobre-img {
   width: 100px;
   height: 100px; /* Ancho mínimo del botón */
   min-width: 100px;
@@ -407,7 +285,7 @@ img {
 
 #btnAbrirSobre {
   text-align: center;
-  background-color: #524F93; /* Color de fondo */
+  background-color: rgb(95 70 138); /* Color de fondo */
   color: white; /* Color del texto */
   padding: 20px; /* Espacio alrededor del texto */
   border: none; /* Sin borde */
@@ -425,5 +303,5 @@ img {
 
 
 #btnAbrirSobre:hover {
-  background-color: #6e42a4; /* Cambio de color de fondo al pasar por encima */
+  background-color: rgb(43 18 84); /* Cambio de color de fondo al pasar por encima */
 }
