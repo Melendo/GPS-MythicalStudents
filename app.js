@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 const mysqlSession = require("express-mysql-session");
 
-//const MySQLStore = mysqlSession(session);
+const MySQLStore = mysqlSession(session);
 
 const sessionOptions = session({
   saveUninitialized: false,
