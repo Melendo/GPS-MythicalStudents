@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    font-family: Monaco, monospace;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+.container {
+    max-width: 1000px; /* Aumentamos el ancho máximo del contenedor */
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+}
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%; /* Ajustamos el ancho del contenido al 100% */
+}
+.left-section {
+    width: 40%; /* Ajustamos el ancho de la sección izquierda */
+    margin-left: 40px;
+    margin-right: 20px;;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.right-section {
+    width: 60%; /* Ajustamos el ancho de la sección derecha */
+    margin: 0 40px; /* Agregamos margen a la izquierda y derecha */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centramos verticalmente el contenido */
+}
+.title-box {
+    border: 2px solid #ccc; /* Agregamos un borde alrededor del título */
+    border-radius: 10px; /* Hacemos los bordes redondeados */
+    padding: 10px; /* Añadimos espacio interno */
+    margin-bottom: 50px; /* Espacio inferior */
+}
+.header {
+    /*margin-bottom: 20px;*/
+    text-align: center; /* Centramos el texto horizontalmente */
+}
+.title {
+    font-size: 24px;
+    margin: 0;
+}
+.image {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.confirmation-info {
+    padding: 20px; /* Añadimos espacio interno */
+    border: 2px solid #ccc; /* Agregamos un borde alrededor de la información de confirmación */
+    border-radius: 10px; /* Hacemos los bordes redondeados */
+    margin-bottom: 20px; /* Espacio inferior */
+    text-align: center;
+}
+.confirm-title {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+.price-box,
+.coins-box {
+    display: inline-block; /* Hacemos que ambos elementos se muestren en la misma línea */
+    border: 2px solid #ccc; /* Agregamos un borde alrededor del precio y las monedas */
+    border-radius: 10px; /* Hacemos los bordes redondeados */
+    padding: 10px; /* Añadimos espacio interno */
+    margin-right: 10px; /* Espacio derecho entre los recuadros */
+    margin-bottom: 20px;
+   
+}
+.price {
+    font-size: 16px;
+   /* margin-bottom: 0;  Quitamos el margen inferior para ajustar mejor */
+}
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cancel, .buy {
+    flex-grow: 1; /* Hacemos que los botones ocupen todo el espacio disponible */
+    padding: 15px; /* Ajustamos el padding de los botones */
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px; /* Ajustamos el margen de los botones */
+    /*border: none;*/
+    border-radius: 10px;
+    background-color: #fff;
+}
