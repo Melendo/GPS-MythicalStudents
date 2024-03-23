@@ -28,7 +28,7 @@ router.get('/', function(req, res) {
         
         req.session.albumes = albumes;
 
-        res.render('index', { user: req.session.user, albumes: req.session.albumes, title: "Pagina Principal" });
+        res.render('index', { user: req.session.user, albumes: req.session.albumes, title: "Pagina Principal", monedas:req.session.user.MONEDAS });
       });
     });
 
