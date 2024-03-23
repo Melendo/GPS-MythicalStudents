@@ -25,6 +25,7 @@ router.get('/', function (req, res, next) {
             con.release();
 
             res.render('tienda', { title: 'Tienda', sobres: result });
+            //res.locals.abrirDialogConfirmar = abrirDialogConfirmar;
         });
     });
 
@@ -50,5 +51,41 @@ router.get('/imagen:id', function (req, res, next) {
     });
 
 });
+
+
+/*
+function abrirDialogConfirmar(id) {
+    // Cargar el contenido de dialogConfirmarCompra.ejs mediante AJAX
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Crear un div para mostrar el contenido
+            var div = document.createElement('div');
+            div.innerHTML = xhr.responseText;
+            document.body.appendChild(div);
+
+            // Opcional: Aplicar estilos o clases al div si es necesario
+            div.classList.add('dialog-confirmar-compra');
+
+            // Opcional: Agregar un botón para cerrar la ventana emergente
+            var closeButton = document.createElement('button');
+            closeButton.innerHTML = 'Cerrar';
+            closeButton.onclick = function() {
+                document.body.removeChild(div);
+            };
+            div.appendChild(closeButton);
+        }
+    };
+    xhr.open('GET', '/views/dialogConfirmarCompra.html', true);
+    xhr.send();
+}
+*/
+
+
+
+function abrirDialogConfirmar() {
+    // Abre una ventana simple
+    window.open('/views/dialogConfirmarCompra.html', 'ConfirmarCompra', 'width=400,height=200');
+}
 
 module.exports = router;
