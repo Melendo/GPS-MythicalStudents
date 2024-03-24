@@ -1,4 +1,4 @@
-var express = require('express');
+    var express = require('express');
 var router = express.Router();
 
 const multer = require('multer');
@@ -15,11 +15,13 @@ router.get('/', function (req, res, next) {
     for (var i = 0; i < req.session.albumes.length; i++) {
         albumes.push(req.session.albumes[i].ID_ALBUM);
     }
-    var ids = albumes.join(',');
-    
+    var ids = albumes.join(', ');
+
     db.getConnection(function (error, con) {
-        const albumesQuery = "SELECT * FROM album WHERE id IN(?)";
-        con.query(albumesQuery, [ids], (error, result) => {
+        const albumesQuery = "SELECT * FROM album WHERE id IN(" + ids + ");";
+        var a = albumesQuery;
+
+        con.query(albumesQuery, (error, result) => {
             if (error) {
                 con.release();
                 throw error;
