@@ -11,8 +11,7 @@
         crossorigin="anonymous"></script>
 
     <link href="/stylesheets/style.css" rel="stylesheet">
-    <link href="/stylesheets/tienda.css" rel="stylesheet">
-    <link href="/stylesheets/modalConfCompra.css" rel="stylesheet">
+    <link href="/stylesheets/estanteriaVirtual.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="/images/logo.png">
     <title>Mythical Mingle</title>
 </head>
@@ -22,6 +21,34 @@
     <header>
         <%- include("titulo", { titulo: title , monedas:monedas }) %>
     </header>
+
+    <div class="container">
+        <div class="row">
+            <% for (var i=0; i < albumes.length; i++) { %>
+                <% if (albumes[i].COLECCION == 1){%>
+                <div class="col-sm-3 ">
+                    <div class="album ">
+                        <img src="/estanteriaVirtual/imagen<%= albumes[i].ID%>" class="img-fluid">
+                        <h4><b>
+                                <%= albumes[i].NOMBRE %>
+                        </b></h4>
+                       
+                    </div>
+                </div>
+                <div class="shelf-divider"></div>
+                <% } else {%>
+                    <div class="col-sm-3 ">
+                        <div class="album ">
+                            <img src="/estanteriaVirtual/imagen<%= albumes[i].ID%>" class="img-fluid">
+                            <h4><b>
+                                    <%= albumes[i].NOMBRE %>
+                            </b></h4>
+                        </div>
+                    </div>
+                <%}%>
+            <%}%>
+        </div>
+    </div>
 
 
     <footer><%- include("layout_principal") %></footer>
