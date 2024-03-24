@@ -3,6 +3,7 @@
 
 body {
   padding: 50px; 
+  height: 100vh; /* Establece la altura del cuerpo al 100% de la ventana */
   font-family: Monaco, monospace; /* Fuente Monaco */
   background:linear-gradient(rgb(89 94 150), rgb(78, 139, 136));
 }

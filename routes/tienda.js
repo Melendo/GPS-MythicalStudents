@@ -17,14 +17,14 @@ router.get('/', function (req, res, next) {
             throw error;
         }
         const sqlAlbumes = "SELECT sobre.* FROM sobre, album_personal WHERE sobre.ALBUM = album_personal.ID_ALBUM AND album_personal.ID_USU = ?"
-        con.query(sqlAlbumes, [req.session.user[0].ID], (error, result) => {
+        con.query(sqlAlbumes, [req.session.user.ID], (error, result) => {
             if (error) {
                 con.release();
                 throw error;
             }
             con.release();
 
-            res.render('tienda', { title: 'Tienda', sobres: result });
+            res.render('tienda', { title: 'Tienda', sobres: result, monedas:req.session.user.MONEDAS});
         });
     });
 
