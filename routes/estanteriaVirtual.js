@@ -10,7 +10,24 @@ const db = require('../connection/connection.js');
 
 
 router.get('/', function (req, res, next) {
-    res.render('estanteriaVirtual', { title: 'Estanteria Virtual', albumes: req.session.albumes, monedas: req.session.user.MONEDAS });
+
+    var albumes = [];
+    for (var i = 0; i < req.session.albumes.length; i++) {
+        albumes.push(req.session.albumes[i].ID_ALBUM);
+    }
+    var ids = albumes.join(',');
+    
+    db.getConnection(function (error, con) {
+        const albumesQuery = "SELECT * FROM album WHERE id IN(?)";
+        con.query(albumesQuery, [ids], (error, result) => {
+            if (error) {
+                con.release();
+                throw error;
+            }
+            con.release();
+            res.render('estanteriaVirtual', { title: 'Estanteria Virtual', albumes: result, monedas: req.session.user.MONEDAS });
+        });
+    });
 });
 
 router.get('/imagen:id', function (req, res, next) {
