@@ -19,10 +19,9 @@
 
 <body>
 
-    <div class="div_introduction">
-
-        <%- include("titulo",{titulo:"Tienda",monedas:monedas}) %>
-    </div>
+  <header>
+    <%- include("titulo", { titulo: "Página Principal", monedas:monedas }) %>
+  </header>
     <div class="container sobre-list">
         <div class="row">
             <% for (var i=0; i < sobres.length; i++) { %>

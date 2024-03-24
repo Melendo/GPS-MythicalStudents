@@ -46,7 +46,8 @@ router.post('/:id', (req, res) => {
                                 con.release();
                                 throw error;
                             }
-
+                            req.session.user.MONEDAS = resta;
+                            
                             con.query(querySqlCromos, [sobresResult[0].ALBUM], (error, totalCromos) => {
                                 if (error) {
                                     con.release();
