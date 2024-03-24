@@ -72,12 +72,12 @@
                       <p class="price" id="sobrePrecio<%= sobres[i].ID %>">PRECIO DEL SOBRE: $<%= sobres[i].PRECIO %></p>
                     </div>
                     <div class="coins-box">
-                      <p>TIENES $YY MONEDAS</p>
+                      <p>TIENES $<%= monedas %> MONEDAS</p>
                     </div>
                   </div>
                   <div class="buttons">
                     <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">CANCELAR</button>
-                    <button type="button" class="btn btn-primary buy">COMPRAR</button>
+                    <button type="button" class="btn btn-primary buy" data-id="<%= sobres[i].ID %>">COMPRAR</button>
                   </div>
                 </div>
               </div>
@@ -99,5 +99,6 @@
     <footer><%- include("layout_principal") %></footer>
 
 </body>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/javascripts/comprarSobre.js"></script>
 </html>

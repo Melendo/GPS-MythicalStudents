@@ -10,10 +10,7 @@ router.get('/', function(req, res) {
 
   db.getConnection(function (error, con) {
     const querySqlUsuario = 'SELECT * FROM usuario WHERE ID = 1';
-    const querySqlAlbumes = 'SELECT * FROM album_personal WHERE ID_USU = 1';
-
-    if(!req.session?.user){
-
+    
     con.query(querySqlUsuario, [], (error, usuarios) => {
       if (error) {
         con.release();
@@ -22,22 +19,8 @@ router.get('/', function(req, res) {
       con.release();
       req.session.user = usuarios[0];
 
-      con.query(querySqlAlbumes, [], (error, albumes) => {
-        if (error) {
-          con.release();
-          throw error;
-        }
-        
-        req.session.albumes = albumes;
-
-        res.render('index', { user: req.session.user, albumes: req.session.albumes, title: "Pagina Principal", monedas:req.session.user.MONEDAS });
-      });
+      res.render('index', { user: req.session.user, title: "Pagina Principal", monedas:req.session.user.MONEDAS });
     });
-  }
-  else{
-    res.render('index', { user: req.session.user, albumes: req.session.albumes, title: "Pagina Principal", monedas:req.session.user.MONEDAS });
-  }
-   // res.render('index', { user: global.user, title: "Pagina Principal" });
 
   });
 });
