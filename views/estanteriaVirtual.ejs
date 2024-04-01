@@ -25,29 +25,16 @@
     <div class="container">
         <div class="row">
             <% for (var i=0; i < albumes.length; i++) { %>
-                <% if (albumes[i].COLECCION == 1){%>
-                <div class="col-sm-3 ">
-                    <div class="album ">
-                        <img src="/estanteriaVirtual/imagen<%= albumes[i].ID%>" class="img-fluid">
-                        <h4><b>
-                                <%= albumes[i].NOMBRE %>
+               <a href="/album/<%= albumes[i].ID%>"><div class="col-sm-3 album">
+                    <img src="/estanteriaVirtual/imagen<%= albumes[i].ID%>" class="img-fluid">
+                    <h4><b>
+                            <%= albumes[i].NOMBRE %>
                         </b></h4>
-                       
-                    </div>
-                </div>
-                <div class="shelf-divider"></div>
-                <% } else {%>
-                    <div class="col-sm-3 ">
-                        <div class="album ">
-                            <img src="/estanteriaVirtual/imagen<%= albumes[i].ID%>" class="img-fluid">
-                            <h4><b>
-                                    <%= albumes[i].NOMBRE %>
-                            </b></h4>
-                        </div>
-                    </div>
+
+                </div></a> 
                 <%}%>
-                <div class="shelf-divider"></div>
-            <%}%>
+                    <div class="shelf-divider"></div>
+
         </div>
     </div>
 
