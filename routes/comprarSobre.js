@@ -1,14 +1,29 @@
 var express = require('express');
 var router = express.Router();
 
+
 const db = require('../connection/connection.js');
 
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 // Función principal para manejar la ruta POST
 router.post('/:id', (req, res) => {
     const idUsuario = req.session.user.ID;
     const monUsuario = req.session.user.MONEDAS;
     const idSobre = req.params.id;
+
+<<<<<<< Updated upstream
+    db.getConnection((error, con) => {
+        if (error) {
+            con.release();
+            throw error;
+        }
+
+=======
 
     db.getConnection((error, con) => {
         if (error) {
@@ -16,16 +31,25 @@ router.post('/:id', (req, res) => {
             throw error;
         }
 
+
+>>>>>>> Stashed changes
         obtenerSobre(con, idSobre, (sobresResult) => {
             comprobarAlbum(con, idUsuario, sobresResult, (albumesResult) => {
                 if (albumesResult.length <= 0) {
                     res.json({ success: false, mensajeError: "No tienes el álbum al que pertenece el sobre" });
+<<<<<<< Updated upstream
                 } 
                 else {
                     if (monUsuario < sobresResult.PRECIO) {
                         res.json({ success: false, mensajeError: "Monedas insuficientes" });
                     } 
                     else {
+=======
+                } else {
+                    if (monUsuario < sobresResult.PRECIO) {
+                        res.json({ success: false, mensajeError: "Monedas insuficientes" });
+                    } else {
+>>>>>>> Stashed changes
                         const resta = monUsuario - sobresResult.PRECIO;
                         restarMonedas(con, resta, idUsuario, () => {
                             req.session.user.MONEDAS = resta;
@@ -41,9 +65,13 @@ router.post('/:id', (req, res) => {
                 }
             });
         });
-    }); 
+    });
 });
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 // Función para obtener la información del sobre
 function obtenerSobre(con, idSobre, callback) {
     const querySqlSobre = 'SELECT * FROM sobre WHERE ID = ?';
@@ -56,6 +84,10 @@ function obtenerSobre(con, idSobre, callback) {
     });
 }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 // Función para comprobar si el usuario tiene el álbum al que pertenece el sobre
 function comprobarAlbum(con, idUsuario, sobresResult, callback) {
     const querySqlComprobarAlbum = 'SELECT * FROM album_personal WHERE ID_USU = ? AND ID_ALBUM = ?';
@@ -68,6 +100,10 @@ function comprobarAlbum(con, idUsuario, sobresResult, callback) {
     });
 }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 // Función para restar las monedas del usuario
 function restarMonedas(con, resta, idUsuario, callback) {
     const querySqlRestarMonedas = 'UPDATE usuario SET MONEDAS = ? WHERE ID = ?';
@@ -80,6 +116,10 @@ function restarMonedas(con, resta, idUsuario, callback) {
     });
 }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 // Función para abrir el sobre y obtener el número total de cromos en el álbum
 function abrirSobre(con, sobresResult, callback) {
     const querySqlCromos = 'SELECT COUNT(*) FROM cromos WHERE ALBUM = ?';
@@ -92,20 +132,34 @@ function abrirSobre(con, sobresResult, callback) {
     });
 }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 // Función para procesar los cromos obtenidos del sobre
 function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
     const querySqlCromosEnCromosPersonal = 'SELECT * FROM cromos_personal WHERE ID_CROMO = ?';
     const querySqlCromoRepetido = 'UPDATE cromos_personal SET CANTIDAD = CANTIDAD + 1 WHERE ID_USU = ? AND ID_CROMO = ?';
     const querySqlCromoNuevo = 'INSERT INTO cromos_personal (ID_USU, ID_CROMO, CANTIDAD) VALUES (?, ?, 1)';
+<<<<<<< Updated upstream
     
+=======
+   
+>>>>>>> Stashed changes
     // Función auxiliar para procesar un cromo
     function procesarCromo(numero, index) {
         return new Promise((resolve, reject) => {
             con.query(querySqlCromosEnCromosPersonal, [numero], (error, results) => {
+<<<<<<< Updated upstream
                 if (error) {
                     reject(error);
                 } 
                 else {
+=======
+                    if (error) {
+                    reject(error);
+                } else {
+>>>>>>> Stashed changes
                     if (results.length > 0) {
                         con.query(querySqlCromoRepetido, [idUsuario, numero], (error) => {
                             if (error) {
@@ -114,8 +168,12 @@ function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
                                 resolve();
                             }
                         });
+<<<<<<< Updated upstream
                     } 
                     else {
+=======
+                    } else {
+>>>>>>> Stashed changes
                         con.query(querySqlCromoNuevo, [idUsuario, numero], (error) => {
                             if (error) {
                                 reject(error);
@@ -129,6 +187,10 @@ function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
         });
     }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     // Utilizando reduce para procesar las promesas secuencialmente
     numerosAleatorios.reduce((promiseChain, numero, index) => {
         return promiseChain.then(() => {
@@ -144,6 +206,12 @@ function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
     });
 }
 
+<<<<<<< Updated upstream
+=======
+
+
+
+>>>>>>> Stashed changes
 // Función para generar números aleatorios
 function generarNumerosAleatorios(max, num, callback) {
     const numerosAleatorios = [];
@@ -154,4 +222,16 @@ function generarNumerosAleatorios(max, num, callback) {
     callback(numerosAleatorios);
 }
 
+
+// ROUTER
 module.exports = router;
+
+
+// FUNCIONES
+module.exports.obtenerSobre = obtenerSobre;
+module.exports.comprobarAlbum = comprobarAlbum;
+module.exports.restarMonedas = restarMonedas;
+module.exports.abrirSobre = abrirSobre;
+module.exports.procesarCromos= procesarCromos;
+module.exports.generarNumerosAleatorios = generarNumerosAleatorios;
+
