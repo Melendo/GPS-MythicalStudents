@@ -10,50 +10,18 @@
 </head>
 
 <body>
-    <div id="sobre-container">
+    <div id="sobre-container" data-numeros="<%= numeros %>" data-album="<%= album %>">
         <div id="image-container">
-        <img id= "apertura-sobre-img" src="#" alt="No hay imagen">
+            <img id= "apertura-sobre-img" src="/abrirSobre/imagen<%= idSobre%>" alt="No hay imagen" height="400" width="400">
         </div>
         <h2>Nombre</h2>
         
     </div>
 
     <button id="btnAbrirSobre">Abrir sobre</button>
-    <script src="/javascripts/abrirSobre.js"></script>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/javascripts/abrirSobre.js"></script>
 
-<!--
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Obtener los datos del almacenamiento local
-        var nombre = localStorage.getItem('nombre');
-        var imagen = localStorage.getItem('imagen');
-        // Lógica para procesar los datos
-        console.log('Nombre:', nombre);
-        console.log('Imagen:', imagen);
-        // Limpiar los datos del almacenamiento local si es necesario
-        localStorage.removeItem('nombre');
-        localStorage.removeItem('imagen');
-    });
-</script>
-
-
-<script> ESTE SCRIPT VA EN BOTON DE COMBRAR DE LA PANTALLA DE COMPRA DE SOBRE
-    document.addEventListener('DOMContentLoaded', function () {
-        var btnAbrirDesdeEJSB = document.getElementById('btnAbrirDesdeEJSB');
-        if (btnAbrirDesdeEJSB) {
-            btnAbrirDesdeEJSB.addEventListener('click', function () {
-                var nombre = '<= nombre %>'; // Obtener el nombre del EJS B
-                var imagen = '<= imagen %>'; // Obtener la imagen del EJS B
-                // Almacenar los datos en el almacenamiento local
-                localStorage.setItem('nombre', nombre);
-                localStorage.setItem('imagen', imagen);
-                // Abrir el EJS A
-                window.location.href = '/ruta/a/EJS_A';
-            });
-        }
-    });
-</script>
--->
 
 </html>

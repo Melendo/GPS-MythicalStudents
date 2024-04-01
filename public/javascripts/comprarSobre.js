@@ -8,11 +8,8 @@ $(document).ready(function() {
             data: { },
             success: function(response) {
                 if (response.success) {
-                    var msg = response.mensaje + "\nObtenidos los siguientes cromos: \n";
-                    response.nombres.array.forEach(nom => {
-                        msg + nom + " del album " + response.album + "\n";
-                    });
-                    alert(msg);
+                    alert(response.mensaje);
+                    window.location.href = '/abrirSobre/' + response.album + '/' + id + '/' + response.numeros.join(',');
                 }
                 else {
                     alert(response.mensaje);

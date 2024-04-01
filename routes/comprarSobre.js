@@ -87,7 +87,7 @@ router.post('/:id', (req, res) => {
                                     });
                                 });
 
-                                res.json({ success: true, mensaje: "Compra realizada correctamente.", album: sobresResult.ALBUM, nombres: nombresCromos });
+                                res.json({ success: true, mensaje: "Compra realizada correctamente", album: sobresResult[0].ALBUM, numeros: numerosAleatorios });
                             });                           
                         });
                     }
