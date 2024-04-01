@@ -15,20 +15,33 @@
     <title>Mythical Mingle</title>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Álbum de Cromos</h1>
-        <div class="row">
-            <% for (var i = 1; i <= 20; i++) { %>
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Cromo <%= i %></h5>
-                            <p class="card-text">Descripción del cromo <%= i %>.</p>
-                        </div>
+
+    <header>
+        <%- include("titulo", { titulo: title , monedas:monedas }) %>
+    </header>
+
+    <div class="container mt-2">
+            <div class="row">
+                <!-- Lista de cromos a la izquierda -->
+                <div class="col-md-4">
+                    <h2 class="mb-4">Lista de Cromos</h2>
+                    <div class="cromos-list">
+                        <% for (var i = 0; i <  cromosTotales.length; i++) { %>
+                            <div class="cromo">
+                                <img src="/album/imagen<%= cromosTotales[i].ID%>" class="img-fluid" alt="<%= cromosTotales[i].NOMBRE %>">
+                            <p class="mb-0"><%= cromosTotales[i].NOMBRE %></p>
+                            </div>
+                        <% } %>
                     </div>
                 </div>
-            <% } %>
+            <!-- Descripción del álbum a la derecha -->
+            <div class="col-md-8">
+                <h2 class="mb-4">Descripción del Álbum</h2>
+                <p>Aquí puedes colocar la descripción del álbum de cromos.</p>
+            </div>
         </div>
     </div>
+
+    <footer><%- include("layout_principal") %></footer>
 </body>
 </html>
