@@ -3,6 +3,7 @@
 
 body {
   padding: 50px; 
+  height: 100vh; /* Establece la altura del cuerpo al 100% de la ventana */
   font-family: Monaco, monospace; /* Fuente Monaco */
   background:linear-gradient(rgb(89 94 150), rgb(78, 139, 136));
 }
@@ -197,11 +198,17 @@ header{
   color: white;
 }
 
+/*-----------PAGINA PRINCIPAL---------------------------------*/
+
 .div_introduction{
-  margin-bottom: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  height: 90vh; /* Ocupa el 100% de la altura de la ventana */
 }
 
-/*-----------PAGINA PRINCIPAL---------------------------------*/
+
 #logo {
   max-width: 100%;
   height: auto;
@@ -240,19 +247,18 @@ header{
 }
 
 /*--------------------------------------------------------*/
-
 /*--------------ESTILOS PARA PANTALLA DE ABRIR SOBRE-------------*/
 #sobre-container {
   background-color: rgb(31 37 97);
   padding: 20px;
   border-radius: 10px;
-  max-width: 300px; /* Ancho máximo del botón */
-  min-width: 300px; /* Ancho mínimo del botón */
+  max-width: 400px; /* Ancho máximo del botón */
+  min-width: 400px; /* Ancho mínimo del botón */
   margin: 0 auto;
   text-align: center;
   font-family: Monaco, monospace; 
   color: white;
-  font-size: 2vw;
+  font-size: 30px;
   margin-bottom: 20px;
   word-wrap: break-word;
   overflow: hidden;
@@ -260,8 +266,8 @@ header{
 
 #image-container {
   background-color: rgb(22, 22, 22); /* Fondo negro */
-  width: 300px; /* Ancho del contenedor */
-  height: 300px; /* Altura del contenedor */
+  width: 400px; /* Ancho del contenedor */
+  height: 400px; /* Altura del contenedor */
   display: flex;
   justify-content: center;
   align-items: center;

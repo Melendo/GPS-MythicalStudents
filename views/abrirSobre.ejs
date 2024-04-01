@@ -10,15 +10,17 @@
 </head>
 
 <body>
-    <div id="sobre-container" data-numeros="<%= numeros %>" data-album="<%= album %>">
+    <div id="sobre-container" data-numeros="<%= numeros %>" data-album="<%= album %>" data-sobre="<%= idSobre %>">
         <div id="image-container">
             <img id= "apertura-sobre-img" src="/abrirSobre/imagen<%= idSobre%>" alt="No hay imagen" height="400" width="400">
         </div>
-        <h2>Nombre</h2>
+
+        <h2><%= nombreSobre %></h2>
         
     </div>
 
     <button id="btnAbrirSobre">Abrir sobre</button>
+
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/javascripts/abrirSobre.js"></script>

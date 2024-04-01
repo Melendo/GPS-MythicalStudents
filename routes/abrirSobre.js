@@ -7,7 +7,26 @@ router.get('/:album/:id/:numerosAleatorios', function(req, res) {
     const idSobre = req.params.id;
     const album = req.params.album;
     const numerosAleatorios = req.params.numerosAleatorios.split(',').map(Number);
-    res.render('abrirSobre', { idSobre: idSobre, album: album, numeros: JSON.stringify(numerosAleatorios) });
+     // Realiza la consulta para obtener el nombre del sobre
+     db.getConnection(function(error, con) {
+        if (error) {
+            con.release();
+            throw error;
+        }
+        const sqlSobre = "SELECT NOMBRE FROM sobre WHERE ID = ?";
+        con.query(sqlSobre, [idSobre], (error, result) => {
+            con.release();
+            if (error) {
+                throw error;
+            }
+            
+            // Si se encontró un nombre, lo pasamos a la plantilla, de lo contrario, pasamos un mensaje
+            const nombreSobre = result.length > 0 ? result[0].NOMBRE : "Nombre no encontrado";
+            
+            // Renderiza la plantilla abrirSobre.ejs con los datos proporcionados
+            res.render('abrirSobre', { idSobre: idSobre, album: album, numeros: JSON.stringify(numerosAleatorios), nombreSobre: nombreSobre });
+        });
+    });
 });
 
 router.get('/imagen:id', function (req, res) {
@@ -27,7 +46,9 @@ router.get('/imagen:id', function (req, res) {
             res.send(result[0].IMAGEN);
         });
     });
+
 });
+
 
 router.get('/:album/:numero', function(req, res) {
     const numeroCromo = req.params.numero;
