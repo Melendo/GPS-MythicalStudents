@@ -1,41 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Sobres</title>
-    <style>
-        /* Estilos para la lista horizontal */
-        .sobre-list {
-            list-style: none;
-            padding: 0;
-            display: flex;
-        }
-        .sobre-item {
-            margin-right: 20px;
-        }
-        /* Estilos para cada sobre */
-        .sobre {
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            width: 120px;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/tienda.css" rel="stylesheet">
+    <link href="/stylesheets/modalConfCompra.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/logo.png">
+    <title>Mythical Mingle</title>
 </head>
+
 <body>
-    <h1>Lista de Sobres Disponibles</h1>
-    <ul class="sobre-list">
-        <% for (var i = 0; i < sobres.length; i++) { %>
-            <li class="sobre-item">
-                <div class="sobre">
-                    <h2><%= sobres[i].nombre %></h2>
-                    <p>Precio: $<%= sobres[i].precio %></p>
-                    <button>Comprar</button>
+
+  <header>
+    <%- include("titulo", { titulo: title, monedas:monedas }) %>
+  </header>
+    <div class="container sobre-list">
+        <div class="row">
+            <% for (var i=0; i < sobres.length; i++) { %>
+                <div class="col-sm-3 ">
+                    <div class="sobre-item ">
+                        <h4><b>
+                                <%= sobres[i].NOMBRE %>
+                            </b></h4>
+                        <div class="sobre" style="background-image: url('/tienda/imagen<%= sobres[i].ID%>');">
+                        </div>
+                        <div class="row">
+                            <div class="col-6 my-1">
+                                <p>Precio: $<%= sobres[i].PRECIO %>
+                                </p>
+                            </div>
+                            <div class="col-6 my-1">
+                                <button type="button" class="btn-comprar" data-bs-toggle="modal" data-bs-target="#modalConfirmarCompra<%= sobres[i].ID %>">Comprar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </li>
-        <% } %>
-    </ul>
+                <% } %>
+        </div>
+    </div>
+
+<!-- Modal de Confirmación -->
+<% for (var i=0; i < sobres.length; i++) { %>
+    <div class="modal fade" id="modalConfirmarCompra<%= sobres[i].ID %>" tabindex="-1" aria-labelledby="modalConfirmarCompraLabel<%= sobres[i].ID %>" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title title" id="modalConfirmarCompraLabel<%= sobres[i].ID %>">CONFIRMACION DE COMPRA</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <div class="content">
+                <div class="left-section">
+                  <img class="image" src="/tienda/imagen<%= sobres[i].ID %>" alt="Sobre del videojuego">
+                  <div>
+                    <h2 class="confirm-title" id="sobreNombre<%= sobres[i].ID %>"><%= sobres[i].NOMBRE %></h2>
+                  </div>
+                </div>
+                <div class="right-section">
+                  <div class="confirmation-info">
+                    <h2 class="confirm-title">¿DESEAS REALIZAR LA COMPRA?</h2>
+                    <div class="price-box">
+                      <p class="price" id="sobrePrecio<%= sobres[i].ID %>">PRECIO DEL SOBRE: $<%= sobres[i].PRECIO %></p>
+                    </div>
+                    <div class="coins-box">
+                      <p>TIENES $<%= monedas %> MONEDAS</p>
+                    </div>
+                  </div>
+                  <div class="buttons">
+                    <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">CANCELAR</button>
+                    <button type="button" class="btn btn-primary buy" data-id="<%= sobres[i].ID %>">COMPRAR</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<% } %>
+    <script>
+      function abrirDialogConfirmar() {
+        $('#modalConfirmarCompra').modal('show');
+      }
+    </script>
+
+
+
+
+    <footer><%- include("layout_principal") %></footer>
+
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/javascripts/comprarSobre.js"></script>
 </html>
