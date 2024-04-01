@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="/images/logo.png">
     <title>Mythical Mingle</title>
 </head>
+
 <body>
 
     <header>
@@ -21,19 +23,22 @@
     </header>
 
     <div class="container mt-2">
-            <div class="row">
-                <!-- Lista de cromos a la izquierda -->
-                <div class="col-md-4">
-                    <h2 class="mb-4">Lista de Cromos</h2>
-                    <div class="cromos-list">
-                        <% for (var i = 0; i <  cromosTotales.length; i++) { %>
-                            <div class="cromo">
-                                <img src="/album/imagen<%= cromosTotales[i].ID%>" class="img-fluid" alt="<%= cromosTotales[i].NOMBRE %>">
-                            <p class="mb-0"><%= cromosTotales[i].NOMBRE %></p>
-                            </div>
+        <div class="row">
+            <!-- Lista de cromos a la izquierda -->
+            <div class="col-md-4">
+                <h2 class="mb-4">Lista de Cromos</h2>
+                <div class="cromos-list">
+                    <% for (var i=0; i < cromosTotales.length; i++) { %>
+                        <div class="cromo">
+                            <img src="/album/imagen/<%= cromosTotales[i].ID%>"
+                                class="img-fluid" alt="<%= cromosTotales[i].NOMBRE %>">
+                            <p class="mb-0">
+                                <%= cromosTotales[i].NOMBRE %>
+                            </p>
+                        </div>
                         <% } %>
-                    </div>
                 </div>
+            </div>
             <!-- Descripción del álbum a la derecha -->
             <div class="col-md-8">
                 <h2 class="mb-4">Descripción del Álbum</h2>
@@ -44,4 +49,5 @@
 
     <footer><%- include("layout_principal") %></footer>
 </body>
+
 </html>

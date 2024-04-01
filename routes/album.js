@@ -14,10 +14,9 @@ router.get('/:album', function (req, res, next) {
     const album = req.params.album;
     
     db.getConnection(function (error, con) {
-        const cromosTotalesQuey = "SELECT * FROM cromos WHERE album = ?;";
-        var a = cromosTotalesQuey;
+        const cromosTotalesQuery = "SELECT * FROM cromos WHERE album = ?;";
 
-        con.query(cromosTotalesQuey,[album] ,(error, cromosTotales) => {
+        con.query(cromosTotalesQuery,[album] ,(error, cromosTotales) => {
             if (error) {
                 con.release();
                 throw error;
@@ -46,7 +45,7 @@ router.get('/:album', function (req, res, next) {
     });
 });
 
-router.get('/imagen:id', function (req, res, next) {
+router.get('/imagen/:id', function (req, res, next) {
     db.getConnection(function (error, con) {
         if (error) {
             con.release();
