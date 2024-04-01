@@ -1,7 +1,8 @@
 $(document).ready(function() {
 
-    $("#comprar").on('click', function() {
+    $(".buy").on('click', function() {
         var id = $(this).data('id');
+        
         $.ajax({
             url: "/comprarSobre/" + id,
             type: "POST",
@@ -9,6 +10,7 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.success) {
                     alert(response.mensaje);
+                    window.location.href = 'tienda';
                 }
                 else {
                     alert(response.mensaje);
