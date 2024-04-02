@@ -2,14 +2,17 @@
 
 
 body {
-  padding: 50px; 
-  height: 100vh; /* Establece la altura del cuerpo al 100% de la ventana */
   font-family: Monaco, monospace; /* Fuente Monaco */
-  background:linear-gradient(rgb(89 94 150), rgb(78, 139, 136));
+  background:linear-gradient(rgb(89 94 150), rgb(78, 139, 136), rgb(89 94 150));
 }
 
 a {
   color: #00B7FF;
+}
+
+.container{
+  margin-top: 75px;
+  margin-bottom: 140px;
 }
 
 .container2{
@@ -163,6 +166,7 @@ a {
 
 .navbar-nav .nav-link {
   color: white; /* Color del texto blanco */
+  justify-content: center; /* Centra los elementos horizontalmente */
 }
 
 .navbar-nav .nav-link.active {
@@ -179,9 +183,6 @@ a {
   height:450px;
 }
 
-header{
-  margin-bottom: 60px;
-}
 
 .titulo-container {
   position: fixed;
@@ -208,7 +209,21 @@ header{
   height: 90vh; /* Ocupa el 100% de la altura de la ventana */
 }
 
+/* Estilos para pantallas más pequeñas */
+@media (max-width: 690px) {
+  .imagen_icono{
+    height: 50px;
+  }
+}
 
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+/*-----------PAGINA PRINCIPAL---------------------------------*/
 #logo {
   max-width: 100%;
   height: auto;
