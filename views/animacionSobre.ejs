@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animación de sobre</title>
+  <link href="/stylesheets/animacionSobre.css" rel="stylesheet">
+</head>
+<body>
+  <div class="envelope-container">
+    <!-- Utiliza la imagen pasada como parámetro en la URL -->
+    <img src="<%= decodeURIComponent(sobreUrl) %>" alt="Sobre" class="envelope-img" id="envelope">
+    <img src="/abrirSobre/imagen<%= idSobre%>" alt="Sobre" class="envelope-img" id="envelope">
+    <div class="lights-container">
+      <div class="light light1"></div>
+      <div class="light light2"></div>
+      <div class="light light3"></div>
+    </div>
+  </div>
+  
+  <script src="/javascripts/animacionSobre.js"></script>
+
+</body>
+</html>
