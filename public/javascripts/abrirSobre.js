@@ -3,6 +3,7 @@ $(document).ready(function() {
     $("#btnAbrirSobre").on('click', function() {
         var numeros = $("#sobre-container").data('numeros');
         var album = $("#sobre-container").data('album');
+        var sobre = $("#sobre-container").data('sobre');
         var consultas = [];
 
         numeros.forEach(function(numero) {
@@ -10,12 +11,17 @@ $(document).ready(function() {
         });
         
         Promise.all(consultas)
-            .then(function() {
-                window.location.href = '/tienda';
-            })
-            .catch(function(error) {
-                console.error("Error al abrir el sobre:", error);
+        .then(function(resultados) {
+            var nombresCromos = resultados.map(function(resultado) {
+                return resultado.nombre;
             });
+
+            localStorage.setItem('nombresCromos', JSON.stringify(nombresCromos));
+            window.location.href = '/animacionSobre/' + sobre;
+        })
+        .catch(function(error) {
+            console.error("Error al abrir el sobre:", error);
+        });
 
     });
 
@@ -25,8 +31,7 @@ $(document).ready(function() {
                 url: '/abrirSobre/' + album + '/' + numero,
                 type: 'GET',
                 success: function(response) {
-                    alert("¡Felicidades! Has obtenido el cromo '" + response.nombre + "'");
-                    resolve();
+                    resolve({ nombre: response.nombre });
                 },
                 error: function(error) {
                     console.error("Error al consultar el nombre del cromo:", error);
