@@ -92,3 +92,6 @@ router.get('/imagen/:id', function (req, res, next) {
 });
 
 module.exports = router;
+module.exports.getCromosTotales = getCromosTotales;
+module.exports.getCromosPersonales = getCromosPersonales;
+module.exports.getInfoAlbum = getInfoAlbum;
