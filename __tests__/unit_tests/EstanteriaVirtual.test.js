@@ -3,6 +3,7 @@ const express = require('express');
 const session = require('express-session');
 const estanteriaVirtualRouter = require('../../routes/estanteriaVirtual.js');
 
+
 // Mock de función para db.getConnection
 const mockDbConnection = jest.fn((callback) => {
   // Simular que la consulta a la base de datos se ejecuta correctamente sin devolver datos específicos
