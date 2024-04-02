@@ -31,11 +31,12 @@
         menuItems.forEach(function(item) {
             var link = item.getAttribute('href');
             
-            if (link === currentUrl) {
+            if ((link === currentUrl) || (currentUrl.startsWith('/album/') && link === '/estanteriaVirtual')) {
                 item.classList.add('active');
             } else {
                 item.classList.remove('active');
             }
+            
         });
     });
 </script>
