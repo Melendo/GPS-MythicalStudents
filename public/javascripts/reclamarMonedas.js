@@ -3,11 +3,11 @@ $(document).ready(function() {
         var nuevasMonedas = obtenerNuevasMonedas();
 
         $.ajax({
-            url: '/cuestionario/' + nuevasMonedas,
+            url: '/cuestionario/reclamar' + nuevasMonedas,
             type: 'GET',
             success: function(response) {
                 alert(response.mensaje);
-                window.location.href = '/index';
+                window.location.href = '/';
             },
             error: function(error) {
                 console.error("Error al reclamar la recompensa:", error);
@@ -17,5 +17,5 @@ $(document).ready(function() {
 });
 
 function obtenerNuevasMonedas() {
-    return $("#monedas").val(); //modificar segun este puesto en la iu
+    return 100; //modificar segun este puesto en la iu
 }
