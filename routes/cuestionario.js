@@ -40,3 +40,4 @@ router.get('/reclamar:monedas', function (req, res) {
 
 
 module.exports = router;
+module.exports.actualizarMonedas = actualizarMonedas;
