@@ -22,11 +22,11 @@
         <%- include("titulo", { titulo: title , monedas:monedas }) %>
     </header>
 
-    <div class="container mt-2">
+    <div class="container sobre-list">
+        <h2 class="text-cromos">Lista de Cromos</h2> <!-- Movido fuera del .row -->
         <div class="row">
             <!-- Lista de cromos a la izquierda -->
-            <div class="col-md-4">
-                <h2 class="mb-4">Lista de Cromos</h2>
+            <div class="col-md-9">
                 <div class="cromos-list">
                     <% for (var i=0; i < cromosTotales.length; i++) { %>
                         <div class="cromo">
@@ -36,15 +36,17 @@
                                 <%= cromosTotales[i].NOMBRE %>
                             </p>
                         </div>
-                        <% } %>
+                    <% } %>
                 </div>
             </div>
             <!-- Descripción del álbum a la derecha -->
-            <div class="col-md-8">
+            <div class="col-md-3">
                 <h2 class="mb-4">Descripción del Álbum</h2>
                 <p>Aquí puedes colocar la descripción del álbum de cromos.</p>
             </div>
         </div>
+    </div>
+    
     </div>
 
     <footer><%- include("layout_principal") %></footer>

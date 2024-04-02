@@ -3,7 +3,7 @@
 
 body {
   font-family: Monaco, monospace; /* Fuente Monaco */
-  background:linear-gradient(rgb(89 94 150), rgb(78, 139, 136));
+  background:linear-gradient(rgb(89 94 150), rgb(78, 139, 136), rgb(89 94 150));
 }
 
 a {
