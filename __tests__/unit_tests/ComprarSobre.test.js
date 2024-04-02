@@ -356,7 +356,7 @@ describe('Función procesarCromos', () => {
 
 //--------------PROBANDO FUNCION PRINCIPAL RUTA POST -----------------------------
 
-/*const express = require('express');
+const express = require('express');
 const request = require('supertest');
 const router = require('../../routes/comprarSobre.js');
 
@@ -399,4 +399,4 @@ describe('POST /:id', () => {
       // Verifica el cuerpo de la respuesta
       expect(response.body).toEqual({ success: true, mensaje: "Compra realizada correctamente", album: 1, numeros: expect.any(Array) }); // Actualizado: 'Álbum de ejemplo' reemplazado por 1
     });
-  });*/
+  });

@@ -1,0 +1,19 @@
+.album {
+    background-color: rgb(74 80 140);
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.album h4{
+    font-family:'Courier New', Courier, monospace;
+    text-align: center;
+    text-size-adjust:initial;
+}
+
+.shelf-divider {
+    border-bottom: 5px solid rgb(31 37 97);
+    margin-bottom: 20px; /* Ajusta el espacio entre las baldas */
+}

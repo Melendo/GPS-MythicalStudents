@@ -15,18 +15,20 @@
 <body>
 
     <header>
-      <%- include("titulo", { titulo: "Página Principal", monedas:monedas }) %>
+        <%- include("titulo", { titulo: "Página Principal" , monedas:monedas }) %>
     </header>
 
     <div class="div_introduction">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-auto">
-              <img id="logo" src="\images\logo.png" class="img-fluid" alt="Logo"> 
+                <img id="logo" src="\images\logo.png" class="img-fluid" alt="Logo">
             </div>
-            <div class="col-md-auto"> 
-                <a class="nav-link contenedor-cuestionario-button" href="ruta/al/cuestionario">
-                    <img class="imagen_icono" src="\images\checklist.png"> Cuestionario <img class="imagen_icono"
-                        src="\images\checklist.png">
+            <div class="col-md-auto">
+                <a class="nav-link contenedor-cuestionario-button" href="/cuestionario">
+                    <!--<img class="imagen_icono" src="\images\checklist.png"> Cuestionario <img class="imagen_icono"
+                        src="\images\checklist.png">-->
+                    <img class="imagen_icono" src="\images\checklist.png"> Reclamar Monedas <img class="imagen_icono"
+                        src="\images\checklist.png"> <!--Provisional hasta que se metan los cuestionarios-->
                 </a>
             </div>
         </div>
@@ -34,12 +36,12 @@
 
     <%- include("layout_principal") %>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/i18n/defaults-es_ES.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/i18n/defaults-es_ES.min.js"></script>
 
 </body>
 

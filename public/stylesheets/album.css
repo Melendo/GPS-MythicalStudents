@@ -11,6 +11,22 @@
 }
 
 .cromo img {
-    width: 100px; /* Ajusta el tamaño de la imagen según tus necesidades */
+    width: 150px; /* Ajusta el tamaño de la imagen según tus necesidades */
     height: auto;
+}
+
+.sobre-list {
+    
+    list-style: none;
+    padding: 20px;
+    justify-content: center; /* Centrar elementos horizontalmente */
+    align-items: center; /* Centrar elementos verticalmente */
+    overflow-x: auto; /* Para permitir desplazamiento horizontal si hay muchos sobres */
+    background-color: rgba(89 94 150); /* Fondo semi-transparente para resaltar la lista */
+    border-radius: 10px; /* Añade un radio de borde */
+
+}
+
+.text-cromos{
+    text-align: center;
 }

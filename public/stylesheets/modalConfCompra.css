@@ -1,0 +1,50 @@
+/* Estilos para el modal de confirmación */
+.modal-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilos para el encabezado */
+.modal-header {
+    align-self: center; /* Centra el encabezado */
+}
+
+/* Estilos para el cuerpo del modal */
+.modal-body {
+    display: flex;
+    flex-direction: row; /* Alinea los elementos en una fila */
+}
+
+/* Estilos para la sección izquierda (imagen y título) */
+.left-section {
+    flex: 1; /* Toma el espacio restante */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra verticalmente */
+    padding: 20px;
+}
+
+/* Estilos para la imagen */
+.image {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Estilos para el título del sobre */
+.confirm-title {
+    margin-top: 0;
+}
+
+/* Estilos para la sección derecha (información y botones) */
+.right-section {
+    flex: 1; /* Toma el espacio restante */
+    padding: 20px;
+}
+
+/* Estilos para los botones */
+.buttons {
+    margin-top: 20px;
+    text-align: right;
+}
+
+

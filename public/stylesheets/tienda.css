@@ -1,0 +1,63 @@
+body {
+    background: linear-gradient(45deg, rgb(78, 116, 139),rgb(78 116 139) ,rgb(63 105 129) , rgb(23 65 89)); /* Degradado horizontal desde el centro */
+    display: flex; /* Permite centrar verticalmente el contenido */
+    justify-content: center; /* Centra verticalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+}
+
+
+
+/* Estilos para la lista horizontal */
+.sobre-list {
+    list-style: none;
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Centrar elementos horizontalmente */
+    align-items: center; /* Centrar elementos verticalmente */
+    overflow-x: auto; /* Para permitir desplazamiento horizontal si hay muchos sobres */
+    background-color: rgba(89 94 150); /* Fondo semi-transparente para resaltar la lista */
+    border-radius: 10px; /* Añade un radio de borde */
+
+}
+.sobre-item {
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.sobre-item h4{
+    font-family:'Courier New', Courier, monospace;
+    text-align: center;
+}
+.sobre-item p {
+    margin-top: 5px;
+    text-align: center;
+}
+
+/* Estilos para cada sobre */
+.sobre {
+    text-align: center;
+    width: 175px; /* Aumenta el ancho de los sobres */
+    height: 300px;
+    border-radius: 10px; /* Aumenta el radio de borde para hacer los sobres más redondeados */
+    border: 3px solid rgb(31 37 97);
+    background-size:cover;
+    background-position: center;
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-comprar {
+    background-color: rgb(200, 150, 41); /* Amarillo de Bootstrap */
+    border:none; /* Amarillo de Bootstrap */
+    color: #212529; /* Color de texto */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 5px 10px;
+}
+
+.btn-comprar:hover {
+    background-color: rgb(245, 200, 104); /* Amarillo más claro al pasar el ratón */
+    color: #212529; /* Color de texto */
+}
