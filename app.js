@@ -31,6 +31,8 @@ var comprarSobreRouter = require('./routes/comprarSobre');
 var estanteriaVirtualRouter = require('./routes/estanteriaVirtual');
 var abrirSobreRouter = require('./routes/abrirSobre');
 var animacionSobreRouter = require('./routes/animacionSobre')
+var cuestionarioRouter = require('./routes/cuestionario');
+
 
 var app = express(); 
 
@@ -72,6 +74,7 @@ app.use('/estanteriaVirtual', estanteriaVirtualRouter);
 app.use('/abrirSobre', abrirSobreRouter);
 app.use('/animacionSobre', animacionSobreRouter);
 
+app.use('/cuestionario', cuestionarioRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

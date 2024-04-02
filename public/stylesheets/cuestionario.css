@@ -1,0 +1,32 @@
+body {
+    background-image: linear-gradient(to bottom right, rgb(110, 89, 150), rgb(78, 139, 124));
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    margin: 0;
+}
+
+.container-final_cuestionario {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(25, 25, 25, 0.7));
+    border-radius: 25px;
+    margin-top: 11%;
+    margin-bottom: 12%;
+
+    text-align: center;
+    /* Alineación de texto */
+    line-height: 100px;
+    /* Altura de línea igual al alto del objeto para centrar verticalmente */
+
+}
+
+.titulo-resultado {
+    background-color: blanchedalmond;
+    border-radius: 25px;
+
+}
+
+.recompensa {
+    background-color: gray;
+    border-radius: 25px;
+
+}
