@@ -28,10 +28,17 @@
             <!-- Lista de cromos a la izquierda -->
             <div class="col-md-9">
                 <div class="cromos-list">
+                    <% var j=0 %>
                     <% for (var i=0; i < cromosTotales.length; i++) { %>
                         <div class="cromo">
-                            <img src="/album/imagen/<%= cromosTotales[i].ID%>"
+                            <% if(cromosPersonales[j] && cromosTotales[i].ID === cromosPersonales[j].ID_CROMO) { %>
+                                <img src="/album/imagen/<%= cromosTotales[i].ID%>"
                                 class="img-fluid" alt="<%= cromosTotales[i].NOMBRE %>">
+                                <% j++ %>
+                            <% } else { %>
+                                <img src="/images/interrogacion.jpeg" class="img-fluid" alt="?">
+                            <% } %>
+                            
                             <p class="mb-0">
                                 <%= cromosTotales[i].NOMBRE %>
                             </p>
