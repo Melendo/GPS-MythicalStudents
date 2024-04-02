@@ -28,8 +28,9 @@ var usersRouter = require('./routes/users');
 var tiendaRouter = require('./routes/tienda');
 var crearColeccionRouter = require('./routes/crearColeccion');
 var comprarSobreRouter = require('./routes/comprarSobre');
-var abrirSobreRouter = require('./routes/abrirSobre');
-var animacionSobreRouter = require('./routes/animacionSobre');
+var estanteriaVirtualRouter = require('./routes/estanteriaVirtual');
+var albumRouter = require('./routes/album');
+
 
 var app = express(); 
 
@@ -67,8 +68,9 @@ app.use('/users', usersRouter);
 app.use('/tienda', tiendaRouter);
 app.use('/crearColeccion', crearColeccionRouter);
 app.use('/comprarSobre', comprarSobreRouter);
-app.use('/abrirSobre', abrirSobreRouter);
-app.use('/animacionSobre', animacionSobreRouter);
+app.use('/estanteriaVirtual', estanteriaVirtualRouter);
+app.use('/album', albumRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

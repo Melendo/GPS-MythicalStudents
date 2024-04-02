@@ -1,0 +1,16 @@
+.cromos-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.cromo {
+    flex: 0 0 auto;
+    text-align: center;
+    margin: 0 10px 20px;
+}
+
+.cromo img {
+    width: 100px; /* Ajusta el tamaño de la imagen según tus necesidades */
+    height: auto;
+}
