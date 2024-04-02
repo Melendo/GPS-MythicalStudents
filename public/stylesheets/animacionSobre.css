@@ -1,0 +1,142 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; /* Evita que el confeti salga de la pantalla */
+    background:linear-gradient(rgb(89 94 150), rgb(78, 139, 136));
+  }
+  
+  .envelope-container {
+    position: relative;
+  }
+  
+  .envelope-img {
+    width: 200px;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    cursor: pointer;
+  }
+  
+  /* Animación de vibración */
+  @keyframes vibrate {
+    0% { transform: translateX(0) translateY(0) rotateZ(0); }
+    25% { transform: translateX(1px) translateY(-1px) rotateZ(1deg); } /* Modificado */
+    50% { transform: translateX(-1px) translateY(1px) rotateZ(-1deg); } /* Modificado */
+    75% { transform: translateX(1px) translateY(-1px) rotateZ(1deg); } /* Modificado */
+    100% { transform: translateX(-1px) translateY(1px) rotateZ(-1deg); } /* Modificado */
+  }
+  
+  /* Animación de agrandamiento y desaparición */
+  @keyframes enlargeAndDisappear {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+  }
+  
+  /* Estilos del confeti */
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: rgb(255, 255, 255); /* Cambia el color del confeti según tus preferencias */
+    border-radius: 50%;
+    opacity: 0;
+    animation: confetti-fall 2s ease-in-out infinite;
+  }
+  
+  /* Animación de caída del confeti */
+  @keyframes confetti-fall {
+    0% { transform: translateY(-100vh); opacity: 0; } /* Cambiado */
+    100% { transform: translateY(100vh); opacity: 1; } /* Cambiado */
+  }
+  
+  body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .envelope-container {
+    position: relative;
+  }
+  
+  .envelope-img {
+    width: 400px;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    cursor: pointer;
+  }
+  
+ /* Estilos de las luces */
+.light {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 10px yellow, 0 0 20px yellow, 0 0 300px yellow; /* Cambiado */
+    display: none; /* Agregado */
+  }
+  
+  .light1 { animation: moveLight1 5s linear forwards; }
+  .light2 { animation: moveLight2 5s linear forwards; }
+  .light3 { animation: moveLight3 5s linear forwards; }
+  
+  @keyframes moveLight1 {
+    0% { top: -100px; left: 20%; }
+    25% { top: calc(50% - 350px); left: calc(0% + 150px); }
+    50% { top: -200px; left: 75%; }
+    75% { top: calc(50% - 100px); left: calc(50% - 100px); }
+    100% { top: calc(50% - 100px); left: calc(50% - 100px); }
+  }
+  
+  @keyframes moveLight2 {
+    0% { top: calc(100% - 20px); left: -50%; }
+    25% { top: calc(50% + 100px); left: calc(50% - 400px); }
+    50% { top: 250px; left: 0% - 20px; }
+    75% { top: calc(50% - 100px); left: calc(50% - 100px); }
+    100% { top: calc(50% - 100px); left: calc(50% - 100px); }
+  }
+  
+  @keyframes moveLight3 {
+    0% { top: calc(100% + 100px); left: 100%; }
+    25% { top: calc(50% + 15px); left: calc(50% + 200px); }
+    50% { top: 100%; left: 100%; }
+    75% { top: calc(50% - 100px); left: calc(50% - 100px); }
+    100% { top: calc(50% - 100px); left: calc(50% - 100px); }
+  }
+  
+
+  @keyframes lightsToCenter {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(120deg); }
+  }
+  
+  @keyframes moveToCenter {
+    0% { top: 0; left: 0; }
+    25% { top: 25%; left: 25%; transform: translate(-50%, -50%); }
+    50% { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    75% { top: 75%; left: 75%; transform: translate(-50%, -50%); }
+    100% { top: 100%; left: 100%; transform: translate(-50%, -50%); }
+  }
+  
+/* Animación para desvanecer las luces */
+@keyframes fadeLights {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Animación para desvanecer el confeti */
+@keyframes fadeConfetti {
+    0% { opacity: 0; }
+    100% {
+        opacity: 0;
+        transform: translateY(calc(-50vh - 100px));
+    }
+}
