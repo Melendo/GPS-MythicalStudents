@@ -8,7 +8,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" href="/">
+            <a class="nav-link" href="/">
                 <img class="imagen_icono" src="/images/home_icon.png">
                 Pagina Principal
             </a>
@@ -22,3 +22,21 @@
     </ul>
 
 </nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var currentUrl = window.location.pathname;
+        var menuItems = document.querySelectorAll('.navbar-nav .nav-link');
+
+        menuItems.forEach(function(item) {
+            var link = item.getAttribute('href');
+            
+            if (link === currentUrl) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    });
+</script>
+
