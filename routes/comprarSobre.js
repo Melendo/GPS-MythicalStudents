@@ -116,16 +116,20 @@ function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
                     if (results.length > 0) {
                         con.query(querySqlCromoRepetido, [idUsuario, numero], (error) => {
                             if (error) {
+                                con.release();
                                 reject(error);
                             } else {
+                                con.release();
                                 resolve();
                             }
                         });
                     } else {
                         con.query(querySqlCromoNuevo, [idUsuario, numero], (error) => {
                             if (error) {
+                                con.release();
                                 reject(error);
                             } else {
+                                con.release();
                                 resolve();
                             }
                         });
