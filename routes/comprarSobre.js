@@ -27,7 +27,7 @@ router.post('/:id', (req, res) => {
                     res.json({ success: false, mensajeError: "No tienes el álbum al que pertenece el sobre" });
                 } else {
                     if (monUsuario < sobresResult.PRECIO) {
-                        res.json({ success: false, mensajeError: "Monedas insuficientes" });
+                        res.json({ success: false, mensaje: "Monedas insuficientes" });
                     } else {
                         const resta = monUsuario - sobresResult.PRECIO;
                         restarMonedas(con, resta, idUsuario, () => {
