@@ -35,6 +35,7 @@ router.post('/:id', (req, res) => {
                             abrirSobre(con, sobresResult, (totalCromos) => {
                                 generarNumerosAleatorios(totalCromos['COUNT(*)'], sobresResult.NUM_CROMOS, (numerosAleatorios) => {
                                     procesarCromos(con, idUsuario, numerosAleatorios, () => {
+                                        con.release();
                                         res.json({ success: true, mensaje: "Compra realizada correctamente", album: sobresResult.ALBUM, numeros: numerosAleatorios });
                                     });
                                 });
@@ -105,12 +106,12 @@ function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
     const querySqlCromosEnCromosPersonal = 'SELECT * FROM cromos_personal WHERE ID_CROMO = ?';
     const querySqlCromoRepetido = 'UPDATE cromos_personal SET CANTIDAD = CANTIDAD + 1 WHERE ID_USU = ? AND ID_CROMO = ?';
     const querySqlCromoNuevo = 'INSERT INTO cromos_personal (ID_USU, ID_CROMO, CANTIDAD) VALUES (?, ?, 1)';
-   
+
     // Función auxiliar para procesar un cromo
     function procesarCromo(numero, index) {
         return new Promise((resolve, reject) => {
             con.query(querySqlCromosEnCromosPersonal, [numero], (error, results) => {
-                    if (error) {
+                if (error) {
                     reject(error);
                 } else {
                     if (results.length > 0) {
@@ -119,7 +120,6 @@ function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
                                 con.release();
                                 reject(error);
                             } else {
-                                con.release();
                                 resolve();
                             }
                         });
@@ -129,7 +129,6 @@ function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
                                 con.release();
                                 reject(error);
                             } else {
-                                con.release();
                                 resolve();
                             }
                         });
@@ -146,13 +145,13 @@ function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
             return procesarCromo(numero, index);
         });
     }, Promise.resolve())
-    .then(() => {
-        callback();
-    })
-    .catch((error) => {
-        con.release();
-        throw error;
-    });
+        .then(() => {
+            callback();
+        })
+        .catch((error) => {
+            con.release();
+            throw error;
+        });
 }
 
 
@@ -178,6 +177,6 @@ module.exports.obtenerSobre = obtenerSobre;
 module.exports.comprobarAlbum = comprobarAlbum;
 module.exports.restarMonedas = restarMonedas;
 module.exports.abrirSobre = abrirSobre;
-module.exports.procesarCromos= procesarCromos;
+module.exports.procesarCromos = procesarCromos;
 module.exports.generarNumerosAleatorios = generarNumerosAleatorios;
 
