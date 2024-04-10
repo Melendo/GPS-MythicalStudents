@@ -6,7 +6,9 @@ function getRandomNumber(min, max) {
 document.addEventListener('DOMContentLoaded', function() {
     var envelope = document.getElementById('envelope');
     var lightsContainer = document.querySelector('.lights-container');
-    var hasClicked = false;
+    var nombreCromoContainer = document.querySelector('.nombre-cromo-container');
+    var nombreCromoTexto = document.querySelector('.nombre-cromo-texto');
+    var buttonSiguiente = document.querySelector('.btnSiguiente');
 
     // Función para iniciar la animación de vibración
     function startVibration() {
@@ -17,12 +19,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function hideEnvelope() {
         envelope.style.animation = 'enlargeAndDisappear 1s forwards';
         lightsContainer.style.animation = 'fadeLights 1s forwards'; // Desvanecer las luces
-        setTimeout(fadeConfetti, 1000); // Retraso de 1000 milisegundos (1 segundo) para el desvanecimiento del confeti
+        setTimeout(fadeConfetti, 1000); // Retraso de 1000 milisegundos (1 segundo) para el desvanecimiento del confeti)
         // Llama a mostrarAlertas después de que la animación haya terminado
         setTimeout(function() {
             trasAnimacion();
         }, 1000); // Espera 2 segundos (1000ms de desaparición + 1000ms de confeti)
-        
     }
 
     // Función para crear confeti
@@ -44,57 +45,61 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Agregar evento de clic a la imagen del sobre
-    envelope.addEventListener('click', function() {
-        if (!hasClicked) {
-            // Mostrar luces
-            var lights = document.querySelectorAll('.light');
-            lights.forEach(function(light) {
-                // Generar posiciones aleatorias para cada luz
-                var randomLeft = getRandomNumber(0, window.innerWidth) + 'px';
-                var randomTop = getRandomNumber(0, window.innerHeight) + 'px';
-                light.style.display = 'block';
-                light.style.left = randomLeft;
-                light.style.top = randomTop;
-            });
-
-            // Iniciar la vibración
-            startVibration();
-
-            // Comienza la animación del confeti
-            createConfetti();
-
-            // Después de un breve retraso, ocultar el sobre y desvanecer las luces
-            setTimeout(hideEnvelope, 3000); // 3000ms es la duración de la vibración
-
-            // Marcar que se ha hecho clic
-            hasClicked = true;
-        }
-    });
-    
     function trasAnimacion() {
-        var nombresCromos = JSON.parse(localStorage.getItem('nombresCromos'));
-        if (nombresCromos && nombresCromos.length > 0) {
-            mostrarAlertas(nombresCromos);
+        buttonSiguiente.style.display = 'block';
+        var idCromos = JSON.parse(localStorage.getItem('idCromos'));
+        if (idCromos && idCromos.length > 0) {
+            mostrarCromos(idCromos);
         } else {
             window.location.href = '/tienda';
         }
     }
     
-    function mostrarAlertas(nombresCromos) {
+    function mostrarCromos(idCromos) {
         var index = 0;
 
-        function mostrarSiguienteAlerta() {
-            if (index < nombresCromos.length) {
-                alert("¡Felicidades! Has obtenido el cromo '" + nombresCromos[index] + "'");
+        function mostrarSiguienteCromo() {
+            if (index < idCromos.length) {
+                obtenerNombreCromo(idCromos[index], function(nombre) {
+                    nombreCromoTexto.textContent = nombre;
+                });
                 index++;
-                
-                mostrarSiguienteAlerta();
             } else {
                 window.location.href = '/tienda';
             }
         }
-        // Comienza a mostrar los alertas
-        mostrarSiguienteAlerta();
+
+        // Mostrar el primer nombre al cargar la página
+        mostrarSiguienteCromo();
+
+        // Agregar botón para avanzar al siguiente nombre
+        buttonSiguiente.addEventListener('click', mostrarSiguienteCromo);
     }
+
+    function obtenerNombreCromo(idCromo, callback) {
+        $.ajax({
+            url: '/animacionSobre/nombre/' + idCromo,
+            type: 'GET',
+            success: function(response) {
+                callback(response);
+            },
+            error: function(error) {
+                console.error("Error al consultar el nombre del cromo:", error);
+            }
+        });
+    }
+
+    // Iniciar la animación al cargar la página
+    var lights = document.querySelectorAll('.light');
+    lights.forEach(function(light) {
+        // Generar posiciones aleatorias para cada luz
+        var randomLeft = getRandomNumber(0, window.innerWidth) + 'px';
+        var randomTop = getRandomNumber(0, window.innerHeight) + 'px';
+        light.style.display = 'block';
+        light.style.left = randomLeft;
+        light.style.top = randomTop;
+    });
+    startVibration();
+    createConfetti();
+    setTimeout(hideEnvelope, 3000); // 3000ms es la duración de la vibración
 });
