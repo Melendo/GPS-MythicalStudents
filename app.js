@@ -10,6 +10,8 @@ const mysqlSession = require("express-mysql-session");
 
 const MySQLStore = mysqlSession(session);
 
+require('dotenv').config({ path: './.env' });
+
 const sessionOptions = session({
   saveUninitialized: false,
   secret: "a",
@@ -35,7 +37,7 @@ var cuestionarioRouter = require('./routes/cuestionario');
 var albumRouter = require('./routes/album');
 
 
-var app = express(); 
+var app = express();
 
 const middlewareSession = session({
   saveUninitialized: false,
@@ -78,12 +80,12 @@ app.use('/album', albumRouter);
 app.use('/cuestionario', cuestionarioRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
