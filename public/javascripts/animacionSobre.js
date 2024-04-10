@@ -6,8 +6,9 @@ function getRandomNumber(min, max) {
 document.addEventListener('DOMContentLoaded', function() {
     var envelope = document.getElementById('envelope');
     var lightsContainer = document.querySelector('.lights-container');
-    var nombreCromoContainer = document.querySelector('.nombre-cromo-container');
+    var vistaCromo = document.querySelector('.cromo-container');
     var nombreCromoTexto = document.querySelector('.nombre-cromo-texto');
+    var imagenCromo = document.querySelector('.imagen-cromo');
     var buttonSiguiente = document.querySelector('.btnSiguiente');
 
     // Función para iniciar la animación de vibración
@@ -46,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function trasAnimacion() {
-        buttonSiguiente.style.display = 'block';
+        vistaCromo.style.display = 'block';
         var idCromos = JSON.parse(localStorage.getItem('idCromos'));
         if (idCromos && idCromos.length > 0) {
             mostrarCromos(idCromos);
@@ -63,6 +64,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 obtenerNombreCromo(idCromos[index], function(nombre) {
                     nombreCromoTexto.textContent = nombre;
                 });
+                
+                imagenCromo.src = "/animacionSobre/imagen/" + idCromos[index];
                 index++;
             } else {
                 window.location.href = '/tienda';

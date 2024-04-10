@@ -22,6 +22,7 @@ router.get('/nombre/:id', function (req, res) {
                 throw error;
             }
             con.release();
+            
             res.send(result[0].NOMBRE);
         });
     });

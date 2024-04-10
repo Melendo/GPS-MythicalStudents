@@ -15,7 +15,7 @@ $(document).ready(function() {
             var idCromos = resultados.map(function(resultado) {
                 return resultado.id;
             });
-
+            
             localStorage.setItem('idCromos', JSON.stringify(idCromos));
             window.location.href = '/animacionSobre/' + sobre;
         })
