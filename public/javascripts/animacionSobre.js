@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var nombreCromoTexto = document.querySelector('.nombre-cromo-texto');
     var imagenCromo = document.querySelector('.imagen-cromo');
     var buttonSiguiente = document.querySelector('.btnSiguiente');
+    var nuevo = document.querySelector('.nuevo');
 
     // Función para iniciar la animación de vibración
     function startVibration() {
@@ -49,14 +50,15 @@ document.addEventListener('DOMContentLoaded', function() {
     function trasAnimacion() {
         vistaCromo.style.display = 'block';
         var idCromos = JSON.parse(localStorage.getItem('idCromos'));
+        var nuevosCromos = JSON.parse(localStorage.getItem('cromosNuevos'));
         if (idCromos && idCromos.length > 0) {
-            mostrarCromos(idCromos);
+            mostrarCromos(idCromos, nuevosCromos);
         } else {
             window.location.href = '/tienda';
         }
     }
     
-    function mostrarCromos(idCromos) {
+    function mostrarCromos(idCromos, nuevosCromos) {
         var index = 0;
 
         function mostrarSiguienteCromo() {
@@ -65,6 +67,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     nombreCromoTexto.textContent = nombre;
                 });
                 
+                if (nuevosCromos[index] === 1) {
+                    nuevo.src = "/images/nuevo.png";
+                    nuevo.style.display = 'block';
+                } else {
+                    nuevo.style.display = 'none';
+                }
+
                 imagenCromo.src = "/animacionSobre/imagen/" + idCromos[index];
                 index++;
             } else {
@@ -105,4 +114,5 @@ document.addEventListener('DOMContentLoaded', function() {
     startVibration();
     createConfetti();
     setTimeout(hideEnvelope, 3000); // 3000ms es la duración de la vibración
+    console.log(JSON.parse(localStorage.getItem('cromosNuevos')));
 });
