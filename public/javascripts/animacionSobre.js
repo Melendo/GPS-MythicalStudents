@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var nombreCromoTexto = document.querySelector('.nombre-cromo-texto');
     var imagenCromo = document.querySelector('.imagen-cromo');
     var buttonSiguiente = document.querySelector('.btnSiguiente');
+    var buttonAnterior = document.querySelector('.btnAnterior');
     var nuevo = document.querySelector('.nuevo');
 
     // Función para iniciar la animación de vibración
@@ -59,34 +60,200 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function mostrarCromos(idCromos, nuevosCromos) {
+        
         var index = 0;
+        var aux = 0;
+        var imagenCromo = document.querySelector('.imagen-cromo');
+        var flechaDerecha = document.createElement('img');
+        var flechaIzquierda = document.createElement('img');
+    
+        // Configurar la flecha derecha
+        flechaDerecha.src = "/images/flecha.png";
+        flechaDerecha.classList.add('flecha');
+        flechaDerecha.classList.add('flecha-derecha');
+    
+        // Configurar la flecha izquierda
+        flechaIzquierda.src = "/images/flecha.png";
+        flechaIzquierda.classList.add('flecha');
+        flechaIzquierda.classList.add('flecha-izquierda');
+        flechaIzquierda.style.transform = 'rotate(180deg)'; // Rotar la flecha hacia el otro lado
+    
+        // Insertar las flechas en el documento
+        document.body.appendChild(flechaIzquierda);
+        document.body.appendChild(flechaDerecha);
 
-        function mostrarSiguienteCromo() {
-            if (index < idCromos.length) {
-                obtenerNombreCromo(idCromos[index], function(nombre) {
-                    nombreCromoTexto.textContent = nombre;
-                });
+     // Función para mostrar el siguiente cromo
+ // Función para mostrar el siguiente cromo
+// Función para mostrar el siguiente cromo
+function mostrarSiguienteCromo() {
+    if (index < idCromos.length) {
+
+
+        if (nuevosCromos[index] === 1) {
+            nuevo.src = "/images/nuevo.png";
+            nuevo.style.display = 'block';
+
+
+            
+            // Agregar la clase 'normal' primero para establecer el tamaño inicial
+            nuevo.classList.add('normal');
+
+            // Después de un breve retraso, agregar la clase 'enlarged' para agrandar la imagen
+            setTimeout(function() {
+                nuevo.classList.add('enlarged');
+            }, 1000); // Espera 100ms antes de agregar la clase 'enlarged'
+
+            // Después de un tiempo, quitar la clase 'enlarged' para revertir el tamaño
+            setTimeout(function() {
+                nuevo.classList.remove('enlarged');
+                // Agregar la clase 'shrink-animation' para animar el regreso al tamaño normal
+                nuevo.classList.add('shrink-animation');
+            }, 2000); // Espera 2 segundos antes de quitar la clase 'enlarged'
+
+            // Después de la animación de regreso al tamaño normal, quitar la clase 'shrink-animation'
+            setTimeout(function() {
+                nuevo.classList.remove('shrink-animation');
+            }, 2500); // Espera 2.5 segundos en total (0.5s para la transición + 2s para el tamaño agrandado)
+
+            createConfetti();
+
+
+            // Función para aplicar la animación de rotación a la imagen
+    function aplicarAnimacion() {
+        imagenCromo.style.animation = 'rotateY 4s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+        nombreCromoTexto.style.animation = 'rotateY 4s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+    }
+    
+    // Función para resetear la animación de rotación
+    function resetearAnimacion() {
+        // Eliminar la regla de animación
+        imagenCromo.style.animation = 'none';
+        nombreCromoTexto.style.animation = 'none';
+        // Esperar un breve momento antes de volver a aplicar la animación
+        setTimeout(aplicarAnimacion, 100);
+    }
+    
+    // Llamar a la función para aplicar la animación cuando sea necesario
+    aplicarAnimacion();
+    
+    // Llamar a la función para resetear la animación después de usarla
+    resetearAnimacion();
+      
+
+
+
+            flechaIzquierda.classList.add('fade-out');
+            flechaDerecha.classList.add('fade-out');
+
+
+
+            setTimeout(function() {
+                // Eliminar la clase fade-out y agregar la clase fade-in después de 3 segundos
+                flechaIzquierda.classList.remove('fade-out');
+                flechaDerecha.classList.remove('fade-out');
+            
+                flechaIzquierda.classList.add('fade-in');
+                flechaDerecha.classList.add('fade-in');
+            }, 3000);
+
+
+
+        } else {
+            nuevo.style.display = 'none';
+            fadeConfetti();
+        }
+
+        if (aux > 0){
+            // Desvanecer la imagen y el texto actuales solo si no es el primer cromo
+            if (index > 0) {
+                imagenCromo.classList.add('fade-out');
+                nombreCromoTexto.classList.add('fade-out');
+
+                        // Mostrar la nueva imagen y el nuevo texto con fade in
+            setTimeout(function() {
+                // Solo se activa la transición si no es el primer cromo
                 
-                if (nuevosCromos[index] === 1) {
-                    nuevo.src = "/images/nuevo.png";
-                    nuevo.style.display = 'block';
-                } else {
-                    nuevo.style.display = 'none';
-                }
+                    imagenCromo.src = "/animacionSobre/imagen/" + idCromos[index - 1];
+                    imagenCromo.classList.remove('fade-out');
+                    imagenCromo.classList.add('fade-in');
+                    
+                    obtenerNombreCromo(idCromos[index-1], function(nombre) {
+                        nombreCromoTexto.textContent = nombre;
+                    });
+                    
+                    nombreCromoTexto.classList.remove('fade-out');
+                    nombreCromoTexto.classList.add('fade-in');
 
-                imagenCromo.src = "/animacionSobre/imagen/" + idCromos[index];
-                index++;
-            } else {
-                window.location.href = '/tienda';
+                    
+                
+            }, 500); // Esperar 500 milisegundos antes de mostrar la nueva imagen y texto
+            }
+            else{
+                imagenCromo.classList.add('fade-out');
+                nombreCromoTexto.classList.add('fade-out');
+
+                setTimeout(function() {
+                    // Solo se activa la transición si no es el primer cromo
+                    
+                        imagenCromo.src = "/animacionSobre/imagen/" + idCromos[0];
+                        imagenCromo.classList.remove('fade-out');
+                        imagenCromo.classList.add('fade-in');
+
+                        obtenerNombreCromo(idCromos[0], function(nombre) {
+                            nombreCromoTexto.textContent = nombre;
+                        });
+                        
+                        nombreCromoTexto.classList.remove('fade-out');
+                        nombreCromoTexto.classList.add('fade-in');
+                    
+                }, 500); // Esperar 500 milisegundos antes de mostrar la nueva imagen y texto
+                //imagenCromo.src = "/animacionSobre/imagen/" + idCromos[0];
             }
         }
+        else{
+
+        imagenCromo.src = "/animacionSobre/imagen/" + idCromos[0];
+        obtenerNombreCromo(idCromos[index], function(nombre) {
+            nombreCromoTexto.textContent = nombre;
+        });
+
+        aux++;
+        }
+
+
+
+        index++;
+    } else {
+        window.location.href = '/tienda';
+    }
+}
+
+        
+        
+
 
         // Mostrar el primer nombre al cargar la página
         mostrarSiguienteCromo();
 
-        // Agregar botón para avanzar al siguiente nombre
-        buttonSiguiente.addEventListener('click', mostrarSiguienteCromo);
+     // Configurar el evento clic para la flecha derecha
+    flechaDerecha.addEventListener('click', function() {
+        console.log("Flecha derecha clickeada");
+        mostrarSiguienteCromo();
+    });
+
+    // Configurar el evento clic para la flecha izquierda
+    flechaIzquierda.addEventListener('click', function() {
+        if (index > 1){
+            console.log("Flecha izquierda clickeada");
+            index -= 2; // Retroceder dos posiciones para mostrar el cromo anterior
+            mostrarSiguienteCromo();
+        }
+
+    });
     }
+
+
+    
 
     function obtenerNombreCromo(idCromo, callback) {
         $.ajax({

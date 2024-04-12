@@ -1,3 +1,64 @@
+
+.nombre-cromo-texto {
+  text-align: center; /* Centra el texto horizontalmente */
+  font-family: Monaco, monospace;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade sombra al texto */
+}
+
+.cromo-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #ccc; /* Añade un borde de 2px sólido gris claro alrededor del cromo */
+  border-radius: 8px; /* Aplica un borde redondeado de 8px al cromo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0.5, 1); /* Agrega una sombra suave alrededor del cromo */
+}
+
+
+
+
+.flecha {
+  width: 50px; /* Ajusta el tamaño de las flechas según lo deseado */
+  height: 50px; /* Ajusta el tamaño de las flechas según lo deseado */
+  position: absolute;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.flecha:hover {
+  transform: translateY(-50%) scale(1.1); /* Escalamos ligeramente la flecha al pasar el ratón sobre ella */
+}
+
+
+.flecha-derecha {
+  top: calc(50% - 30px); /* Alinea la flecha con el centro vertical del cromo */
+  right: calc(50% - 220px); /* Posición relativa a la derecha del cromo */
+}
+
+.flecha-izquierda {
+  top: calc(50% - 55px); /* Alinea la flecha con el centro vertical del cromo */
+  left: calc(50% - 220px); /* Posición relativa a la izquierda del cromo */
+  
+}
+
+
+
+
+
+.nuevo {
+  position: absolute;
+  top: 20%;
+  right: 58%;
+  width: 100px;
+  height: 100px;
+  z-index: 2;
+}
+
+
+
 body {
     margin: 0;
     display: flex;
@@ -51,7 +112,8 @@ body {
     0% { transform: translateY(-100vh); opacity: 0; } /* Cambiado */
     100% { transform: translateY(100vh); opacity: 1; } /* Cambiado */
   }
-  
+
+
   body {
     margin: 0;
     display: flex;
@@ -139,4 +201,81 @@ body {
         opacity: 0;
         transform: translateY(calc(-50vh - 100px));
     }
+}
+
+/* Animación de desvanecimiento saliente */
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+/* Animación de aparecer */
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
+
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+.fade-out {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+  from {
+      opacity: 1;
+  }
+  to {
+      opacity: 0;
+  }
+}
+
+
+
+/* Clase para la imagen en tamaño normal */
+.normal {
+  transform: scale(1); /* Tamaño normal */
+  transition: transform 0.5s ease; /* Transición suave */
+}
+
+/* Clase para la imagen en tamaño agrandado */
+.enlarged {
+  transform: scale(2); /* Tamaño agrandado */
+}
+
+/* Clase para la animación de regreso al tamaño normal */
+.shrink-animation {
+  transform: scale(1); /* Tamaño normal */
+}
+
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateY {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(1080deg);
+  }
 }
