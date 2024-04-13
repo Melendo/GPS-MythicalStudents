@@ -9,17 +9,17 @@ router.get('/', function(req, res) {
   
   if (typeof user !== 'undefined') {
     db.getConnection(function (error, con) {
-      const querySqlUsuario = 'SELECT * FROM usuario WHERE ID = 1';
+      const querySqlAlbumes = 'SELECT * FROM album_personal WHERE ID_USU = ?';
   
-      con.query(querySqlUsuario, [], (error, usuarios) => {
+      con.query(querySqlAlbumes, [user.ID], (error, albumes) => {
         if (error) {
           con.release();
           throw error;
         }
         con.release();
-        req.session.user = usuarios[0];
+        req.session.albumes = albumes;
   
-        res.render('index', { user: req.session.user, title: "Pagina Principal", monedas:req.session.user.MONEDAS });
+        res.render('index', { title: "Pagina Principal", monedas: user.MONEDAS });
       });
     });
   }
