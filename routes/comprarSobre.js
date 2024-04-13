@@ -5,8 +5,6 @@ var router = express.Router();
 const db = require('../connection/connection.js');
 
 
-
-
 // Función principal para manejar la ruta POST
 router.post('/:id', (req, res) => {
     const idUsuario = req.session.user.ID;

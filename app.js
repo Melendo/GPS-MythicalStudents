@@ -35,6 +35,7 @@ var abrirSobreRouter = require('./routes/abrirSobre');
 var animacionSobreRouter = require('./routes/animacionSobre')
 var cuestionarioRouter = require('./routes/cuestionario');
 var albumRouter = require('./routes/album');
+var inicioSesionRouter = require('./routes/inicioSesion');
 
 
 var app = express();
@@ -78,6 +79,7 @@ app.use('/abrirSobre', abrirSobreRouter);
 app.use('/animacionSobre', animacionSobreRouter);
 app.use('/album', albumRouter);
 app.use('/cuestionario', cuestionarioRouter);
+app.use('/inicioSesion', inicioSesionRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

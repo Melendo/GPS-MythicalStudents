@@ -1,35 +1,39 @@
 var express = require('express');
 var router = express.Router();
 
-const multer = require('multer');
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
 const db = require('../connection/connection.js');
 
 
 router.get('/', function (req, res, next) {
 
-    var albumes = [];
-    for (var i = 0; i < req.session.albumes.length; i++) {
-        albumes.push(req.session.albumes[i].ID_ALBUM);
-    }
-    var ids = albumes.join(', ');
+    var user = req.session.user;
 
-    db.getConnection(function (error, con) {
-        const albumesQuery = "SELECT * FROM album WHERE id IN(" + ids + ");";
-        var a = albumesQuery;
+    if (typeof user !== 'undefined') {
+        var albumes = [];
+        for (var i = 0; i < req.session.albumes.length; i++) {
+            albumes.push(req.session.albumes[i].ID_ALBUM);
+        }
+        var ids = albumes.join(', ');
 
-        con.query(albumesQuery, (error, result) => {
-            if (error) {
+        db.getConnection(function (error, con) {
+            const albumesQuery = "SELECT * FROM album WHERE id IN(" + ids + ");";
+            var a = albumesQuery;
+
+            con.query(albumesQuery, (error, result) => {
+                if (error) {
+                    con.release();
+                    throw error;
+                }
                 con.release();
-                throw error;
-            }
-            con.release();
-            res.render('estanteriaVirtual', { title: 'Estanteria Virtual', albumes: result, monedas: req.session.user.MONEDAS });
+                res.render('estanteriaVirtual', { title: 'Estanteria Virtual', albumes: result, monedas: req.session.user.MONEDAS });
+            });
         });
-    });
+    }
+    else {
+        res.redirect('/inicioSesion');
+    }
+
+    
 });
 
 router.get('/imagen:id', function (req, res, next) {

@@ -1,11 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-const multer = require('multer');
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
 const db = require('../connection/connection.js');
 
 
@@ -36,37 +31,45 @@ function getInfoAlbum(album, con, callback) {
 // Controlador original
 router.get('/:album', function (req, res, next) {
     const album = req.params.album;
-    db.getConnection(function (error, con) {
-        if (error) {
-            throw error;
-        }
-        getCromosTotales(album, con, (error, cromosTotales) => {
+    var user = req.session.user;
+
+    if (typeof user !== 'undefined') {
+        db.getConnection(function (error, con) {
             if (error) {
-                con.release();
                 throw error;
             }
-            getCromosPersonales(album, con, (error, cromosPersonales) => {
+            getCromosTotales(album, con, (error, cromosTotales) => {
                 if (error) {
                     con.release();
                     throw error;
                 }
-                getInfoAlbum(album, con, (error, infoAlbum) => {
+                getCromosPersonales(album, con, (error, cromosPersonales) => {
                     if (error) {
                         con.release();
                         throw error;
                     }
-                    con.release();
-                    res.render('album', {
-                        title: 'Estanteria Virtual',
-                        album: infoAlbum,
-                        monedas: req.session.user.MONEDAS,
-                        cromosPersonales: cromosPersonales,
-                        cromosTotales: cromosTotales
+                    getInfoAlbum(album, con, (error, infoAlbum) => {
+                        if (error) {
+                            con.release();
+                            throw error;
+                        }
+                        con.release();
+                        res.render('album', {
+                            title: 'Estanteria Virtual',
+                            album: infoAlbum,
+                            monedas: user.MONEDAS,
+                            cromosPersonales: cromosPersonales,
+                            cromosTotales: cromosTotales
+                        });
                     });
                 });
             });
         });
-    });
+    }
+    else {
+        res.redirect('/inicioSesion');
+    }
+    
 });
 
 
