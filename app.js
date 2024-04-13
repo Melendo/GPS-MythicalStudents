@@ -94,7 +94,17 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+
+  let titulo, mensaje;
+  if (err.status === 404) {
+    titulo = "Error 404";
+    mensaje = "La página que buscas no existe.";
+  } else {
+    titulo = "Error " + (err.status || 500);
+    mensaje = "Ocurrió un error en el servidor.";
+  }
+
+  res.render('error', { titulo: titulo, mensaje: mensaje });
 });
 
 module.exports = app;
