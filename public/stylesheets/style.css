@@ -326,3 +326,8 @@ footer {
 #btnAbrirSobre:hover {
   background-color: rgb(43 18 84); /* Cambio de color de fondo al pasar por encima */
 }
+
+.container-xxl .container-xxl {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 4px solid grey;
+}
