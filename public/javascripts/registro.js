@@ -5,7 +5,8 @@ $(document).ready(function() {
         // Obtener los datos del formulario
         var formData = {
             email: $('#email1').val(),
-            contraseña: $('#contraseña1').val(),
+            contraseña1: $('#contraseña1').val(),
+            contraseña2: $('#contraseña2').val(),
             nombre: $('#nombre').val(),
             apellido1: $('#apellido1').val(),
             apellido2: $('#apellido2').val(),
@@ -30,6 +31,10 @@ $(document).ready(function() {
                     $('.alerta').append('<br>');
                 });
                 $('.alerta').show();
+
+                $('html, body').animate({
+                    scrollTop: $('.alerta').offset().top
+                }, 20);
             }
         },
         error: function(error) {

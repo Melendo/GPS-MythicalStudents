@@ -17,12 +17,13 @@ router.post(
         ).isEmail(),
         // Utilizamos una expresión regular para verificar la complejidad de la contraseña
         check(
-            'contraseña',
+            'contraseña1',
             'La contraseña debe tener al menos una minúscula, una mayúscula, un número y ser de al menos 4 caracteres de longitud.'
         ).custom((value) => {
             const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{4,}$/;
             return passwordRegex.test(value);
-        })
+        }),
+        check("contraseña2", "Las contraseñas no coinciden.").custom((value, { req }) => value === req.body.contraseña1),
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -38,7 +39,7 @@ router.post(
             verificarEmail(con, req.body.email)
                 .then(successEmail => {
                     if (!successEmail) {
-                        throw { message: 'El email ya existe' };
+                        throw { message: 'Ese email ya está registrado' };
                     }
                     return verificarNombreUsuario(con, req.body.nombreUsuario);
                 })
@@ -48,7 +49,7 @@ router.post(
                     }
                     // Ambas verificaciones pasaron, proceder con la inserción
                     return new Promise((resolve, reject) => {
-                        con.query(insertQuery, [req.body.nombre, req.body.apellido1, req.body.apellido2, req.body.email, req.body.nombre_usuario, req.body.contraseña], (error, results) => {
+                        con.query(insertQuery, [req.body.nombre, req.body.apellido1, req.body.apellido2, req.body.email, req.body.nombreUsuario, req.body.contraseña1], (error, results) => {
                             if (error) {
                                 reject(error);
                             } else {

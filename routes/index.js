@@ -10,16 +10,24 @@ router.get('/', function(req, res) {
   if (typeof user !== 'undefined') {
     db.getConnection(function (error, con) {
       const querySqlAlbumes = 'SELECT * FROM album_personal WHERE ID_USU = ?';
+      const querySqlMonedas = 'SELECT MONEDAS FROM usuario WHERE ID = ?';
   
       con.query(querySqlAlbumes, [user.ID], (error, albumes) => {
         if (error) {
           con.release();
           throw error;
         }
-        con.release();
         req.session.albumes = albumes;
-  
-        res.render('index', { title: "Pagina Principal", monedas: user.MONEDAS });
+        
+        con.query(querySqlMonedas, [user.ID], (error, monedas) => {
+          if (error) {
+            con.release();
+            throw error;
+          }
+          con.release();
+          req.session.user.MONEDAS = monedas[0].MONEDAS
+          res.render('index', { title: "Pagina Principal", monedas: monedas[0].MONEDAS });
+        });
       });
     });
   }
