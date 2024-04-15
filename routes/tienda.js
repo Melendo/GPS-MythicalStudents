@@ -28,7 +28,7 @@ router.get('/', function (req, res, next) {
                 }
                 con.release();
     
-                res.render('tienda', { user: user, title: 'Tienda', sobres: result, monedas:req.session.user.MONEDAS});
+                res.render('tienda', { user: user, title: 'Tienda', sobres: result });
             });
         });
     }

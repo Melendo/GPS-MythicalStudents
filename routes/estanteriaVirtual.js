@@ -27,12 +27,12 @@ router.get('/', function (req, res, next) {
                         throw error;
                     }
                     con.release();
-                    res.render('estanteriaVirtual', { user: user, title: 'Estanteria Virtual', albumes: result, monedas: user.MONEDAS });
+                    res.render('estanteriaVirtual', { user: user, title: 'Estanteria Virtual', albumes: result });
                 });
             });
         }
         else {
-            res.render('estanteriaVirtual', { user: user, title: 'Estanteria Virtual', albumes: "", monedas: user.MONEDAS });
+            res.render('estanteriaVirtual', { user: user, title: 'Estanteria Virtual', albumes: "" });
         }
        
     }

@@ -20,7 +20,7 @@
 <body>
 
   <header>
-    <%- include("titulo", { titulo: title, monedas:monedas }) %>
+    <%- include("titulo", { titulo: title, user: user }) %>
   </header>
     <div class="container sobre-list">
         <div class="row">
@@ -72,7 +72,7 @@
                       <p class="price" id="sobrePrecio<%= sobres[i].ID %>">PRECIO DEL SOBRE: $<%= sobres[i].PRECIO %></p>
                     </div>
                     <div class="coins-box">
-                      <p>TIENES $<%= monedas %> MONEDAS</p>
+                      <p>TIENES $<%= user.MONEDAS %> MONEDAS</p>
                     </div>
                   </div>
                   <div class="buttons">

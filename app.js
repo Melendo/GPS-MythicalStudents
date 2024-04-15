@@ -84,7 +84,6 @@ app.use('/album', albumRouter);
 app.use('/cuestionario', cuestionarioRouter);
 app.use('/inicioSesion', inicioSesionRouter);
 app.use('/registro', registroRouter);
-
 app.use('/cerrarSesion', cerrarSesionRouter);
 
 // catch 404 and forward to error handler

@@ -58,7 +58,6 @@ router.get('/:album', function (req, res, next) {
                             user: user,
                             title: 'Estanteria Virtual',
                             album: infoAlbum,
-                            monedas: user.MONEDAS,
                             cromosPersonales: cromosPersonales,
                             cromosTotales: cromosTotales
                         });
