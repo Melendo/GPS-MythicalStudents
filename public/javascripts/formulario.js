@@ -16,6 +16,10 @@ $(document).ready(function() {
         mostrarPassword("contraseña1");
     });
 
+    $("#show-password2").on("click", function() {
+        mostrarPassword("contraseña2");
+    });
+
     // Verificar contraseña
     function validarContrasena(contra) {
         var longitudValida = contra.length >= 4;
@@ -43,6 +47,24 @@ $(document).ready(function() {
         mensajePassword('contraseña1', 'mensaje-validacion1');
     });
 
+    $('#contraseña2').on('input', function() {
+        mensajePassword('contraseña2', 'mensaje-validacion2');
+        verificarCoincidenciaContraseñas();
+    });
+
+    // Verificar coincidencia de contraseñas
+    function verificarCoincidenciaContraseñas() {
+        var contraseña1 = $('#contraseña1').val();
+        var contraseña2 = $('#contraseña2').val();
+        var mensaje = "";
+
+        if (contraseña1 !== contraseña2) {
+            mensaje = "Las contraseñas no coinciden.";
+        }
+
+        $('#mensaje-validacion2').text(mensaje);
+    }
+
     // Verificar correo
     function validarCorreo(inputId, mensajeId) {
         var email = $('#' + inputId).val();
@@ -58,5 +80,8 @@ $(document).ready(function() {
     
     $('#email1').on('input', function(event) {
         validarCorreo('email1', 'correo-valido1');
+    });
+    $('#email2').on('input', function(event) {
+        validarCorreo('email2', 'correo-valido1');
     });
 });
