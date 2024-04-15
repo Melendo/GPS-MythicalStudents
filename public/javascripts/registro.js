@@ -24,6 +24,7 @@ $(document).ready(function() {
             // Verificar la respuesta del servidor y redirigir en consecuencia
             if (response.success) {
                 $('.alerta').hide();
+                alert("Cuenta creada con exito!");
                 window.location.href = response.redirect;
             }
             else {
