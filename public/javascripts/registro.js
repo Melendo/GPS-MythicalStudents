@@ -3,20 +3,22 @@ $(document).ready(function() {
         e.preventDefault();
 
         // Obtener los datos del formulario
-        var formData = {
-            email: $('#email1').val(),
-            contraseña1: $('#contraseña1').val(),
-            contraseña2: $('#contraseña2').val(),
-            nombre: $('#nombre').val(),
-            apellido1: $('#apellido1').val(),
-            apellido2: $('#apellido2').val(),
-            nombreUsuario: $('#nombre_usuario').val()
-        };
+        const formData = new FormData();
+        formData.append('nombre', $('#nombre').val());
+        formData.append('apellido1', $('#apellido1').val());
+        formData.append('apellido2', $('#apellido2').val());
+        formData.append('nombreUsuario', $('#nombre_usuario').val());
+        formData.append('email', $('#email1').val());
+        formData.append('contrasena1', $('#contrasena1').val());
+        formData.append('contrasena2', $('#contrasena2').val());
+        formData.append('foto', $('#foto')[0].files[0]);
 
         // Realizar la solicitud AJAX para iniciar sesión
         $.ajax({
         type: 'POST',
         url: '/registro',
+        processData: false,
+        contentType: false,
         data: formData,
         success: function(response) {
             // Verificar la respuesta del servidor y redirigir en consecuencia

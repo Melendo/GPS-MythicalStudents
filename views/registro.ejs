@@ -52,7 +52,7 @@
             <div class="col-11 form-group mb-4">
                 <label for="password">Contraseña: *</label>
                 <div class="d-flex">
-                    <input class="form-control" type="password" id="contraseña1" name="contraseña" required/>
+                    <input class="form-control" type="password" id="contrasena1" name="contrasena1" required/>
                     <button class="btn btn-outline-primary btn-sm" type="button" id="show-password1">Mostrar</button>
                 </div>
                 <div id="mensaje-validacion1" class="text-danger small"></div>
@@ -61,11 +61,19 @@
               <div class="col-11 form-group mb-4">
                 <label for="password">Confirma la contraseña: *</label>
                 <div class="d-flex">
-                    <input class="form-control" type="password" id="contraseña2" name="contraseña2" required/>
+                    <input class="form-control" type="password" id="contrasena2" name="contrasena2" required/>
                     <button class="btn btn-outline-primary btn-sm" type="button" id="show-password2">Mostrar</button>
                 </div>
                 <div id="mensaje-validacion2" class="text-danger small"></div>
-              </div>          
+              </div>
+
+              <div class="col-11 form-group my-2">
+                <label for="imagen">Imagen de perfil:</label><br>
+                <input class="form-control" type="file" id="foto" name="foto" accept="image/*"/>
+                <small id="profile-picture-help" class="form-text text-light"
+                  >Sube una imagen de perfil (formato: JPEG, PNG, GIF,
+                  etc.).</small>
+              </div>
                          
               <button class="col-11 col-md-3 btn btn-primary my-4" type="submit">Registrarse</button>
               <p class="text-center">¿Ya tienes una cuenta? <a href="/inicioSesion" class="text-primary">Inicia sesion aquí</a></p>

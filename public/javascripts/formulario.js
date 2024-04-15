@@ -13,11 +13,11 @@ $(document).ready(function() {
     }
     
     $("#show-password1").on("click", function() {
-        mostrarPassword("contraseña1");
+        mostrarPassword("contrasena1");
     });
 
     $("#show-password2").on("click", function() {
-        mostrarPassword("contraseña2");
+        mostrarPassword("contrasena2");
     });
 
     // Verificar contraseña
@@ -43,22 +43,22 @@ $(document).ready(function() {
         $('#' + mensajeId).text(mensaje);
     }
 
-    $('#contraseña1').on('input', function() {
-        mensajePassword('contraseña1', 'mensaje-validacion1');
+    $('#contrasena1').on('input', function() {
+        mensajePassword('contrasena1', 'mensaje-validacion1');
     });
 
-    $('#contraseña2').on('input', function() {
-        mensajePassword('contraseña2', 'mensaje-validacion2');
-        verificarCoincidenciaContraseñas();
+    $('#contrasena2').on('input', function() {
+        mensajePassword('contrasena2', 'mensaje-validacion2');
+        verificarCoincidenciaContrasenas();
     });
 
     // Verificar coincidencia de contraseñas
-    function verificarCoincidenciaContraseñas() {
-        var contraseña1 = $('#contraseña1').val();
-        var contraseña2 = $('#contraseña2').val();
+    function verificarCoincidenciaContrasenas() {
+        var contrasena1 = $('#contrasena1').val();
+        var contrasena2 = $('#contrasena2').val();
         var mensaje = "";
 
-        if (contraseña1 !== contraseña2) {
+        if (contrasena1 !== contrasena2) {
             mensaje = "Las contraseñas no coinciden.";
         }
 

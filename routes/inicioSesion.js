@@ -5,7 +5,14 @@ const { check, validationResult } = require('express-validator');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('inicioSesion');
+    var user = req.session.user;
+
+    if (typeof user !== 'undefined') {
+        res.redirect('/');
+    }
+    else {
+        res.render('inicioSesion');
+    }
 });
 
 /* POST inicioSesion*/
@@ -19,7 +26,7 @@ router.post(
 		).isEmail(),
 		// Utilizamos una expresión regular para verificar la complejidad de la contraseña
 		check(
-			'contraseña',
+			'contrasena',
 			'La contraseña debe tener al menos una minúscula, una mayúscula, un número y ser de al menos 4 caracteres de longitud.'
 		).custom((value) => {
 			const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{4,}$/;
@@ -27,7 +34,7 @@ router.post(
 		}),
 	],
 	(req, res) => {
-		const { email, contraseña } = req.body;
+		const { email, contrasena } = req.body;
 
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
@@ -41,7 +48,7 @@ router.post(
                 throw error;
             }
         
-            verificarUsuario(con, email, contraseña, (usuario) => {
+            verificarUsuario(con, email, contrasena, (usuario) => {
                 if (usuario) {
                     req.session.user = usuario;
                     res.json({ success: true, redirect: '/' });
@@ -58,7 +65,7 @@ router.post(
 );
 
 // Función para obtener la información del sobre
-function verificarUsuario(con, email, contraseña, callback) {
+function verificarUsuario(con, email, contrasena, callback) {
     const querySqlVerificarUsuario = 'SELECT * FROM usuario WHERE EMAIL = ?';
     con.query(querySqlVerificarUsuario, [email], (error, results) => {
         if (error) {
@@ -68,7 +75,7 @@ function verificarUsuario(con, email, contraseña, callback) {
 
         if (results.length > 0) {
             const usuario = results[0];
-            if (usuario.CONTRASEÑA === contraseña) {
+            if (usuario.CONTRASEÑA === contrasena) {
                 callback(usuario);
             }
             else {

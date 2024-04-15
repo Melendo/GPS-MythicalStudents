@@ -2,13 +2,21 @@ const express = require('express');
 const router = express.Router();
 const db = require('../connection/connection.js');
 const { check, validationResult } = require('express-validator');
+const multer = require("multer");
+const multerFactory = multer({storage: multer.memoryStorage()});
 
 router.get('/', function (req, res) {
-    res.render('registro');
+    var user = req.session.user;
+
+    if (typeof user !== 'undefined') {
+        res.redirect('/');
+    }
+    else {
+        res.render('registro');
+    }
 });
 
-router.post(
-    '/',
+router.post('/', multerFactory.single('foto'),
     [
         // Validamos el formato del correo electrónico
         check(
@@ -17,13 +25,14 @@ router.post(
         ).isEmail(),
         // Utilizamos una expresión regular para verificar la complejidad de la contraseña
         check(
-            'contraseña1',
+            'contrasena1',
             'La contraseña debe tener al menos una minúscula, una mayúscula, un número y ser de al menos 4 caracteres de longitud.'
         ).custom((value) => {
             const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{4,}$/;
+            console.log(value);
             return passwordRegex.test(value);
         }),
-        check("contraseña2", "Las contraseñas no coinciden.").custom((value, { req }) => value === req.body.contraseña1),
+        check("contrasena2", "Las contraseñas no coinciden.").custom((value, { req }) => value === req.body.contrasena1),
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -31,10 +40,11 @@ router.post(
             return res.json({ success: false, mensajeError: errors.array() });
         }
 
+        let foto = req.file ? req.file.buffer : null;
         db.getConnection(function (error, con) {
             if (error) throw error;
 
-            const insertQuery = "INSERT INTO usuario (NOMBRE, APELLIDO1, APELLIDO2, EMAIL, NOMBRE_USUARIO, CONTRASEÑA, MONEDAS) VALUES (?,?,?,?,?,?,100)";
+            const insertQuery = "INSERT INTO usuario (NOMBRE, APELLIDO1, APELLIDO2, EMAIL, NOMBRE_USUARIO, CONTRASEÑA, IMAGEN, MONEDAS) VALUES (?,?,?,?,?,?,?,100)";
 
             verificarEmail(con, req.body.email)
                 .then(successEmail => {
@@ -49,7 +59,7 @@ router.post(
                     }
                     // Ambas verificaciones pasaron, proceder con la inserción
                     return new Promise((resolve, reject) => {
-                        con.query(insertQuery, [req.body.nombre, req.body.apellido1, req.body.apellido2, req.body.email, req.body.nombreUsuario, req.body.contraseña1], (error, results) => {
+                        con.query(insertQuery, [req.body.nombre, req.body.apellido1, req.body.apellido2, req.body.email, req.body.nombreUsuario, req.body.contrasena1, foto], (error, results) => {
                             if (error) {
                                 reject(error);
                             } else {

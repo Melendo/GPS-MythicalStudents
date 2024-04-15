@@ -5,7 +5,7 @@ $(document).ready(function() {
         // Obtener los datos del formulario
         var formData = {
             email: $('#email1').val(),
-            contraseña: $('#contraseña1').val()
+            contrasena: $('#contrasena1').val()
         };
 
         // Realizar la solicitud AJAX para iniciar sesión
