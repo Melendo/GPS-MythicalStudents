@@ -326,3 +326,8 @@ footer {
 #btnAbrirSobre:hover {
   background-color: rgb(43 18 84); /* Cambio de color de fondo al pasar por encima */
 }
+
+#cerrarSesion {
+  font-weight: bold;
+  font-size: large;
+}
