@@ -1,9 +1,16 @@
-
-    <div class="titulo-container">
-        <a class="cerrarSesion text-danger text-decoration-none" href="#" id="cerrarSesion">Cerrar sesión</a>
-        <h1 class="titulo"><%= titulo %></h1>
-        <div class="monedas-container">
-            <span class="monedas-icon">&#x1F4B0;</span> <!-- Icono de monedas -->
-            <span class="monedas-cantidad"><%= monedas%></span> <!-- Contador de monedas -->
-        </div>
+<div class="titulo-container">
+    <div class="dropdown">
+        <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= user.NOMBRE_USUARIO %>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><label class="dropdown-item"><strong><%= user.EMAIL %></strong></label></li>
+            <li><a class="cerrarSesion dropdown-item text-danger text-decoration-none" href="#" id="cerrarSesion">Cerrar sesión</a></li>
+        </ul>
     </div>
+    <h1 class="titulo"><%= titulo %></h1>
+    <div class="monedas-container">
+        <span class="monedas-icon">&#x1F4B0;</span> <!-- Icono de monedas -->
+        <span class="monedas-cantidad"><%= monedas%></span> <!-- Contador de monedas -->
+    </div>
+</div>

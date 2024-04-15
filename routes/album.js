@@ -36,6 +36,7 @@ function getInfoAlbum(album, con, callback) {
 // Controlador original
 router.get('/:album', function (req, res, next) {
     const album = req.params.album;
+    var user = req.session.user;
     db.getConnection(function (error, con) {
         if (error) {
             throw error;
@@ -57,6 +58,7 @@ router.get('/:album', function (req, res, next) {
                     }
                     con.release();
                     res.render('album', {
+                        user: user,
                         title: 'Estanteria Virtual',
                         album: infoAlbum,
                         monedas: req.session.user.MONEDAS,

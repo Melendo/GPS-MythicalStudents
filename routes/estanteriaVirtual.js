@@ -10,6 +10,7 @@ const db = require('../connection/connection.js');
 
 
 router.get('/', function (req, res, next) {
+    var user = req.session.user;
 
     var albumes = [];
     for (var i = 0; i < req.session.albumes.length; i++) {
@@ -27,7 +28,7 @@ router.get('/', function (req, res, next) {
                 throw error;
             }
             con.release();
-            res.render('estanteriaVirtual', { title: 'Estanteria Virtual', albumes: result, monedas: req.session.user.MONEDAS });
+            res.render('estanteriaVirtual', { user: user, title: 'Estanteria Virtual', albumes: result, monedas: req.session.user.MONEDAS });
         });
     });
 });
