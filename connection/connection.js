@@ -8,4 +8,6 @@ var con = mysql.createPool({
     database: "mm_db",
 });
 
+require('dotenv').config({ path: './.env' });
+
 module.exports=con;
