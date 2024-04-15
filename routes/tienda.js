@@ -10,6 +10,7 @@ const db = require('../connection/connection.js');
 
 
 router.get('/', function (req, res, next) {
+    var user = req.session.user;
 
     var user = req.session.user;
 
@@ -27,7 +28,7 @@ router.get('/', function (req, res, next) {
                 }
                 con.release();
     
-                res.render('tienda', { title: 'Tienda', sobres: result, monedas:user.MONEDAS});
+                res.render('tienda', { user: user, title: 'Tienda', sobres: result, monedas:req.session.user.MONEDAS});
             });
         });
     }

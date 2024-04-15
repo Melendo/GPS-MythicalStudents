@@ -5,6 +5,7 @@ const db = require('../connection/connection.js');
 
 
 router.get('/', function (req, res, next) {
+    var user = req.session.user;
 
     var user = req.session.user;
 

@@ -48,19 +48,14 @@ router.get('/:album', function (req, res, next) {
                         con.release();
                         throw error;
                     }
-                    getInfoAlbum(album, con, (error, infoAlbum) => {
-                        if (error) {
-                            con.release();
-                            throw error;
-                        }
-                        con.release();
-                        res.render('album', {
-                            title: 'Estanteria Virtual',
-                            album: infoAlbum,
-                            monedas: user.MONEDAS,
-                            cromosPersonales: cromosPersonales,
-                            cromosTotales: cromosTotales
-                        });
+                    con.release();
+                    res.render('album', {
+                        user: user,
+                        title: 'Estanteria Virtual',
+                        album: infoAlbum,
+                        monedas: req.session.user.MONEDAS,
+                        cromosPersonales: cromosPersonales,
+                        cromosTotales: cromosTotales
                     });
                 });
             });
