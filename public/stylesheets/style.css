@@ -331,3 +331,9 @@ footer {
   font-weight: bold;
   font-size: large;
 }
+
+.btn-perfil {
+  background-color: rgba(128, 0, 128, 0.5);
+  padding: 7px;
+  color: white;
+}
