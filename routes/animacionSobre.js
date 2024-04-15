@@ -5,7 +5,14 @@ const db = require('../connection/connection.js');
 /* GET animacion sobre page with parameters */
 router.get('/:sobre', function(req, res) {
     const idSobre = req.params.sobre;
-    res.render('animacionSobre', { idSobre: idSobre });
+    var user = req.session.user;
+
+    if (typeof user !== 'undefined') {
+        res.render('animacionSobre', { idSobre: idSobre });
+    }
+    else {
+        res.redirect('/inicioSesion');
+    }
 });
 
 
