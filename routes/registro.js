@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../connection/connection.js');
+var bcryptjs = require('bcryptjs')
 const { check, validationResult } = require('express-validator');
 const multer = require("multer");
 const multerFactory = multer({storage: multer.memoryStorage()});
@@ -41,6 +42,8 @@ router.post('/', multerFactory.single('foto'),
         }
 
         let foto = req.file ? req.file.buffer : null;
+        let pass = await bcryptjs.hash(req.body.contrasena1, 8);
+
         db.getConnection(function (error, con) {
             if (error) throw error;
 
@@ -59,7 +62,7 @@ router.post('/', multerFactory.single('foto'),
                     }
                     // Ambas verificaciones pasaron, proceder con la inserción
                     return new Promise((resolve, reject) => {
-                        con.query(insertQuery, [req.body.nombre, req.body.apellido1, req.body.apellido2, req.body.email, req.body.nombreUsuario, req.body.contrasena1, foto], (error, results) => {
+                        con.query(insertQuery, [req.body.nombre, req.body.apellido1, req.body.apellido2, req.body.email, req.body.nombreUsuario, pass, foto], (error, results) => {
                             if (error) {
                                 reject(error);
                             } else {

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../connection/connection.js');
+var bcryptjs = require('bcryptjs')
 const { check, validationResult } = require('express-validator');
 
 /* GET home page. */
@@ -75,7 +76,8 @@ function verificarUsuario(con, email, contrasena, callback) {
 
         if (results.length > 0) {
             const usuario = results[0];
-            if (usuario.CONTRASEÑA === contrasena) {
+            if ((bcryptjs.compare(contrasena, usuario.CONTRASEÑA))) {
+                console.log(usuario.CONTRASEÑA + " - " + contrasena)
                 callback(usuario);
             }
             else {
