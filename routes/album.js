@@ -13,9 +13,9 @@ function getCromosTotales(album, con, callback) {
 }
 
 // Función para obtener los cromos personales
-function getCromosPersonales(album, con, callback) {
-    const cromosPersonalesQuery = "SELECT * FROM cromos_personal, cromos WHERE ID_CROMO = ID AND album = ?;";
-    con.query(cromosPersonalesQuery, [album], (error, cromosPersonales) => {
+function getCromosPersonales(id, album, con, callback) {
+    const cromosPersonalesQuery = "SELECT c.*, cp.* FROM cromos c JOIN cromos_personal cp ON c.ID = cp.ID_CROMO WHERE cp.ID_USU = ? AND c.ALBUM = ?;";
+    con.query(cromosPersonalesQuery, [id, album], (error, cromosPersonales) => {
         callback(error, cromosPersonales);
     });
 }
@@ -43,7 +43,7 @@ router.get('/:album', function (req, res, next) {
                     con.release();
                     throw error;
                 }
-                getCromosPersonales(album, con, (error, cromosPersonales) => {
+                getCromosPersonales(user.ID, album, con, (error, cromosPersonales) => {
                     if (error) {
                         con.release();
                         throw error;
