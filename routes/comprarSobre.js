@@ -34,7 +34,7 @@ router.post('/:id', (req, res) => {
                                 generarNumerosAleatorios(totalCromos['COUNT(*)'], sobresResult.NUM_CROMOS, (numerosAleatorios) => {
                                     procesarCromos(con, idUsuario, numerosAleatorios, (nuevosCromos) => {
                                         nuevos = nuevosCromos;
-                                        //con.release();
+                                        con.release();
                                         res.json({ success: true, mensaje: "Compra realizada correctamente", album: sobresResult.ALBUM, numeros: numerosAleatorios, nuevosCromos: nuevos });
                                     });
                                 });
@@ -102,7 +102,7 @@ function abrirSobre(con, sobresResult, callback) {
 
 // Función para procesar los cromos obtenidos del sobre
 function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
-    const querySqlCromosEnCromosPersonal = 'SELECT * FROM cromos_personal WHERE ID_CROMO = ?';
+    const querySqlCromosEnCromosPersonal = 'SELECT * FROM cromos_personal WHERE ID_CROMO = ? && ID_USU = ?';
     const querySqlCromoRepetido = 'UPDATE cromos_personal SET CANTIDAD = CANTIDAD + 1 WHERE ID_USU = ? AND ID_CROMO = ?';
     const querySqlCromoNuevo = 'INSERT INTO cromos_personal (ID_USU, ID_CROMO, CANTIDAD) VALUES (?, ?, 1)';
     var nuevos = [];
@@ -110,7 +110,7 @@ function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
     // Función auxiliar para procesar un cromo
     function procesarCromo(numero, index) {
         return new Promise((resolve, reject) => {
-            con.query(querySqlCromosEnCromosPersonal, [numero], (error, results) => {
+            con.query(querySqlCromosEnCromosPersonal, [numero, idUsuario], (error, results) => {
                 if (error) {
                     reject(error);
                 } else {
