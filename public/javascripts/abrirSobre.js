@@ -7,16 +7,16 @@ $(document).ready(function() {
         var consultas = [];
 
         numeros.forEach(function(numero) {
-            consultas.push(consultarNombre(numero, album));
+            consultas.push(consultarID(numero, album));
         });
         
         Promise.all(consultas)
         .then(function(resultados) {
-            var nombresCromos = resultados.map(function(resultado) {
-                return resultado.nombre;
+            var idCromos = resultados.map(function(resultado) {
+                return resultado.id;
             });
-
-            localStorage.setItem('nombresCromos', JSON.stringify(nombresCromos));
+            
+            localStorage.setItem('idCromos', JSON.stringify(idCromos));
             window.location.href = '/animacionSobre/' + sobre;
         })
         .catch(function(error) {
@@ -25,16 +25,16 @@ $(document).ready(function() {
 
     });
 
-    function consultarNombre(numero, album) {
+    function consultarID(numero, album) {
         return new Promise(function(resolve, reject) {
             $.ajax({
                 url: '/abrirSobre/' + album + '/' + numero,
                 type: 'GET',
                 success: function(response) {
-                    resolve({ nombre: response.nombre });
+                    resolve({ id: response.id });
                 },
                 error: function(error) {
-                    console.error("Error al consultar el nombre del cromo:", error);
+                    console.error("Error al consultar el ID del cromo:", error);
                     reject();
                 }
             });

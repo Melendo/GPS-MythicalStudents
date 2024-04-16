@@ -10,6 +10,7 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.success) {
                     alert(response.mensaje);
+                    localStorage.setItem('cromosNuevos', JSON.stringify(response.nuevosCromos));
                     window.location.href = '/abrirSobre/' + response.album + '/' + id + '/' + response.numeros.join(',');
                 }
                 else {

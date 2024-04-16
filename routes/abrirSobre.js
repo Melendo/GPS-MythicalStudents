@@ -67,18 +67,18 @@ router.get('/:album/:numero', function(req, res) {
             con.release();
             throw error;
         }
-        const sqlNombreCromo = "SELECT NOMBRE FROM cromos WHERE NUM_CROMO = ? AND ALBUM = ?";
+        const sqlNombreCromo = "SELECT ID FROM cromos WHERE NUM_CROMO = ? AND ALBUM = ?";
         con.query(sqlNombreCromo, [numeroCromo, albumCromo], (error, result) => {
             if (error) {
                 con.release();
                 throw error;
             }
             con.release();
-
+            
             if (result.length > 0) {
-                res.json({ nombre: result[0].NOMBRE });
+                res.json({ id: result[0].ID });
             } else {
-                res.json({ nombre: "Nombre no encontrado" });
+                res.json({ id: 0 });
             }
         });
     });

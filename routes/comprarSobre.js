@@ -10,7 +10,7 @@ router.post('/:id', (req, res) => {
     const idUsuario = req.session.user.ID;
     const monUsuario = req.session.user.MONEDAS;
     const idSobre = req.params.id;
-
+    var nuevos = [];
 
     db.getConnection((error, con) => {
         if (error) {
@@ -32,9 +32,10 @@ router.post('/:id', (req, res) => {
                             req.session.user.MONEDAS = resta;
                             abrirSobre(con, sobresResult, (totalCromos) => {
                                 generarNumerosAleatorios(totalCromos['COUNT(*)'], sobresResult.NUM_CROMOS, (numerosAleatorios) => {
-                                    procesarCromos(con, idUsuario, numerosAleatorios, () => {
-                                        con.release();
-                                        res.json({ success: true, mensaje: "Compra realizada correctamente", album: sobresResult.ALBUM, numeros: numerosAleatorios });
+                                    procesarCromos(con, idUsuario, numerosAleatorios, (nuevosCromos) => {
+                                        nuevos = nuevosCromos;
+                                        //con.release();
+                                        res.json({ success: true, mensaje: "Compra realizada correctamente", album: sobresResult.ALBUM, numeros: numerosAleatorios, nuevosCromos: nuevos });
                                     });
                                 });
                             });
@@ -104,6 +105,7 @@ function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
     const querySqlCromosEnCromosPersonal = 'SELECT * FROM cromos_personal WHERE ID_CROMO = ?';
     const querySqlCromoRepetido = 'UPDATE cromos_personal SET CANTIDAD = CANTIDAD + 1 WHERE ID_USU = ? AND ID_CROMO = ?';
     const querySqlCromoNuevo = 'INSERT INTO cromos_personal (ID_USU, ID_CROMO, CANTIDAD) VALUES (?, ?, 1)';
+    var nuevos = [];
 
     // Función auxiliar para procesar un cromo
     function procesarCromo(numero, index) {
@@ -118,6 +120,7 @@ function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
                                 con.release();
                                 reject(error);
                             } else {
+                                nuevos.push(0);
                                 resolve();
                             }
                         });
@@ -127,6 +130,7 @@ function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
                                 con.release();
                                 reject(error);
                             } else {
+                                nuevos.push(1);
                                 resolve();
                             }
                         });
@@ -144,7 +148,8 @@ function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
         });
     }, Promise.resolve())
         .then(() => {
-            callback();
+            //con.release();
+            callback(nuevos);
         })
         .catch((error) => {
             con.release();
