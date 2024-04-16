@@ -37,6 +37,7 @@ var cuestionarioRouter = require('./routes/cuestionario');
 var albumRouter = require('./routes/album');
 var cerrarSesionRouter = require('./routes/cerrarSesion');
 var mostrarColeccionesRouter = require('./routes/mostrarColecciones');
+var mostrarAlbumColeccion = require('./routes/mostrarAlbumColeccion');
 
 
 var app = express();
@@ -82,6 +83,7 @@ app.use('/album', albumRouter);
 app.use('/cuestionario', cuestionarioRouter);
 app.use('/cerrarSesion', cerrarSesionRouter);
 app.use('/mostrarColecciones', mostrarColeccionesRouter);
+app.use('/mostrarAlbumColeccion', mostrarAlbumColeccion);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
