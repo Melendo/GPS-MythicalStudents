@@ -24,13 +24,13 @@
 
     <div class="container">
         <div class="row">
-            <% for (var i=0; i < albumes.length; i++) { %>
+            <% for (var i=0; i < colecciones.length; i++) { %>
                
                     <div class="col-sm-3 album">
-                        <a href="/album/<%= albumes[i].ID%>">
-                        <img src="/estanteriaVirtual/imagen<%= albumes[i].ID%>" class="img-fluid">
+                        <a href="/album/<%= colecciones[i].ID %>">
+                        <img src="/estanteriaVirtual/imagen<%= colecciones[i].ID %>" class="img-fluid">
                         <h4><b>
-                                <%= albumes[i].NOMBRE %>
+                                <%= colecciones[i].NOMBRE %>
                         </b></h4>
                         </a> 
                     </div>

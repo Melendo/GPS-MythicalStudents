@@ -8,33 +8,29 @@ const upload = multer({ storage: storage });
 
 const db = require('../connection/connection.js');
 
+function getColecciones(con, callback) {
+    const query = "SELECT * FROM colecciones;";
+    con.query(query, (error, colecciones) => {
+        callback(error, colecciones);
+    });
+}
 
 router.get('/', function (req, res, next) {
-    var user = req.session.user;
-
-    var albumes = [];
-    for (var i = 0; i < req.session.albumes.length; i++) {
-        albumes.push(req.session.albumes[i].ID_ALBUM);
-    }
-    var ids = albumes.join(', ');
-
     db.getConnection(function (error, con) {
-        const albumesQuery = "SELECT * FROM album WHERE id IN(" + ids + ");";
-        var a = albumesQuery;
-
-        con.query(albumesQuery, (error, result) => {
+        if (error) {
+            con.release();
+            return res.status(500).json({ error: "Error de conexión a la base de datos" });
+        }
+        getColecciones(con, (error, colecciones) => {
             if (error) {
                 con.release();
-                throw error;
+                return res.status(500).json({ error: "Error al obtener las colecciones de la base de datos" });
             }
             con.release();
-            res.render('mostrarColecciones', { user: user, title: 'Mostrar Colecciones', albumes: result, monedas: req.session.user.MONEDAS });
+            res.render('mostrarColecciones', { colecciones: colecciones });
         });
     });
 });
 
-
-
-
-
 module.exports = router;
+module.exports.getColecciones = getColecciones;
