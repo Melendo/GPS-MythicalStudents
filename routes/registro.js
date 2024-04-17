@@ -30,7 +30,6 @@ router.post('/', multerFactory.single('foto'),
             'La contraseña debe tener al menos una minúscula, una mayúscula, un número y ser de al menos 4 caracteres de longitud.'
         ).custom((value) => {
             const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{4,}$/;
-            console.log(value);
             return passwordRegex.test(value);
         }),
         check("contrasena2", "Las contraseñas no coinciden.").custom((value, { req }) => value === req.body.contrasena1),

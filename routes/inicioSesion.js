@@ -78,7 +78,6 @@ function verificarUsuario(con, email, contrasena, callback) {
             const usuario = results[0];
             const contrasenaValida = await bcryptjs.compare(contrasena, usuario.CONTRASEÑA);
             if (contrasenaValida) {
-                console.log(usuario.CONTRASEÑA + " - " + contrasena)
                 callback(usuario);
             }
             else {
