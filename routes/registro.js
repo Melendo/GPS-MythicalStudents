@@ -47,7 +47,7 @@ router.post('/', multerFactory.single('foto'),
         db.getConnection(function (error, con) {
             if (error) throw error;
 
-            const insertQuery = "INSERT INTO usuario (NOMBRE, APELLIDO1, APELLIDO2, EMAIL, NOMBRE_USUARIO, CONTRASEÑA, IMAGEN, MONEDAS) VALUES (?,?,?,?,?,?,?,100)";
+            const insertQuery = "INSERT INTO usuario (EMAIL, NOMBRE_USUARIO, CONTRASEÑA, IMAGEN, MONEDAS) VALUES (?,?,?,?,100)";
 
             verificarEmail(con, req.body.email)
                 .then(successEmail => {
@@ -62,7 +62,7 @@ router.post('/', multerFactory.single('foto'),
                     }
                     // Ambas verificaciones pasaron, proceder con la inserción
                     return new Promise((resolve, reject) => {
-                        con.query(insertQuery, [req.body.nombre, req.body.apellido1, req.body.apellido2, req.body.email, req.body.nombreUsuario, pass, foto], (error, results) => {
+                        con.query(insertQuery, [req.body.email, req.body.nombreUsuario, pass, foto], (error, results) => {
                             if (error) {
                                 reject(error);
                             } else {
