@@ -39,7 +39,7 @@
 }
 
 .flecha-izquierda {
-  top: calc(50% - 55px); /* Alinea la flecha con el centro vertical del cromo */
+  top: calc(50% - 30px); /* Alinea la flecha con el centro vertical del cromo */
   left: calc(50% - 220px); /* Posición relativa a la izquierda del cromo */
   
 }

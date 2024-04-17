@@ -73,10 +73,10 @@ document.addEventListener('DOMContentLoaded', function() {
         flechaDerecha.classList.add('flecha-derecha');
     
         // Configurar la flecha izquierda
-        flechaIzquierda.src = "/images/flecha.png";
+        flechaIzquierda.src = "/images/flecha_izquierda.png";
         flechaIzquierda.classList.add('flecha');
         flechaIzquierda.classList.add('flecha-izquierda');
-        flechaIzquierda.style.transform = 'rotate(180deg)'; // Rotar la flecha hacia el otro lado
+        //flechaIzquierda.style.transform = 'rotate(180deg)'; // Rotar la flecha hacia el otro lado
     
         // Insertar las flechas en el documento
         document.body.appendChild(flechaIzquierda);

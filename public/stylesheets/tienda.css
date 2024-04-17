@@ -1,8 +1,5 @@
 body {
-    background: linear-gradient(45deg, rgb(78, 116, 139),rgb(78 116 139) ,rgb(63 105 129) , rgb(23 65 89)); /* Degradado horizontal desde el centro */
-    display: flex; /* Permite centrar verticalmente el contenido */
-    justify-content: center; /* Centra verticalmente el contenido */
-    align-items: center; /* Centra verticalmente el contenido */
+    background:linear-gradient(rgb(89 94 150), rgb(78, 139, 136), rgb(89 94 150));
 }
 
 
