@@ -118,3 +118,5 @@ function verificarNombreUsuario(con, nombreUsuario) {
 }
 
 module.exports = router;
+module.exports.verificarEmail = verificarEmail;
+module.exports.verificarNombreUsuario = verificarNombreUsuario;
