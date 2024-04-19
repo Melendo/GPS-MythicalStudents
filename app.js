@@ -37,8 +37,8 @@ var cuestionarioRouter = require('./routes/cuestionario');
 var albumRouter = require('./routes/album');
 var inicioSesionRouter = require('./routes/inicioSesion');
 var registroRouter = require('./routes/registro');
-
 var cerrarSesionRouter = require('./routes/cerrarSesion');
+var agregarAlbumRouter = require('./routes/agregarAlbum');
 
 
 var app = express();
@@ -85,6 +85,7 @@ app.use('/cuestionario', cuestionarioRouter);
 app.use('/inicioSesion', inicioSesionRouter);
 app.use('/registro', registroRouter);
 app.use('/cerrarSesion', cerrarSesionRouter);
+app.use('/agregarAlbum', agregarAlbumRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

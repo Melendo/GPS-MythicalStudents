@@ -7,8 +7,6 @@ const db = require('../connection/connection.js');
 router.get('/', function (req, res, next) {
     var user = req.session.user;
 
-    var user = req.session.user;
-
     if (typeof user !== 'undefined') {
         var albumes = [];
         for (var i = 0; i < req.session.albumes.length; i++) {
