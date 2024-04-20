@@ -1,17 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-const multer = require('multer');
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
 const db = require('../connection/connection.js');
 
 
 router.get('/', function (req, res, next) {
-    var user = req.session.user;
-
     var user = req.session.user;
 
     if (typeof user !== 'undefined') {

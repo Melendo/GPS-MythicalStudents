@@ -61,10 +61,5 @@ module.exports = router;
 
 
 // FUNCIONES
-module.exports.obtenerSobre = obtenerSobre;
 module.exports.comprobarAlbum = comprobarAlbum;
-module.exports.restarMonedas = restarMonedas;
-module.exports.abrirSobre = abrirSobre;
-module.exports.procesarCromos = procesarCromos;
-module.exports.generarNumerosAleatorios = generarNumerosAleatorios;
-
+module.exports.agregarAlbum = agregarAlbum;

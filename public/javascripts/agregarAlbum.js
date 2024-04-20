@@ -10,7 +10,7 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.success) {
                     alert(response.mensaje);
-                    window.location.href = '/';
+                    window.location.href = '/estanteriaVirtual';
                 }
                 else {
                     alert(response.mensaje);
