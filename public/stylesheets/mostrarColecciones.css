@@ -1,0 +1,49 @@
+.album {
+    background-color: rgb(74 80 140);
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.album h4{
+    font-family:'Courier New', Courier, monospace;
+    text-align: center;
+    text-size-adjust:initial;
+}
+
+.add{
+    background-color: rgb(243, 241, 241);
+    border-radius: 60px;
+    margin: 30px;
+    padding: 10px;
+    display: inline-block;
+    vertical-align: top;
+    transform: scale(0.6);
+}
+
+.add h4{
+    font-family:'Courier New', Courier, monospace;
+    text-align: center;
+    text-size-adjust:initial;
+}
+
+
+.titulo {
+    text-align: center; /* Centra el texto */
+    margin-top: 50px; /* Añade un margen superior */
+    margin-bottom: 0px; /* Añade un margen inferior */
+    font-size: 60px; /* Tamaño de fuente */
+    color: #ffffff; /* Color del texto */
+    font-family: Monaco, monospace; /* Fuente Monaco */
+    text-decoration: underline;
+    text-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5);
+
+}
+
+
+.shelf-divider {
+    border-bottom: 5px solid rgb(31 37 97);
+    margin-bottom: 20px; /* Ajusta el espacio entre las baldas */
+}

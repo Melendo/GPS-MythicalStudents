@@ -11,24 +11,22 @@
         crossorigin="anonymous"></script>
 
     <link href="/stylesheets/style.css" rel="stylesheet">
-    <link href="/stylesheets/estanteriaVirtual.css" rel="stylesheet">
+    <link href="/stylesheets/mostrarColecciones.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="/images/logo.png">
     <title>Mythical Mingle</title>
 </head>
 
 <body>
 
-    <header>
-        <%- include("titulo", { titulo: title , monedas:monedas }) %>
-    </header>
+    <h1 class="titulo">LISTA DE COLECCIONES</h1>
 
     <div class="container">
         <div class="row">
             <% for (var i=0; i < colecciones.length; i++) { %>
                
-                    <div class="col-sm-3 album">
+                    <div class="col-sm-2 album">
                         <a href="/album/<%= colecciones[i].ID %>">
-                        <img src="/mostrarColecciones/imagen<%= colecciones[i].ID %>" class="img-fluid">
+                            <img src="/estanteriaVirtual/imagen<%= colecciones[i].ID%>" class="img-fluid">
                         <h4><b>
                                 <%= colecciones[i].NOMBRE %>
                         </b></h4>
@@ -36,7 +34,7 @@
                     </div>
                
                 <%}%>
-                    <div class="shelf-divider"></div>
+                 
 
         </div>
     </div>

@@ -13,6 +13,22 @@
     text-size-adjust:initial;
 }
 
+.add{
+    background-color: rgb(243, 241, 241);
+    border-radius: 60px;
+    margin: 30px;
+    padding: 10px;
+    display: inline-block;
+    vertical-align: top;
+    transform: scale(0.6);
+}
+
+.add h4{
+    font-family:'Courier New', Courier, monospace;
+    text-align: center;
+    text-size-adjust:initial;
+}
+
 .shelf-divider {
     border-bottom: 5px solid rgb(31 37 97);
     margin-bottom: 20px; /* Ajusta el espacio entre las baldas */
