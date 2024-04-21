@@ -71,7 +71,8 @@ function verificarUsuario(con, email, contrasena, callback) {
     con.query(querySqlVerificarUsuario, [email], async (error, results) => {
         if (error) {
             con.release();
-            throw error;
+            callback(null);
+            return; // Detenemos la ejecución de la función        
         }
 
         if (results.length > 0) {
@@ -91,3 +92,4 @@ function verificarUsuario(con, email, contrasena, callback) {
 }
 
 module.exports = router;
+module.exports.verificarUsuario = verificarUsuario;
