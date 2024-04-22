@@ -20,7 +20,7 @@ function getAlbumesTotales(coleccion, con, callback) {
 // Función para obtener los cromos personales
 function getAlbumesPersonales(coleccion, usuario, con, callback) {
     const albumesPersonalesQuery = "SELECT * FROM album_personal, album WHERE ID_ALBUM = ID AND coleccion = ? AND ID_USU = ?;";
-    con.query(albumesPersonalesQuery, [coleccion, usuario], (error, albumesPersonales) => {
+    con.query(albumesPersonalesQuery, [coleccion, usuario.ID], (error, albumesPersonales) => {
         callback(error, albumesPersonales);
     });
 }
@@ -57,13 +57,13 @@ router.get('/:coleccion', function (req, res, next) {
                         throw error;
                     }
                     con.release();
-                    res.render('informacionColeccion', {
+                    res.render('mostrarAlbumColeccion', {
                         user: user,
                         title: 'Estanteria Virtual',
-                        album: infoColeccion,
+                        coleccion: infoColeccion,
                         monedas: req.session.user.MONEDAS,
-                        cromosPersonales: albumesPersonales,
-                        cromosTotales: albumesTotales
+                        albumesPersonales: albumesPersonales,
+                        albumesTotales: albumesTotales
                     });
                 });
             });
