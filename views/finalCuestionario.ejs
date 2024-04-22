@@ -17,9 +17,14 @@
     <div class="container container-final_cuestionario">
         <div class="row justify-content-center  mx-1 my-3 d-flex">
             <div class="col-md-6">
+                <div class="coin-container">
+                    <div class="coins"></div>
+                </div>
+                
                 <h3 class="text-center m-4 p-2 titulo-resultado">RECLAMAR RECOMPENSA</h3>
                 <!--<h3 class="text-center m-4 p-2 titulo-resultado">FINAL DEL CUESTIONARIO
                 <p class="text-center m-3 p-2 recompensa">HAS ACERTADO X / X PREGUNTAS (proximamente)</p>-->
+                <audio id="sonidoMoneda" src="/sounds/SonidoMoneda.mp3"></audio>
                 <p class="text-center m-3 p-2 recompensa"><b>100 MONEDAS</b></p>
 
                 <div class="text-center mt-4 p-1">
@@ -33,6 +38,7 @@
     </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="javascripts/reclamarMonedas.js"></script>
 
 </html>
