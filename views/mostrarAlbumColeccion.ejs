@@ -11,7 +11,7 @@
         crossorigin="anonymous"></script>
 
     <link href="/stylesheets/style.css" rel="stylesheet">
-    <link href="/stylesheets/album.css" rel="stylesheet">
+    <link href="/stylesheets/albumColeccion.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="/images/logo.png">
     <title>Mythical Mingle</title>
 </head>
@@ -22,15 +22,13 @@
         <%- include("titulo", { titulo: title , monedas:monedas }) %>
     </header>
 
-    <div class="container sobre-list">
-        <h2 class="text-cromos">Lista de Álbumes</h2>
+    <div class="container coleccion-list">
+        <h2 class="text-albumes">Lista de Álbumes</h2>
         <div class="row">
             <div class="col-md-9">
-                <div class="cromos-list">
+                <div class="coleccion-list">
                     <% for (var i=0; i < albumesTotales.length; i++) { %>
                         <div class="album">
-                           
-
                             <% var encontrado = false; %>
                             <% for (var j=0; j < albumesPersonales.length; j++) { %>
                                 <% if (albumesTotales[i].ID === albumesPersonales[j].ID_ALBUM) { %>
@@ -43,12 +41,11 @@
                             <% if (!encontrado) { %>
                                 <a href="/anadirAlbum/<%= albumesTotales[i].ID %>">
                             <% } %>
-                            <img src="/album/imagen/<%= albumesTotales[i].ID %>" class="img-fluid" alt="<%= albumesTotales[i].NOMBRE %>">
+                            <img src="/mostrarAlbumColeccion/imagen/<%= albumesTotales[i].ID %>" class="img-fluid" widht = 150px>
                             <h4><b><%= albumesTotales[i].NOMBRE %></b></h4>
                             <p><%= albumesTotales[i].DESCRIPCION %></p>
 
 
-                           
                             <% if (!encontrado) { %>
                                 </a>
                             <% } %>
@@ -58,9 +55,9 @@
             </div>
             <!-- Descripción de los álbumes a la derecha -->
             <div class="col-md-3">
-                <h2 class="mb-4">Descripción de la Coleccion</h2>
-                <p><%= infoColeccion.NOMBRE %></p>
-                <p><%= infoColeccion.DESCRIPCION %></p>
+                <h2 class="mb-4"><b><%= coleccion[0].NOMBRE %></b></h2>
+                <p class=" coleccion-descripcion"><%= coleccion[0].DESCRIPCION %></p>
+              
             </div>
         </div>
     </div>

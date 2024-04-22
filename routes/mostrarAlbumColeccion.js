@@ -27,7 +27,7 @@ function getAlbumesPersonales(coleccion, usuario, con, callback) {
 
 // Función para obtener la información del álbum
 function getInfoColeccion(coleccion, con, callback) {
-    const infoColeccionQuery = "SELECT * FROM coleccion WHERE ID = ?;";
+    const infoColeccionQuery = "SELECT * FROM colecciones WHERE ID = ?;";
     con.query(infoColeccionQuery, [coleccion], (error, infoColeccion) => {
         callback(error, infoColeccion);
     });
