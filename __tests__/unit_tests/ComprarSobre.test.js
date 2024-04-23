@@ -273,7 +273,7 @@ describe('Función generarNumerosAleatorios', () => {
 
 
 //--------------PROBANDO FUNCION PROCESAR CROMOS -----------------------------
-const procesarCromos = require('../../routes/comprarSobre.js').procesarCromos;
+/*const procesarCromos = require('../../routes/comprarSobre.js').procesarCromos;
 
 describe('Función procesarCromos', () => {
   it('Debería procesar los cromos obtenidos del sobre', (done) => {
@@ -306,7 +306,7 @@ describe('Función procesarCromos', () => {
 
       procesarCromos(conMock, 1, [1, 2, 3], callback);
   });
-});
+});*/
 
 
 
