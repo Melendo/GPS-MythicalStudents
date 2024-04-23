@@ -1,28 +1,38 @@
 <nav class="fixed-bottom navbar navbar-expand navbar-light bg-custom">
 
     <ul class="navbar-nav nav-pills w-100 justify-content-around">
-        <li class="nav-item">
+        <li class="nav-item pedro">
             <a class="nav-link" href="/tienda">
                 <img class="imagen_icono" src="/images/shop_icon.png">
-                Tienda
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item pedro">
             <a class="nav-link" href="/">
                 <img class="imagen_icono" src="/images/home_icon.png">
-                Pagina Principal
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item pedro">
             <a class="nav-link" href="/estanteriaVirtual">
                 <img class="imagen_icono" src="/images/shelf_icon.png">
-                Estanteria Virtual
             </a>
         </li>
     </ul>
 
 </nav>
+<style>
+    
+    .pedro {
+        width: 250px;
+        height: auto;
+        text-align: center;
+    }
 
+    .pedro:hover {
+        background-color: rgba(0, 0, 0, 0.1); /* Color de fondo en hover */
+    }
+
+    
+</style>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var currentUrl = window.location.pathname;
