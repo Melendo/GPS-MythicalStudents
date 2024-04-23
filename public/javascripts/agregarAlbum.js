@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $("#btnAgregarAlbum").on('click', function() {
+    $(".buy").on('click', function() {
         var id = $(this).data('id');
         
         $.ajax({
@@ -10,7 +10,7 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.success) {
                     alert(response.mensaje);
-                    window.location.href = '/mostrarAlbumColeccion';
+                    window.location.href = '/estanteriaVirtual';
                 }
                 else {
                     alert(response.mensaje);

@@ -42,7 +42,7 @@
                            
                             <img src="/mostrarAlbumColeccion/imagen/<%= albumesTotales[i].ID %>" class="img-fluid" widht = 150px>
                             <% if (!encontrado) { %>
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalConfirmarAgregar<%= albumesTotales[i].ID %>">Agregar</button>
+                                <button type="button" class="btn btn-info mt-2" data-bs-toggle="modal" data-bs-target="#modalConfirmarAgregar<%= albumesTotales[i].ID %>">Agregar</button>
                             <% } %>
                             <h4><b><%= albumesTotales[i].NOMBRE %></b></h4>
                             <% if (!encontrado) { %>
@@ -103,5 +103,6 @@
     <footer><%- include("layout_principal") %></footer>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/javascripts/agregarAlbum.js"></script>
 <script src="/javascripts/cerrarSesion.js"></script>
 </html>
