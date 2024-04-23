@@ -10,14 +10,14 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.success) {
                     alert(response.mensaje);
-                    window.location.href = '/estanteriaVirtual';
+                    window.location.href = '/mostrarAlbumColeccion';
                 }
                 else {
                     alert(response.mensaje);
                 }
             },
             error: function(error) {
-                console.error("Error al realizar el proceso de compra de sobre:", error);
+                console.error("Error al agregar album:", error);
             }
         });
 
