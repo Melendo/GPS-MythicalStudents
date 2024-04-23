@@ -59,7 +59,7 @@ router.get('/:coleccion', function (req, res, next) {
                     con.release();
                     res.render('mostrarAlbumColeccion', {
                         user: user,
-                        title: 'Estanteria Virtual',
+                        title: 'Colecciones',
                         coleccion: infoColeccion,
                         monedas: req.session.user.MONEDAS,
                         albumesPersonales: albumesPersonales,
