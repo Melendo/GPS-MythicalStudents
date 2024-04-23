@@ -80,7 +80,7 @@ router.get('/imagen/:id', function (req, res, next) {
             con.release();
             throw error;
         }
-        const sqlAlbumes = "SELECT IMAGEN FROM cromos WHERE ID = ?";
+        const sqlAlbumes = "SELECT IMAGEN FROM album WHERE ID = ?";
         con.query(sqlAlbumes, [req.params.id], (error, result) => {
             if (error) {
                 con.release();
