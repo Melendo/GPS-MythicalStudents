@@ -10,7 +10,6 @@ router.post('/:id', (req, res) => {
     const idUsuario = req.session.user.ID;
     const monUsuario = req.session.user.MONEDAS;
     const idSobre = req.params.id;
-    var nuevos = [];
 
     db.getConnection((error, con) => {
         if (error) {
@@ -32,10 +31,9 @@ router.post('/:id', (req, res) => {
                             req.session.user.MONEDAS = resta;
                             abrirSobre(con, sobresResult, (totalCromos) => {
                                 generarNumerosAleatorios(totalCromos['COUNT(*)'], sobresResult.NUM_CROMOS, (numerosAleatorios) => {
-                                    procesarCromos(con, idUsuario, numerosAleatorios, (nuevosCromos) => {
-                                        nuevos = nuevosCromos;
+                                    procesarCromos(con, idUsuario, numerosAleatorios, sobresResult.ALBUM, (nuevosCromos) => {
                                         con.release();
-                                        res.json({ success: true, mensaje: "Compra realizada correctamente", album: sobresResult.ALBUM, numeros: numerosAleatorios, nuevosCromos: nuevos });
+                                        res.json({ success: true, mensaje: "Compra realizada correctamente", album: sobresResult.ALBUM, numeros: numerosAleatorios, nuevosCromos: nuevosCromos });
                                     });
                                 });
                             });
@@ -101,40 +99,48 @@ function abrirSobre(con, sobresResult, callback) {
 
 
 // Función para procesar los cromos obtenidos del sobre
-function procesarCromos(con, idUsuario, numerosAleatorios, callback) {
+function procesarCromos(con, idUsuario, numerosAleatorios, idAlbum, callback) {
+    const querySqlIdCromo = 'SELECT ID FROM cromos WHERE NUM_CROMO = ? && ALBUM = ?';
     const querySqlCromosEnCromosPersonal = 'SELECT * FROM cromos_personal WHERE ID_CROMO = ? && ID_USU = ?';
     const querySqlCromoRepetido = 'UPDATE cromos_personal SET CANTIDAD = CANTIDAD + 1 WHERE ID_USU = ? AND ID_CROMO = ?';
     const querySqlCromoNuevo = 'INSERT INTO cromos_personal (ID_USU, ID_CROMO, CANTIDAD) VALUES (?, ?, 1)';
     var nuevos = [];
 
     // Función auxiliar para procesar un cromo
-    function procesarCromo(numero, index) {
+    function procesarCromo(numero) {
         return new Promise((resolve, reject) => {
-            con.query(querySqlCromosEnCromosPersonal, [numero, idUsuario], (error, results) => {
+            con.query(querySqlIdCromo, [numero, idAlbum], (error, idCromo) => {
                 if (error) {
                     reject(error);
-                } else {
-                    if (results.length > 0) {
-                        con.query(querySqlCromoRepetido, [idUsuario, numero], (error) => {
-                            if (error) {
-                                con.release();
-                                reject(error);
+                }
+                else {
+                    con.query(querySqlCromosEnCromosPersonal, [idCromo[0].ID, idUsuario], (error, results) => {
+                        if (error) {
+                            reject(error);
+                        } else {
+                            if (results.length > 0) {
+                                con.query(querySqlCromoRepetido, [idUsuario, idCromo[0].ID], (error) => {
+                                    if (error) {
+                                        con.release();
+                                        reject(error);
+                                    } else {
+                                        nuevos.push(0);
+                                        resolve();
+                                    }
+                                });
                             } else {
-                                nuevos.push(0);
-                                resolve();
+                                con.query(querySqlCromoNuevo, [idUsuario, idCromo[0].ID], (error) => {
+                                    if (error) {
+                                        con.release();
+                                        reject(error);
+                                    } else {
+                                        nuevos.push(1);
+                                        resolve();
+                                    }
+                                });
                             }
-                        });
-                    } else {
-                        con.query(querySqlCromoNuevo, [idUsuario, numero], (error) => {
-                            if (error) {
-                                con.release();
-                                reject(error);
-                            } else {
-                                nuevos.push(1);
-                                resolve();
-                            }
-                        });
-                    }
+                        }
+                    });
                 }
             });
         });
