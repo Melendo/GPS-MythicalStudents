@@ -7,40 +7,50 @@ const db = require('../connection/connection.js');
 router.get('/', function (req, res, next) {
     var user = req.session.user;
 
-    var user = req.session.user;
-
     if (typeof user !== 'undefined') {
-        var albumes = [];
-        for (var i = 0; i < req.session.albumes.length; i++) {
-            albumes.push(req.session.albumes[i].ID_ALBUM);
-        }
-        var ids = albumes.join(', ');
+        db.getConnection(function (error, con) {
+            if (error) {
+                con.release();
+                throw error;
+            }
+            const querySqlAlbumes = 'SELECT * FROM album_personal WHERE ID_USU = ?';
+            con.query(querySqlAlbumes, [user.ID], (error, albumesResult) => {
+                if (error) {
+                  con.release();
+                  throw error;
+                }
+                req.session.albumes = albumesResult;
+                var albumes = [];
+                for (var i = 0; i < albumesResult.length; i++) {
+                    albumes.push(albumesResult[i].ID_ALBUM);
+                }
+                var ids = albumes.join(', ');
+                console.log(albumes);
 
-        if (ids !== "") {
-            db.getConnection(function (error, con) {
-                const albumesQuery = "SELECT * FROM album WHERE id IN(" + ids + ");";
-                var a = albumesQuery;
-    
-                con.query(albumesQuery, (error, result) => {
-                    if (error) {
+                if (ids !== "") {
+                    const albumesQuery = "SELECT * FROM album WHERE id IN(" + ids + ");";
+        
+                    con.query(albumesQuery, (error, result) => {
+                        if (error) {
+                            con.release();
+                            throw error;
+                        }
                         con.release();
-                        throw error;
-                    }
-                    con.release();
-                    res.render('estanteriaVirtual', { user: user, title: 'Estanteria Virtual', albumes: result });
-                });
+                        res.render('estanteriaVirtual', { user: user, title: 'Estanteria Virtual', albumes: result });
+                    });
+                
+                }
+                else {
+                    res.render('estanteriaVirtual', { user: user, title: 'Estanteria Virtual', albumes: "" });
+                }
             });
-        }
-        else {
-            res.render('estanteriaVirtual', { user: user, title: 'Estanteria Virtual', albumes: "" });
-        }
-       
+
+            
+        });
     }
     else {
         res.redirect('/inicioSesion');
     }
-
-    
 });
 
 router.get('/imagen:id', function (req, res, next) {

@@ -8,6 +8,10 @@ const db = require('../connection/connection.js');
 function getCromosTotales(album, con, callback) {
     const cromosTotalesQuery = "SELECT * FROM cromos WHERE album = ?;";
     con.query(cromosTotalesQuery, [album], (error, cromosTotales) => {
+        if (error) {
+            con.release();
+            throw error;
+        }
         callback(error, cromosTotales);
     });
 }
@@ -16,6 +20,10 @@ function getCromosTotales(album, con, callback) {
 function getCromosPersonales(id, album, con, callback) {
     const cromosPersonalesQuery = "SELECT c.*, cp.* FROM cromos c JOIN cromos_personal cp ON c.ID = cp.ID_CROMO WHERE cp.ID_USU = ? AND c.ALBUM = ?;";
     con.query(cromosPersonalesQuery, [id, album], (error, cromosPersonales) => {
+        if (error) {
+            con.release();
+            throw error;
+        }
         callback(error, cromosPersonales);
     });
 }
@@ -24,6 +32,10 @@ function getCromosPersonales(id, album, con, callback) {
 function getInfoAlbum(album, con, callback) {
     const infoAlbumQuery = "SELECT * FROM album WHERE ID = ?;";
     con.query(infoAlbumQuery, [album], (error, infoAlbum) => {
+        if (error) {
+            con.release();
+            throw error;
+        }
         callback(error, infoAlbum);
     });
 }
@@ -36,23 +48,12 @@ router.get('/:album', function (req, res, next) {
     if (typeof user !== 'undefined') {
         db.getConnection(function (error, con) {
             if (error) {
+                con.release();
                 throw error;
             }
             getCromosTotales(album, con, (error, cromosTotales) => {
-                if (error) {
-                    con.release();
-                    throw error;
-                }
                 getCromosPersonales(user.ID, album, con, (error, cromosPersonales) => {
-                    if (error) {
-                        con.release();
-                        throw error;
-                    }
                     getInfoAlbum(album, con, (error, infoAlbum) => {
-                        if (error) {
-                            con.release();
-                            throw error;
-                        }
                         con.release();
                         res.render('album', {
                             user: user,
