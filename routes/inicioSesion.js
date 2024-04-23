@@ -56,12 +56,11 @@ router.post(
                 } else {
                     res.json({
                         success: false,
-                        mensajeError: [{ msg: 'Usuario o contraseña incorrectos' }],
+                        mensajeError: 'Usuario o contraseña incorrectos',
                     });
                 }
             });
         });
-
     }
 );
 

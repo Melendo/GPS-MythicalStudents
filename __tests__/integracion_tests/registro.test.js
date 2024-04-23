@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../../app.js'); 
+const app = require('../../app.js');
 const mysql = require('mysql');
 
 const dbConfig = {
@@ -40,7 +40,7 @@ describe('Registro', () => {
     it('Debería mostrar la página de registro si el usuario no está autenticado', async () => {
         const response = await request(app).get('/registro');
         // Verificar que la respuesta tenga el código de estado 200
-        expect(response.status).toBe(200); 
+        expect(response.status).toBe(200);
     });
 
     it('Debería registrar un nuevo usuario correctamente', async () => {
