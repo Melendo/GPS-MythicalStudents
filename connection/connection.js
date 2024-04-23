@@ -7,7 +7,4 @@ var con = mysql.createPool({
     password: process.env.PASSWORD,
     database: "mm_db",
 });
-
-require('dotenv').config({ path: './.env' });
-
 module.exports=con;
