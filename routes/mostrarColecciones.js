@@ -8,21 +8,31 @@ const upload = multer({ storage: storage });
 
 const db = require('../connection/connection.js');
 
-//Obtenemos las colecciones
 function getColecciones(con, callback) {
     const query = "SELECT * FROM colecciones;";
     con.query(query, (error, colecciones) => {
-        callback(error, colecciones);
+        if (error) {
+            // Si hay un error durante la consulta, pasar el error al callback
+            callback(error, null);
+        } else {
+            // Si no hay errores, pasar las colecciones al callback
+            callback(null, colecciones);
+        }
     });
 }
 
-//Obtenemos la imagen de una coleccion con su id 
+
 function getColeccionImagen(con, id, callback) {
     const sqlColecciones = "SELECT IMAGEN FROM colecciones WHERE ID = ?;";
     con.query(sqlColecciones, [id], (error, result) => {
-        callback(error, result);
+        if (error) {
+            callback(error, null); // Pasar el error al callback
+        } else {
+            callback(null, result); // Pasar el resultado al callback
+        }
     });
 }
+
 
 router.get('/', function (req, res, next) {
     var user = req.session.user;
