@@ -3,18 +3,21 @@ var router = express.Router();
 
 const db = require('../connection/connection.js');
 
-
 // Función para obtener los cromos totales
 function getCromosTotales(album, con, callback) {
     const cromosTotalesQuery = "SELECT * FROM cromos WHERE album = ?;";
     con.query(cromosTotalesQuery, [album], (error, cromosTotales) => {
         if (error) {
+            // En caso de error, pasa el error al callback y libera la conexión
             con.release();
-            throw error;
+            return callback(error, null);
         }
-        callback(error, cromosTotales);
+        // Si no hay error, llama al callback con los cromos totales obtenidos
+        callback(null, cromosTotales);
     });
 }
+
+
 
 // Función para obtener los cromos personales
 function getCromosPersonales(id, album, con, callback) {
@@ -22,9 +25,9 @@ function getCromosPersonales(id, album, con, callback) {
     con.query(cromosPersonalesQuery, [id, album], (error, cromosPersonales) => {
         if (error) {
             con.release();
-            throw error;
+            return callback(error, null);
         }
-        callback(error, cromosPersonales);
+        callback(null, cromosPersonales);
     });
 }
 
@@ -34,9 +37,9 @@ function getInfoAlbum(album, con, callback) {
     con.query(infoAlbumQuery, [album], (error, infoAlbum) => {
         if (error) {
             con.release();
-            throw error;
+            return callback(error, null);
         }
-        callback(error, infoAlbum);
+        callback(null, infoAlbum);
     });
 }
 
