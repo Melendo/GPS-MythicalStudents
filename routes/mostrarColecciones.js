@@ -26,7 +26,6 @@ function getColeccionImagen(con, id, callback) {
 
 router.get('/', function (req, res, next) {
     var user = req.session.user;
-
     db.getConnection(function (error, con) {
         if (error) {
             con.release();
