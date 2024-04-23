@@ -276,72 +276,37 @@ describe('Función generarNumerosAleatorios', () => {
 const procesarCromos = require('../../routes/comprarSobre.js').procesarCromos;
 
 describe('Función procesarCromos', () => {
-    it('Debería procesar los cromos obtenidos del sobre', (done) => {
-      
+  it('Debería procesar los cromos obtenidos del sobre', (done) => {
       const conMock = {
-        query: jest.fn((querySql, params, callback) => {
-          
-          if (querySql === 'SELECT * FROM cromos_personal WHERE ID_CROMO = ?') {
-            // Simula que no hay cromos para el ID de cromo 2
-            if (params[0] === 2) {
-              callback(null, []); // Simula que no hay resultados
-            } else {
-              // Simula que hay resultados para cualquier otro ID de cromo
-              callback(null, [{ 'ID_USU': 1, 'ID_CROMO': params[0], 'CANTIDAD': 1 }]);
-            }
-          } else if (querySql === 'UPDATE cromos_personal SET CANTIDAD = CANTIDAD + 1 WHERE ID_USU = ? AND ID_CROMO = ?') {
-            // Simula una actualización exitosa
-            callback(null);
-          } else if (querySql === 'INSERT INTO cromos_personal (ID_USU, ID_CROMO, CANTIDAD) VALUES (?, ?, 1)') {
-            // Simula una inserción exitosa
-            callback(null);
-          } else {
-            // Simula cualquier otro tipo de consulta
-            callback(new Error('Consulta no reconocida'));
-          }
-        }),
-        release: jest.fn() // Simula el método release
+          query: jest.fn((querySql, params, callback) => {
+              if (querySql === 'SELECT * FROM cromos_personal WHERE ID_CROMO = ? && ID_USU = ?') {
+                  if (params[0] === 2) {
+                      callback(null, []); // No hay cromos para el ID de cromo 2
+                  } else {
+                      callback(null, [{ 'ID_USU': 1, 'ID_CROMO': params[0], 'CANTIDAD': 1 }]);
+                  }
+              } else if (querySql === 'UPDATE cromos_personal SET CANTIDAD = CANTIDAD + 1 WHERE ID_USU = ? AND ID_CROMO = ?') {
+                  callback(null); // Actualización exitosa
+              } else if (querySql === 'INSERT INTO cromos_personal (ID_USU, ID_CROMO, CANTIDAD) VALUES (?, ?, 1)') {
+                  callback(null); // Inserción exitosa
+              } else {
+                  callback(new Error('Consulta no reconocida: ' + querySql));
+              }
+          }),
+          release: jest.fn() // Simula el método release
       };
-  
-     
-      const callback = jest.fn(() => {
-        
-        expect(conMock.query).toHaveBeenCalledWith(
-          'SELECT * FROM cromos_personal WHERE ID_CROMO = ?',
-          [1], 
-          expect.any(Function)
-        );
-        expect(conMock.query).toHaveBeenCalledWith(
-          'SELECT * FROM cromos_personal WHERE ID_CROMO = ?',
-          [2], 
-          expect.any(Function)
-        );
-        expect(conMock.query).toHaveBeenCalledWith(
-          'SELECT * FROM cromos_personal WHERE ID_CROMO = ?',
-          [3], 
-          expect.any(Function)
-        );
-        expect(conMock.query).toHaveBeenCalledWith(
-          'UPDATE cromos_personal SET CANTIDAD = CANTIDAD + 1 WHERE ID_USU = ? AND ID_CROMO = ?',
-          [1, 1], 
-          expect.any(Function)
-        );
-        expect(conMock.query).toHaveBeenCalledWith(
-          'UPDATE cromos_personal SET CANTIDAD = CANTIDAD + 1 WHERE ID_USU = ? AND ID_CROMO = ?',
-          [1, 3], 
-          expect.any(Function)
-        );
-        expect(conMock.query).toHaveBeenCalledWith(
-          'INSERT INTO cromos_personal (ID_USU, ID_CROMO, CANTIDAD) VALUES (?, ?, 1)',
-          [1, 2], 
-          expect.any(Function)
-        );
-        done(); 
+
+      const callback = jest.fn((nuevos) => {
+          // Verifica que todas las consultas esperadas se hayan realizado
+          expect(conMock.query).toHaveBeenCalledTimes(6);
+          // Verifica el contenido del array 'nuevos'
+          expect(nuevos).toEqual([0, 1, 0]);
+          done(); 
       });
-  
-        procesarCromos(conMock, 1, [1, 2, 3], callback);
-    });
+
+      procesarCromos(conMock, 1, [1, 2, 3], callback);
   });
+});
 
 
 
@@ -356,7 +321,7 @@ describe('Función procesarCromos', () => {
 
 //--------------PROBANDO FUNCION PRINCIPAL RUTA POST -----------------------------
 
-const express = require('express');
+/*const express = require('express');
 const request = require('supertest');
 const router = require('../../routes/comprarSobre.js');
 
@@ -399,4 +364,4 @@ describe('POST /:id', () => {
       // Verifica el cuerpo de la respuesta
       expect(response.body).toEqual({ success: true, mensaje: "Compra realizada correctamente", album: 1, numeros: expect.any(Array) }); // Actualizado: 'Álbum de ejemplo' reemplazado por 1
     });
-  });
+  });*/

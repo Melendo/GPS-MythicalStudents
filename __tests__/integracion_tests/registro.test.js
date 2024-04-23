@@ -9,17 +9,15 @@ const dbConfig = {
     database: "mm_db",
 };
 
-
 let con;
 
 describe('Registro', () => {
-
   beforeAll(done => {
     con = mysql.createConnection(dbConfig);
     con.connect(err => {
       if (err) {
         console.error('Error al conectar a la base de datos:', err);
-        done.fail(err);
+        done(err); // Manejar el error adecuadamente
       } else {
         console.log('Conexión exitosa a la base de datos de prueba');
         done();
@@ -27,12 +25,11 @@ describe('Registro', () => {
     });
   });
 
-  
   afterAll(done => {
     con.end(err => {
       if (err) {
         console.error('Error al cerrar la conexión a la base de datos:', err);
-        done.fail(err);
+        done(err); // Manejar el error adecuadamente
       } else {
         console.log('Conexión cerrada correctamente');
         done();
@@ -41,8 +38,8 @@ describe('Registro', () => {
   });
 
   it('Debería mostrar la página de registro si el usuario no está autenticado', async () => {
-    
     const response = await request(app).get('/registro');
+    // Verificar que la respuesta tenga el código de estado 200
     expect(response.status).toBe(200); 
   });
 });
