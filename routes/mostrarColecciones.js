@@ -18,7 +18,7 @@ function getColecciones(con, callback) {
 
 //Obtenemos la imagen de una coleccion con su id 
 function getColeccionImagen(con, id, callback) {
-    const sqlColecciones = "SELECT IMAGEN FROM colecciones WHERE ID = ?";
+    const sqlColecciones = "SELECT IMAGEN FROM colecciones WHERE ID = ?;";
     con.query(sqlColecciones, [id], (error, result) => {
         callback(error, result);
     });
