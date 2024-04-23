@@ -37,7 +37,7 @@ function comprobarAlbum(con, idUsuario, idAlbum, callback) {
     con.query(querySqlComprobarAlbum, [idUsuario, idAlbum], (error, albumesResult) => {
         if (error) {
             con.release();
-            throw error;
+            return callback(error, null);
         }
         callback(albumesResult);
     });
@@ -49,7 +49,7 @@ function agregarAlbum(con, idUsuario, idAlbum, callback) {
     con.query(querySqlInsertarAlbum, [idUsuario, idAlbum], (error, insertarAlbumResult) => {
         if (error) {
             con.release();
-            throw error;
+            return callback(error, null);
         }
         callback(insertarAlbumResult);
     });
