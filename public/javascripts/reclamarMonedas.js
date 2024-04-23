@@ -1,4 +1,7 @@
+var sound = new Audio('/sounds/SonidoMoneda.mp3');
+
 $(document).ready(function() {
+
     $("#btnReclamarRecompensa").on('click', function() {
         var nuevasMonedas = obtenerNuevasMonedas();
 
@@ -30,7 +33,6 @@ function obtenerNuevasMonedas() {
 }
 
 function reproducirSonido() {
-    var sound = document.getElementById("sonidoMoneda");
     sound.play();
     generarMonedas();
 }
