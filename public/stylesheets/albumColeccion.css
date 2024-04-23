@@ -1,0 +1,44 @@
+.album-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.album {
+    background-color: rgb(74 80 140);
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    vertical-align: top;
+    flex: 0 0 auto;
+    text-align: center;
+    margin: 0 10px 20px;
+    width: 200px;
+
+}
+
+.album img {
+    width: 150px; /* Ajusta el tamaño de la imagen según tus necesidades */
+    height: auto;
+}
+
+.coleccion-list {
+    
+    list-style: none;
+    padding: 20px;
+    justify-content: center; /* Centrar elementos horizontalmente */
+    align-items: center; /* Centrar elementos verticalmente */
+    overflow-x: auto; /* Para permitir desplazamiento horizontal si hay muchos sobres */
+    background-color: rgba(89 94 150); /* Fondo semi-transparente para resaltar la lista */
+    border-radius: 10px; /* Añade un radio de borde */
+
+}
+
+.text-albumes{
+    text-align: center;
+}
+
+.coleccion-descripcion{
+    font-size: 20px; 
+}

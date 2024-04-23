@@ -23,15 +23,24 @@
     transform: scale(0.6);
 }
 
-.add:hover {
-    transform: scale(1.1); /* Aumenta el tamaño en un 10% */
-}
-
 .add h4{
     font-family:'Courier New', Courier, monospace;
     text-align: center;
     text-size-adjust:initial;
 }
+
+
+/*.titulo {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    font-size: 60px;
+    color: #ffffff;
+    font-family: Monaco, monospace;
+    text-decoration: underline;
+    text-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5);
+}*/
+
 
 .shelf-divider {
     border-bottom: 5px solid rgb(31 37 97);

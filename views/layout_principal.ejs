@@ -31,7 +31,12 @@
         menuItems.forEach(function(item) {
             var link = item.getAttribute('href');
             
-            if ((link === currentUrl) || (currentUrl.startsWith('/album/') && link === '/estanteriaVirtual')) {
+            if (
+                (link === currentUrl) || 
+                (currentUrl.startsWith('/album/') && link === '/estanteriaVirtual') ||
+                (currentUrl === '/mostrarColecciones' && link === '/estanteriaVirtual') ||
+                (currentUrl.startsWith('/mostrarAlbumColeccion') && link === '/estanteriaVirtual')
+            ) {
                 item.classList.add('active');
             } else {
                 item.classList.remove('active');
