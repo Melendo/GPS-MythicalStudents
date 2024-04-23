@@ -1,109 +1,123 @@
-const request = require('supertest');
-const express = require('express');
-const mostrarColeccionesRouter = require('../../routes/mostrarColecciones.js');
+const getColecciones = require('../../routes/mostrarColecciones.js').getColecciones;
 
-// Mock de función para db.getConnection
-const mockDbConnection = jest.fn((callback) => {
-  // Simular que la consulta a la base de datos se ejecuta correctamente sin devolver datos específicos
-  callback(null, {
-    query: jest.fn(),
-    release: jest.fn(),
-  });
-});
+describe('Función getColecciones', () => {
+  it('Debería devolver información de las colecciones si la consulta es exitosa', () => {
+    // Mockear la conexión a la base de datos
+    const conMock = {
+      query: jest.fn((querySql, callback) => {
+        // Simular que la consulta a la base de datos se ejecuta correctamente
+        callback(null, [{ ID: 1, NOMBRE: 'Colección 1' }]);
+      })
+    };
 
-// Mock de función para la consulta de la base de datos para obtener una imagen de la colección
-const mockGetColeccionImagen = jest.fn((con, id, callback) => {
-  // Simular que la consulta a la base de datos se ejecuta correctamente sin devolver datos específicos
-  callback(null, [{ IMAGEN: Buffer.from('imagen de prueba') }]);
-});
-
-// Mock de función para la consulta de la base de datos para obtener todas las colecciones
-const mockGetColecciones = jest.fn((con, callback) => {
-  // Simular que la consulta a la base de datos se ejecuta correctamente sin devolver datos específicos
-  const colecciones = [
-    { ID: 1, NOMBRE: "Colección 1", DESCRIPCION: "Descripción de la Colección 1", IMAGEN: Buffer.from('imagen de prueba') },
-    { ID: 2, NOMBRE: "Colección 2", DESCRIPCION: "Descripción de la Colección 2", IMAGEN: Buffer.from('imagen de prueba') }
-  ];
-  callback(null, colecciones);
-});
-
-describe('Routes de Mostrar Colecciones', () => {
-  let app;
-
-  beforeEach(() => {
-    app = express();
-
-    // Ruta para mostrar colecciones
-    app.use('/', mostrarColeccionesRouter);
-
-    // Configurar el motor de plantillas EJS
-    app.set('view engine', 'ejs');
-
-    // Mockear db.getConnection en la ruta
-    jest.mock('../../connection/connection.js', () => ({
-      getConnection: mockDbConnection,
-    }));
-
-    // Mockear las funciones de consulta de la base de datos
-    mostrarColeccionesRouter.getColecciones = mockGetColecciones;
-    mostrarColeccionesRouter.getColeccionImagen = mockGetColeccionImagen;
-  });
-
-  afterEach(() => {
-    jest.resetModules();
-    jest.restoreAllMocks();
-  });
-
-  it('Debería devolver una respuesta exitosa con datos simulados para /', async () => {
-    const response = await request(app).get('/');
-    expect(response.status).toBe(200);
-    // Se puede verificar el contenido de la respuesta si es necesario
-  });
-
-  it('Debería devolver una imagen con datos simulados para /imagen:id', async () => {
-    // Realizar la solicitud GET a la ruta de la estantería virtual con un ID de imagen simulado
-    const response = await request(app).get('/imagen/1');
-
-    // Verificar el código de estado de la respuesta
-    expect(response.status).toBe(200);
-  });
-
-  it('Debería devolver un error 500 si hay un error al obtener las colecciones desde la base de datos', async () => {
-    // Mockear la función getColecciones para que devuelva un error
-    mostrarColeccionesRouter.getColecciones = jest.fn((con, callback) => {
-      callback(new Error('Error al obtener las colecciones'), null);
+    // Definir la función de callback
+    const callback = jest.fn((error, colecciones) => {
+      // Verificar que no hay errores
+      expect(error).toBeNull();
+      // Verificar que se devuelve la información de las colecciones
+      expect(colecciones).toEqual([{ ID: 1, NOMBRE: 'Colección 1' }]);
     });
 
-    const response = await request(app).get('/');
+    // Llamar a la función getColecciones con el mock de conexión y el callback
+    getColecciones(conMock, callback);
 
-    // Verificar el código de estado de la respuesta
-    expect(response.status).toBe(200);
-    // Se puede verificar el contenido de la respuesta si es necesario
+    // Verificar que se hace la consulta SQL adecuada
+    expect(conMock.query).toHaveBeenCalledWith(
+      'SELECT * FROM colecciones;',
+      expect.any(Function)
+    );
   });
 
-  it('Debería devolver un error 500 si hay un error al obtener la imagen de la colección desde la base de datos', async () => {
-    // Mockear la función getColeccionImagen para que devuelva un error
-    mostrarColeccionesRouter.getColeccionImagen = jest.fn((con, id, callback) => {
-      callback(new Error('Error al obtener la imagen de la colección'), null);
+  it('Debería pasar un error al callback si la consulta falla', () => {
+    // Mockear la conexión a la base de datos
+    const conMock = {
+      query: jest.fn((querySql, callback) => {
+        // Simular que la consulta a la base de datos falla
+        const error = new Error('Error de consulta');
+        callback(error, null);
+      }),
+    };
+
+    // Definir la función de callback
+    const callback = jest.fn((error, colecciones) => {
+      // Verificar que se pasa un error al callback
+      expect(error.message).toBe('Error de consulta');
+      // Verificar que no hay colecciones
+      expect(colecciones).toBeNull();
     });
 
-    const response = await request(app).get('/imagen/1');
+    // Llamar a la función getColecciones con el mock de conexión y el callback
+    getColecciones(conMock, callback);
 
-    // Verificar el código de estado de la respuesta
-    expect(response.status).toBe(500);
-    // Se puede verificar el contenido de la respuesta si es necesario
+    // Verificar que se hace la consulta SQL adecuada
+    expect(conMock.query).toHaveBeenCalledWith(
+      'SELECT * FROM colecciones;',
+      expect.any(Function)
+    );
+  });
+  
+});
+
+
+
+
+const getColeccionImagen = require('../../routes/mostrarColecciones.js').getColeccionImagen;
+
+describe('Función getColeccionImagen', () => {
+  it('Debería devolver la imagen de la colección si la consulta es exitosa', () => {
+    // Mockear la conexión a la base de datos
+    const conMock = {
+      query: jest.fn((querySql, params, callback) => {
+        // Simular una consulta exitosa que devuelve la imagen
+        callback(null, [{ IMAGEN: Buffer.from('imagen de prueba') }]);
+      })
+    };
+
+    // Definir la función de callback
+    const callback = jest.fn((error, result) => {
+      // Verificar que no hay errores
+      expect(error).toBeNull();
+      // Verificar que se devuelve la imagen de la colección
+      expect(result).toEqual([{ IMAGEN: Buffer.from('imagen de prueba') }]);
+    });
+
+    // Llamar a la función getColeccionImagen con el mock de conexión, el ID y el callback
+    getColeccionImagen(conMock, 1, callback);
+
+    // Verificar que se hace la consulta SQL adecuada
+    expect(conMock.query).toHaveBeenCalledWith(
+      'SELECT IMAGEN FROM colecciones WHERE ID = ?;',
+      [1],
+      expect.any(Function)
+    );
   });
 
-  it('Debería devolver un error 404 si no se encuentra la imagen de la colección en la base de datos', async () => {
-    // Mockear la función getColeccionImagen para que devuelva un resultado vacío
-    mostrarColeccionesRouter.getColeccionImagen = jest.fn((con, id, callback) => {
-      callback(null, []);
+  it('Debería pasar un error al callback si la consulta falla', () => {
+    // Mockear la conexión a la base de datos
+    const conMock = {
+      query: jest.fn((querySql, params, callback) => {
+        // Simular que la consulta a la base de datos falla
+        const error = new Error('Error de consulta');
+        callback(error, null);
+      }),
+    };
+
+    // Definir la función de callback
+    const callback = jest.fn((error, result) => {
+      // Verificar que se pasa un error al callback
+      expect(error.message).toBe('Error de consulta');
+      // Verificar que no hay resultado
+      expect(result).toBeNull();
     });
 
-    const response = await request(app).get('/album/1');
+    // Llamar a la función getColeccionImagen con el mock de conexión y el callback
+    getColeccionImagen(conMock, 1, callback);
 
-    // Verificar el código de estado de la respuesta
-    expect(response.status).toBe(404);
-    // Se puede verificar el contenido de la respuesta si es necesario
+    // Verificar que se hace la consulta SQL adecuada
+    expect(conMock.query).toHaveBeenCalledWith(
+      'SELECT IMAGEN FROM colecciones WHERE ID = ?;',
+      [1],
+      expect.any(Function)
+    );
   });
 });
