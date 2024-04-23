@@ -36,12 +36,12 @@ router.get('/', function (req, res, next) {
                             throw error;
                         }
                         con.release();
-                        res.render('estanteriaVirtual', { user: user, title: 'Estantería Virtual', albumes: result });
+                        res.render('estanteriaVirtual', { user: user, title: 'MYTHICAL MINGLE', albumes: result });
                     });
                 
                 }
                 else {
-                    res.render('estanteriaVirtual', { user: user, title: 'Estantería Virtual', albumes: "" });
+                    res.render('estanteriaVirtual', { user: user, title: 'MYTHICAL MINGLE', albumes: "" });
                 }
             });
 

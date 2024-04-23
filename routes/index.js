@@ -22,7 +22,7 @@ router.get('/', function(req, res) {
         }
         con.release();
         req.session.user.MONEDAS = monedas[0].MONEDAS
-        res.render('index', { user: user, title: "Página Principal" });
+        res.render('index', { user: user, title: "MYTHICAL MINGLE" });
       });
     });
   }

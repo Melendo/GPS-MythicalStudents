@@ -60,7 +60,7 @@ router.get('/:album', function (req, res, next) {
                         con.release();
                         res.render('album', {
                             user: user,
-                            title: 'Estanteria Virtual',
+                            title: 'MYTHICAL MINGLE',
                             album: infoAlbum,
                             cromosPersonales: cromosPersonales,
                             cromosTotales: cromosTotales

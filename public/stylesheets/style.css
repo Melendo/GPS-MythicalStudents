@@ -233,7 +233,7 @@ footer {
  
  .contenedor-cuestionario-button {
   background-color: rgb(74 80 140); 
-  font-size: 2vw;
+  font-size: 2em;
   color: #fff; 
   padding: 10px 20px; 
   border-radius: 59px; 
@@ -242,9 +242,7 @@ footer {
   display: flex; 
   justify-content: center; 
   align-items: center; 
-  min-height: 10vw; 
-  max-height: 20vw; /* Altura relativa al tamaño de la ventana */
-  max-width: 30vw; /* Ancho máximo relativo al tamaño de la ventana */
+  min-height: 10vw;
   margin: 0 auto; 
   margin-right: 2vw; 
 }

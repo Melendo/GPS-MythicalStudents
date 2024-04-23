@@ -55,7 +55,7 @@ router.get('/:coleccion', function (req, res, next) {
                         con.release();
                         res.render('mostrarAlbumColeccion', {
                             user: user,
-                            title: 'Álbumes de la colección',
+                            title: 'MYTHICAL MINGLE',
                             coleccion: infoColeccion,
                             albumesPersonales: albumesPersonales,
                             albumesTotales: albumesTotales
