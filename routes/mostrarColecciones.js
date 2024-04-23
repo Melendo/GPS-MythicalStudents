@@ -25,6 +25,8 @@ function getColeccionImagen(con, id, callback) {
 }
 
 router.get('/', function (req, res, next) {
+    var user = req.session.user;
+
     db.getConnection(function (error, con) {
         if (error) {
             con.release();
@@ -36,7 +38,7 @@ router.get('/', function (req, res, next) {
                 return res.status(500).json({ error: "Error al obtener las colecciones de la base de datos" });
             }
             con.release();
-            res.render('mostrarColecciones', { colecciones: colecciones });
+            res.render('mostrarColecciones', { user: user, title: 'LISTA DE COLECCIONES', colecciones: colecciones });
         });
     });
 });

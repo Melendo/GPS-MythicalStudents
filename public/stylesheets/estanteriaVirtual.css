@@ -23,6 +23,10 @@
     transform: scale(0.6);
 }
 
+.add:hover {
+    transform: scale(1.1); /* Aumenta el tamaño en un 10% */
+}
+
 .add h4{
     font-family:'Courier New', Courier, monospace;
     text-align: center;

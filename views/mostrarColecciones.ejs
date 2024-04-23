@@ -18,14 +18,18 @@
 
 <body>
 
-    <h1 class="titulo">LISTA DE COLECCIONES</h1>
+    <header>
+        <%- include("titulo", { titulo: title , monedas: user.MONEDAS }) %>
+    </header>
+
+    
 
     <div class="container">
         <div class="row">
             <% for (var i=0; i < colecciones.length; i++) { %>
                
                     <div class="col-sm-2 album">
-                        <a href="/mostrarAlbumColeccion/<%= colecciones[i].ID %>">
+                        <a href="/mostrarAlbumColeccion/<%= colecciones[i].ID %>" class="text-decoration-none">
                             <img src="/mostrarColecciones/imagen/<%= colecciones[i].ID %>" class="img-fluid">
                         <h4><b>
                                 <%= colecciones[i].NOMBRE %>

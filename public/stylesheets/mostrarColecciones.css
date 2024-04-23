@@ -30,17 +30,16 @@
 }
 
 
-.titulo {
-    text-align: center; /* Centra el texto */
-    margin-top: 50px; /* Añade un margen superior */
-    margin-bottom: 0px; /* Añade un margen inferior */
-    font-size: 60px; /* Tamaño de fuente */
-    color: #ffffff; /* Color del texto */
-    font-family: Monaco, monospace; /* Fuente Monaco */
+/*.titulo {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    font-size: 60px;
+    color: #ffffff;
+    font-family: Monaco, monospace;
     text-decoration: underline;
     text-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5);
-
-}
+}*/
 
 
 .shelf-divider {

@@ -27,26 +27,22 @@
             <% for (var i=0; i < albumes.length; i++) { %>
                
                     <div class="col-sm-3 album">
-                        <a href="/album/<%= albumes[i].ID%>">
-                        <img src="/estanteriaVirtual/imagen<%= albumes[i].ID%>" class="img-fluid">
-                        <h4><b>
-                                <%= albumes[i].NOMBRE %>
-                        </b></h4>
+                        <a href="/album/<%= albumes[i].ID%>" class="text-decoration-none">
+                            <img src="/estanteriaVirtual/imagen<%= albumes[i].ID%>" class="img-fluid">
+                            <h4><b><%= albumes[i].NOMBRE %></b></h4>
                         </a> 
                     </div>
                
                 <%}%>
 
                 <div class="col-sm-3 add">
-                    <a href="/mostrarColecciones">
+                    <a href="/mostrarColecciones" class="text-decoration-none">
                         <img src="/images/suma.png" class="img-fluid">
-                        <h4><b>
-                                Añadir colección
-                        </b></h4>
+                        <h4><b>Añadir colección</b></h4>
                     </a> 
                 </div>
 
-                    <div class="shelf-divider"></div>
+                <div class="shelf-divider"></div>
 
         </div>
     </div>
