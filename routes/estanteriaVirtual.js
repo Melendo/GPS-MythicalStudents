@@ -36,12 +36,12 @@ router.get('/', function (req, res, next) {
                             throw error;
                         }
                         con.release();
-                        res.render('estanteriaVirtual', { user: user, title: 'Estanteria Virtual', albumes: result });
+                        res.render('estanteriaVirtual', { user: user, title: 'Estantería Virtual', albumes: result });
                     });
                 
                 }
                 else {
-                    res.render('estanteriaVirtual', { user: user, title: 'Estanteria Virtual', albumes: "" });
+                    res.render('estanteriaVirtual', { user: user, title: 'Estantería Virtual', albumes: "" });
                 }
             });
 

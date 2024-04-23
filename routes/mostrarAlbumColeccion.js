@@ -1,11 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-const multer = require('multer');
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
 const db = require('../connection/connection.js');
 
 
@@ -37,38 +32,43 @@ function getInfoColeccion(coleccion, con, callback) {
 router.get('/:coleccion', function (req, res, next) {
     const coleccion = req.params.coleccion;
     var user = req.session.user;
-    db.getConnection(function (error, con) {
-        if (error) {
-            throw error;
-        }
-        getAlbumesTotales(coleccion, con, (error, albumesTotales) => {
+    if (typeof user !== 'undefined') {
+        db.getConnection(function (error, con) {
             if (error) {
-                con.release();
                 throw error;
             }
-            getAlbumesPersonales(coleccion,user, con, (error, albumesPersonales) => {
+            getAlbumesTotales(coleccion, con, (error, albumesTotales) => {
                 if (error) {
                     con.release();
                     throw error;
                 }
-                getInfoColeccion(coleccion, con, (error, infoColeccion) => {
+                getAlbumesPersonales(coleccion, user, con, (error, albumesPersonales) => {
                     if (error) {
                         con.release();
                         throw error;
                     }
-                    con.release();
-                    res.render('mostrarAlbumColeccion', {
-                        user: user,
-                        title: 'Álbumes de la colección',
-                        coleccion: infoColeccion,
-                        monedas: req.session.user.MONEDAS,
-                        albumesPersonales: albumesPersonales,
-                        albumesTotales: albumesTotales
+                    getInfoColeccion(coleccion, con, (error, infoColeccion) => {
+                        if (error) {
+                            con.release();
+                            throw error;
+                        }
+                        con.release();
+                        res.render('mostrarAlbumColeccion', {
+                            user: user,
+                            title: 'Álbumes de la colección',
+                            coleccion: infoColeccion,
+                            albumesPersonales: albumesPersonales,
+                            albumesTotales: albumesTotales
+                        });
                     });
                 });
             });
         });
-    });
+    }
+    else {
+      res.redirect('/inicioSesion');
+    }
+    
 });
 
 

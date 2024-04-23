@@ -1,12 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-const multer = require('multer');
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
 const db = require('../connection/connection.js');
+
 
 //Obtenemos las colecciones
 function getColecciones(con, callback) {
@@ -24,25 +20,30 @@ function getColeccionImagen(con, id, callback) {
     });
 }
 
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
     var user = req.session.user;
-    db.getConnection(function (error, con) {
-        if (error) {
-            con.release();
-            return res.status(500).json({ error: "Error de conexión a la base de datos" });
-        }
-        getColecciones(con, (error, colecciones) => {
+    if (typeof user !== 'undefined') {
+        db.getConnection(function (error, con) {
             if (error) {
                 con.release();
-                return res.status(500).json({ error: "Error al obtener las colecciones de la base de datos" });
+                return res.status(500).json({ error: "Error de conexión a la base de datos" });
             }
-            con.release();
-            res.render('mostrarColecciones', { user: user, title: 'LISTA DE COLECCIONES', colecciones: colecciones });
+            getColecciones(con, (error, colecciones) => {
+                if (error) {
+                    con.release();
+                    return res.status(500).json({ error: "Error al obtener las colecciones de la base de datos" });
+                }
+                con.release();
+                res.render('mostrarColecciones', { user: user, title: 'Lista de colecciones', colecciones: colecciones });
+            });
         });
-    });
+    }
+    else {
+      res.redirect('/inicioSesion');
+    }
 });
 
-router.get('/imagen/:id', function (req, res, next) {
+router.get('/imagen/:id', function (req, res) {
     db.getConnection(function (error, con) {
         if (error) {
             con.release();

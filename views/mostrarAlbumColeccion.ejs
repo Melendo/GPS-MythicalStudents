@@ -19,7 +19,7 @@
 <body>
 
     <header>
-        <%- include("titulo", { titulo: title , monedas:monedas }) %>
+        <%- include("titulo", { titulo: title , user: user }) %>
     </header>
 
     <div class="container coleccion-list">
@@ -39,7 +39,7 @@
                            
 
                             <% if (!encontrado) { %>
-                                <a href="/anadirAlbum/<%= albumesTotales[i].ID %>">
+                                <a href="/anadirAlbum/<%= albumesTotales[i].ID %>"  class="text-decoration-none">
                             <% } %>
                             <img src="/mostrarAlbumColeccion/imagen/<%= albumesTotales[i].ID %>" class="img-fluid" widht = 150px>
                             <h4><b><%= albumesTotales[i].NOMBRE %></b></h4>
@@ -64,5 +64,6 @@
 
     <footer><%- include("layout_principal") %></footer>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/javascripts/cerrarSesion.js"></script>
 </html>
