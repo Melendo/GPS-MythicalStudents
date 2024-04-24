@@ -5,8 +5,8 @@
     padding: 10px;
     display: inline-block;
     vertical-align: top;
+    width: 400px;
 }
-
 .album h4{
     font-family:'Courier New', Courier, monospace;
     text-align: center;
@@ -15,16 +15,12 @@
 
 .add{
     background-color: rgb(243, 241, 241);
-    border-radius: 60px;
-    margin: 30px;
-    padding: 10px;
-    display: inline-block;
-    vertical-align: top;
+    border-radius: 50px;
     transform: scale(0.6);
 }
 
 .add:hover {
-    transform: scale(1.1); /* Aumenta el tamaño en un 10% */
+    transform: scale(0.8); /* Aumenta el tamaño en un 10% */
 }
 
 .add h4{
