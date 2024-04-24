@@ -8,7 +8,7 @@ app.use((req, res, next) => {
     next();
 });
 
-describe('Registro', () => {
+describe('Agregar Album', () => {
   it('Debería mostrar la página de registro si el usuario no está autenticado', async () => {
     const response = await request(app).get('/registro');
     // Verifica que la respuesta tenga el código de estado 200

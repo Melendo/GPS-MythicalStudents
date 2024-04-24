@@ -73,11 +73,10 @@ async function cleanUpTestData() {
     con = mysql.createConnection(dbConfig);
     con.connect();
     // Eliminación de datos de prueba
-    const deleteQuery = 'DELETE FROM usuario WHERE EMAIL = ?';
-    const userEmail = 'test@example.com'; // Correo electrónico del usuario de prueba insertado
-
+    const deleteQuery = "DELETE FROM usuario WHERE EMAIL LIKE '%@example.com'";
+    
     await new Promise((resolve, reject) => {
-        con.query(deleteQuery, userEmail, (error, results, fields) => {
+        con.query(deleteQuery, (error, results, fields) => {
             if (error) {
                 reject(error);
             } else {
@@ -98,7 +97,7 @@ describe('POST /', () => {
 
     afterEach(async () => {
         // Limpiar datos de prueba en la base de datos después de cada test
-        //await cleanUpTestData();
+        await cleanUpTestData();
     });
     it('should respond with success when valid email and password are provided', async () => {
         // Datos de prueba

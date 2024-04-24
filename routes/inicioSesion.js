@@ -68,8 +68,8 @@ router.post(
 function verificarUsuario(con, email, contrasena, callback) {
     const querySqlVerificarUsuario = 'SELECT * FROM usuario WHERE EMAIL = ?';
     con.query(querySqlVerificarUsuario, [email], async (error, results) => {
+        con.release();
         if (error) {
-            con.release();
             callback(null);
             return; // Detenemos la ejecución de la función        
         }
