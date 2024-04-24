@@ -51,16 +51,19 @@ router.post(
 
             verificarUsuario(con, email, contrasena, (usuario) => {
                 if (usuario) {
+                    con.release();
                     req.session.user = usuario;
                     res.json({ success: true, redirect: '/' });
                 } else {
+                    con.release();
                     res.json({
                         success: false,
-                        mensajeError: 'Usuario o contraseña incorrectos',
+                        mensajeError: [{ msg: 'Usuario o contraseña incorrectos' }],
                     });
                 }
             });
         });
+
     }
 );
 
@@ -68,8 +71,8 @@ router.post(
 function verificarUsuario(con, email, contrasena, callback) {
     const querySqlVerificarUsuario = 'SELECT * FROM usuario WHERE EMAIL = ?';
     con.query(querySqlVerificarUsuario, [email], async (error, results) => {
-        con.release();
         if (error) {
+            con.release();
             callback(null);
             return; // Detenemos la ejecución de la función        
         }

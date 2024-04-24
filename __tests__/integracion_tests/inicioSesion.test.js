@@ -74,7 +74,7 @@ async function cleanUpTestData() {
     con.connect();
     // Eliminación de datos de prueba
     const deleteQuery = "DELETE FROM usuario WHERE EMAIL LIKE '%@example.com'";
-    
+
     await new Promise((resolve, reject) => {
         con.query(deleteQuery, (error, results, fields) => {
             if (error) {
@@ -179,8 +179,12 @@ describe('POST /', () => {
         // Verificar la respuesta
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
+            "mensajeError": [
+                {
+                    "msg": "Usuario o contraseña incorrectos",
+                },
+            ],
             success: false,
-            mensajeError: 'Usuario o contraseña incorrectos' 
         });
     });
 });
