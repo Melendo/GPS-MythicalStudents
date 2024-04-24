@@ -9,8 +9,18 @@ $(document).ready(function() {
             data: { },
             success: function(response) {
                 if (response.success) {
-                    alert(response.mensaje);
-                    window.location.href = '/abrirSobre/' + response.album + '/' + id + '/' + response.numeros.join(',');
+                    Swal.fire({
+                        title: response.mensaje,
+                        text: "¡Vamos a abrirlo!",
+                        icon: "success",
+                        timer: 1800,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                        didClose: function() {
+                            localStorage.setItem('cromosNuevos', JSON.stringify(response.nuevosCromos));
+                            window.location.href = '/abrirSobre/' + response.album + '/' + id + '/' + response.numeros.join(',');
+                        }
+                    });
                 }
                 else {
                     alert(response.mensaje);

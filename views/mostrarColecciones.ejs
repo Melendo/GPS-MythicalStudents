@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <link href="/stylesheets/mostrarColecciones.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/logo.png">
+    <title>Mythical Mingle</title>
+</head>
+
+<body>
+
+    <header>
+        <%- include("titulo", { titulo: title , user: user }) %>
+    </header>
+
+    
+
+    <div class="container">
+        <div class="row">
+            <% for (var i=0; i < colecciones.length; i++) { %>
+               
+                    <div class="col-sm-4 album">
+                        <a href="/mostrarAlbumColeccion/<%= colecciones[i].ID %>" class="text-decoration-none">
+                            <img src="/mostrarColecciones/imagen/<%= colecciones[i].ID %>" class="img-fluid">
+                        <h4><b>
+                                <%= colecciones[i].NOMBRE %>
+                        </b></h4>
+                        </a> 
+                    </div>
+               
+                <%}%>
+                 
+
+        </div>
+    </div>
+
+
+    <footer><%- include("layout_principal") %></footer>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/javascripts/comprarSobre.js"></script>
+<script src="/javascripts/cerrarSesion.js"></script>
+</html>

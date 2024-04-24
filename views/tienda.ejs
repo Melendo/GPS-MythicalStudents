@@ -20,12 +20,12 @@
 <body>
 
   <header>
-    <%- include("titulo", { titulo: title, monedas:monedas }) %>
+    <%- include("titulo", { titulo: title, user: user }) %>
   </header>
     <div class="container sobre-list">
         <div class="row">
             <% for (var i=0; i < sobres.length; i++) { %>
-                <div class="col-sm-3 ">
+                <div class="col-sm-5 m-2 p-2">
                     <div class="sobre-item ">
                         <h4><b>
                                 <%= sobres[i].NOMBRE %>
@@ -47,46 +47,49 @@
         </div>
     </div>
 
-<!-- Modal de Confirmación -->
+<!-- Modal de Confirmación Horizontal -->
 <% for (var i=0; i < sobres.length; i++) { %>
-    <div class="modal fade" id="modalConfirmarCompra<%= sobres[i].ID %>" tabindex="-1" aria-labelledby="modalConfirmarCompraLabel<%= sobres[i].ID %>" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title title" id="modalConfirmarCompraLabel<%= sobres[i].ID %>">CONFIRMACION DE COMPRA</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="container">
-              <div class="content">
-                <div class="left-section">
+  <div class="modal fade" id="modalConfirmarCompra<%= sobres[i].ID %>" tabindex="-1" aria-labelledby="modalConfirmarCompraLabel<%= sobres[i].ID %>" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title title" id="modalConfirmarCompraLabel<%= sobres[i].ID %>">CONFIRMACION DE COMPRA</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position: absolute; top: 15px; right: 15px;">
+        </div>
+        <div class="modal-body">
+          <div class="container mt-3 mb-3">
+            <div class="content">
+              <div class="row">
+                <div class="col-md-6">
                   <img class="image" src="/tienda/imagen<%= sobres[i].ID %>" alt="Sobre del videojuego">
-                  <div>
-                    <h2 class="confirm-title" id="sobreNombre<%= sobres[i].ID %>"><%= sobres[i].NOMBRE %></h2>
-                  </div>
                 </div>
-                <div class="right-section">
+                <div class="col-md-6">
+                  <h2 class="confirm-title" id="sobreNombre<%= sobres[i].ID %>"><%= sobres[i].NOMBRE %></h2>
+                  <p class="desc-title"><%= sobres[i].DESCRIPCION %></p>
+                  <p class="cromo-title fw-bold lead">Contiene <%= sobres[i].NUM_CROMOS %> cromos</p>
                   <div class="confirmation-info">
                     <h2 class="confirm-title">¿DESEAS REALIZAR LA COMPRA?</h2>
                     <div class="price-box">
-                      <p class="price" id="sobrePrecio<%= sobres[i].ID %>">PRECIO DEL SOBRE: $<%= sobres[i].PRECIO %></p>
+                      <p class="price" id="sobrePrecio<%= sobres[i].ID %>">PRECIO DEL SOBRE: <strong>$<%= sobres[i].PRECIO %></strong></p>
                     </div>
                     <div class="coins-box">
-                      <p>TIENES $<%= monedas %> MONEDAS</p>
+                      <p>TIENES <strong>$<%= user.MONEDAS %></strong> MONEDAS</p>
                     </div>
-                  </div>
-                  <div class="buttons">
-                    <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">CANCELAR</button>
-                    <button type="button" class="btn btn-primary buy" data-id="<%= sobres[i].ID %>">COMPRAR</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">CANCELAR</button>
+          <button type="button" class="btn btn-primary buy" data-id="<%= sobres[i].ID %>">COMPRAR</button>
+        </div>
       </div>
     </div>
+  </div>
 <% } %>
+
     <script>
       function abrirDialogConfirmar() {
         $('#modalConfirmarCompra').modal('show');
@@ -100,5 +103,7 @@
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/javascripts/comprarSobre.js"></script>
+<script src="/javascripts/cerrarSesion.js"></script>
 </html>

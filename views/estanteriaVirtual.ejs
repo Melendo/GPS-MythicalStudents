@@ -19,7 +19,7 @@
 <body>
 
     <header>
-        <%- include("titulo", { titulo: title , monedas:monedas }) %>
+        <%- include("titulo", { titulo: title , user: user }) %>
     </header>
 
     <div class="container">
@@ -27,16 +27,21 @@
             <% for (var i=0; i < albumes.length; i++) { %>
                
                     <div class="col-sm-3 album">
-                        <a href="/album/<%= albumes[i].ID%>">
-                        <img src="/estanteriaVirtual/imagen<%= albumes[i].ID%>" class="img-fluid">
-                        <h4><b>
-                                <%= albumes[i].NOMBRE %>
-                        </b></h4>
+                        <a href="/album/<%= albumes[i].ID%>" class="text-decoration-none">
+                            <img src="/estanteriaVirtual/imagen<%= albumes[i].ID%>" class="img-fluid">
+                            <h4><b><%= albumes[i].NOMBRE %></b></h4>
                         </a> 
                     </div>
-               
+
                 <%}%>
-                    <div class="shelf-divider"></div>
+
+                <div class="col-sm-4 album add">
+                    <a href="/mostrarColecciones" class="text-decoration-none">
+                        <img src="/images/suma.png" class="img-fluid">
+                        <h4><b>Añadir Album</b></h4>
+                    </a> 
+                </div>
+
 
         </div>
     </div>
@@ -47,5 +52,5 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/javascripts/comprarSobre.js"></script>
-
+<script src="/javascripts/cerrarSesion.js"></script>
 </html>

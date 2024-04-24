@@ -1,27 +1,33 @@
 var express = require('express');
 var router = express.Router();
 
-const multer = require('multer');
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
 const db = require('../connection/connection.js');
-
 
 // Función para obtener los cromos totales
 function getCromosTotales(album, con, callback) {
     const cromosTotalesQuery = "SELECT * FROM cromos WHERE album = ?;";
     con.query(cromosTotalesQuery, [album], (error, cromosTotales) => {
-        callback(error, cromosTotales);
+        if (error) {
+            // En caso de error, pasa el error al callback y libera la conexión
+            con.release();
+            return callback(error, null);
+        }
+        // Si no hay error, llama al callback con los cromos totales obtenidos
+        callback(null, cromosTotales);
     });
 }
 
+
+
 // Función para obtener los cromos personales
-function getCromosPersonales(album, con, callback) {
-    const cromosPersonalesQuery = "SELECT * FROM cromos_personal, cromos WHERE ID_CROMO = ID AND album = ?;";
-    con.query(cromosPersonalesQuery, [album], (error, cromosPersonales) => {
-        callback(error, cromosPersonales);
+function getCromosPersonales(id, album, con, callback) {
+    const cromosPersonalesQuery = "SELECT c.*, cp.* FROM cromos c JOIN cromos_personal cp ON c.ID = cp.ID_CROMO WHERE cp.ID_USU = ? AND c.ALBUM = ?;";
+    con.query(cromosPersonalesQuery, [id, album], (error, cromosPersonales) => {
+        if (error) {
+            con.release();
+            return callback(error, null);
+        }
+        callback(null, cromosPersonales);
     });
 }
 
@@ -29,44 +35,45 @@ function getCromosPersonales(album, con, callback) {
 function getInfoAlbum(album, con, callback) {
     const infoAlbumQuery = "SELECT * FROM album WHERE ID = ?;";
     con.query(infoAlbumQuery, [album], (error, infoAlbum) => {
-        callback(error, infoAlbum);
+        if (error) {
+            con.release();
+            return callback(error, null);
+        }
+        callback(null, infoAlbum);
     });
 }
 
 // Controlador original
 router.get('/:album', function (req, res, next) {
     const album = req.params.album;
-    db.getConnection(function (error, con) {
-        if (error) {
-            throw error;
-        }
-        getCromosTotales(album, con, (error, cromosTotales) => {
+    var user = req.session.user;
+
+    if (typeof user !== 'undefined') {
+        db.getConnection(function (error, con) {
             if (error) {
                 con.release();
                 throw error;
             }
-            getCromosPersonales(album, con, (error, cromosPersonales) => {
-                if (error) {
-                    con.release();
-                    throw error;
-                }
-                getInfoAlbum(album, con, (error, infoAlbum) => {
-                    if (error) {
+            getCromosTotales(album, con, (error, cromosTotales) => {
+                getCromosPersonales(user.ID, album, con, (error, cromosPersonales) => {
+                    getInfoAlbum(album, con, (error, infoAlbum) => {
                         con.release();
-                        throw error;
-                    }
-                    con.release();
-                    res.render('album', {
-                        title: 'Estanteria Virtual',
-                        album: infoAlbum,
-                        monedas: req.session.user.MONEDAS,
-                        cromosPersonales: cromosPersonales,
-                        cromosTotales: cromosTotales
+                        res.render('album', {
+                            user: user,
+                            title: 'MYTHICAL MINGLE',
+                            album: infoAlbum,
+                            cromosPersonales: cromosPersonales,
+                            cromosTotales: cromosTotales
+                        });
                     });
                 });
             });
         });
-    });
+    }
+    else {
+        res.redirect('/inicioSesion');
+    }
+    
 });
 
 

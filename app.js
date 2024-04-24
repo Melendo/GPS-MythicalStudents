@@ -35,6 +35,12 @@ var abrirSobreRouter = require('./routes/abrirSobre');
 var animacionSobreRouter = require('./routes/animacionSobre')
 var cuestionarioRouter = require('./routes/cuestionario');
 var albumRouter = require('./routes/album');
+var inicioSesionRouter = require('./routes/inicioSesion');
+var registroRouter = require('./routes/registro');
+var cerrarSesionRouter = require('./routes/cerrarSesion');
+var mostrarColeccionesRouter = require('./routes/mostrarColecciones');
+var mostrarAlbumColeccion = require('./routes/mostrarAlbumColeccion');
+var agregarAlbumRouter = require('./routes/agregarAlbum');
 
 
 var app = express();
@@ -78,6 +84,12 @@ app.use('/abrirSobre', abrirSobreRouter);
 app.use('/animacionSobre', animacionSobreRouter);
 app.use('/album', albumRouter);
 app.use('/cuestionario', cuestionarioRouter);
+app.use('/inicioSesion', inicioSesionRouter);
+app.use('/registro', registroRouter);
+app.use('/cerrarSesion', cerrarSesionRouter);
+app.use('/mostrarColecciones', mostrarColeccionesRouter);
+app.use('/mostrarAlbumColeccion', mostrarAlbumColeccion);
+app.use('/agregarAlbum', agregarAlbumRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -92,7 +104,17 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+
+  let titulo, mensaje;
+  if (err.status === 404) {
+    titulo = "Error 404";
+    mensaje = "La página que buscas no existe.";
+  } else {
+    titulo = "Error " + (err.status || 500);
+    mensaje = "Ocurrió un error en el servidor.";
+  }
+
+  res.render('error', { titulo: titulo, mensaje: mensaje });
 });
 
 module.exports = app;

@@ -5,9 +5,25 @@
     padding: 10px;
     display: inline-block;
     vertical-align: top;
+    width: 400px;
+}
+.album h4{
+    font-family:'Courier New', Courier, monospace;
+    text-align: center;
+    text-size-adjust:initial;
 }
 
-.album h4{
+.add{
+    background-color: rgb(243, 241, 241);
+    border-radius: 50px;
+    transform: scale(0.6);
+}
+
+.add:hover {
+    transform: scale(0.8); /* Aumenta el tamaño en un 10% */
+}
+
+.add h4{
     font-family:'Courier New', Courier, monospace;
     text-align: center;
     text-size-adjust:initial;

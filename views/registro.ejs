@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="/stylesheets/style.css" rel="stylesheet">
+    <title>Mythical Mingle</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/logo.png">
+</head>
+
+<body>
+
+    <main class="main_container p-4">
+        <div class="container-xxl">
+          <div class="col-xl-7 container-xxl mt-4 p-4 rounded text-light">
+            <h1 class="display-3 mt-2 mb-4 text-center"> Registro de usuario</h1>
+            <form class="datos_inicio form fs-5 row justify-content-center" id="formularioRegistro">
+              
+              <div class="alerta alert alert-danger mb-4 text-center" role="alert" style="max-width: 630px; margin: 0 auto; display: none;">
+              </div>
+            
+            <div class="col-11 form-group mb-4">
+                <label for="username">Dirección de correo: *</label><br>
+                <input class="form-control" type="text" id="email1" name="email" required>
+                <div id="correo-valido1" class="text-danger small"></div>
+            </div>
+
+            <div class="col-11 form-group mb-4">
+                <label for="nombre_usuario">Nombre de usuario: *</label><br>
+                <input class="form-control" type="text" id="nombre_usuario" name="nombre_usuario" required>
+            </div>
+            
+            <div class="col-11 form-group mb-4">
+                <label for="password">Contraseña: *</label>
+                <div class="d-flex">
+                    <input class="form-control" type="password" id="contrasena1" name="contrasena1" required/>
+                    <button class="btn btn-outline-primary btn-sm" type="button" id="show-password1">Mostrar</button>
+                </div>
+                <div id="mensaje-validacion1" class="text-danger small"></div>
+              </div>
+            
+              <div class="col-11 form-group mb-4">
+                <label for="password">Confirma la contraseña: *</label>
+                <div class="d-flex">
+                    <input class="form-control" type="password" id="contrasena2" name="contrasena2" required/>
+                    <button class="btn btn-outline-primary btn-sm" type="button" id="show-password2">Mostrar</button>
+                </div>
+                <div id="mensaje-validacion2" class="text-danger small"></div>
+              </div>
+
+              <div class="col-11 form-group my-2">
+                <label for="imagen">Imagen de perfil:</label><br>
+                <input class="form-control" type="file" id="foto" name="foto" accept="image/*"/>
+                <small id="profile-picture-help" class="form-text text-light"
+                  >Sube una imagen de perfil (formato: JPEG, PNG, GIF,
+                  etc.).</small>
+              </div>
+                         
+              <button class="col-11 col-md-3 btn btn-primary my-4" type="submit">Registrarse</button>
+              <p class="text-center">¿Ya tienes una cuenta? <a href="/inicioSesion" class="text-primary">Inicia sesion aquí</a></p>
+              
+            </form>
+          </div>
+        
+          
+      </main>
+
+    
+</body>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+<script src="/javascripts/formulario.js"></script>
+<script src="/javascripts/registro.js"></script>
+
+</html>

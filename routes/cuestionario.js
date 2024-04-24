@@ -3,7 +3,16 @@ var router = express.Router();
 const db = require('../connection/connection.js');
 
 router.get('/', function (req, res) {
-    res.render('finalCuestionario');
+
+    var user = req.session.user;
+
+    if (typeof user !== 'undefined') {
+        res.render('finalCuestionario');
+    }
+    else {
+        res.redirect('/inicioSesion');
+    }
+    
 });
 
 

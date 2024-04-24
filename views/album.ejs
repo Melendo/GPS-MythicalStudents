@@ -19,11 +19,11 @@
 <body>
 
     <header>
-        <%- include("titulo", { titulo: title , monedas:monedas }) %>
+        <%- include("titulo", { titulo: title , user: user }) %>
     </header>
 
     <div class="container sobre-list">
-        <h2 class="text-cromos">Lista de Cromos</h2> <!-- Movido fuera del .row -->
+        <h2 class="text-cromos"><%=album[0].NOMBRE%></h2> <!-- Movido fuera del .row -->
         <div class="row">
             <!-- Lista de cromos a la izquierda -->
             <div class="col-md-9">
@@ -48,8 +48,8 @@
             </div>
             <!-- Descripción del álbum a la derecha -->
             <div class="col-md-3">
-                <h2 class="mb-4">Descripción del Álbum</h2>
-                <p>Aquí puedes colocar la descripción del álbum de cromos.</p>
+                <h2 class="mb-4">Descripción</h2>
+                <p><%=album[0].DESCRIPCION%></p>
             </div>
         </div>
     </div>
@@ -58,5 +58,6 @@
 
     <footer><%- include("layout_principal") %></footer>
 </body>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/javascripts/cerrarSesion.js"></script>
 </html>
