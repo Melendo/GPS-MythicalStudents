@@ -26,9 +26,11 @@
     <div class="container coleccion-list">
         <h2 class="text-albumes">Lista de álbumes</h2>
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="coleccion-list">
                     <% for (var i=0; i < albumesTotales.length; i++) { %>
+                      <div class="row">
+                        <div class="col-md-4 mx-3">
                         <div class="album">
                             <% var encontrado = false; %>
                             <% for (var j=0; j < albumesPersonales.length; j++) { %>
@@ -42,18 +44,22 @@
                            
                             <img src="/mostrarAlbumColeccion/imagen/<%= albumesTotales[i].ID %>" class="img-fluid" widht = 150px>
                             <% if (!encontrado) { %>
-                                <button type="button" class="btn btn-info mt-2" data-bs-toggle="modal" data-bs-target="#modalConfirmarAgregar<%= albumesTotales[i].ID %>">Agregar</button>
+                                <button type="button" class="btn btn-info mt-4" data-bs-toggle="modal" data-bs-target="#modalConfirmarAgregar<%= albumesTotales[i].ID %>">Agregar</button>
                             <% } %>
-                            <h4><b><%= albumesTotales[i].NOMBRE %></b></h4>
+                            <h4 class="mt-2"><b><%= albumesTotales[i].NOMBRE %></b></h4>
                             <% if (!encontrado) { %>
                                 </a>
                             <% } %>
                         </div>
+                        </div>
+
+                       
+                      </div>
                     <% } %>
                 </div>
             </div>
             <!-- Descripción de los álbumes a la derecha -->
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <h2 class="mb-4"><b><%= coleccion[0].NOMBRE %></b></h2>
                 <p class=" coleccion-descripcion"><%= coleccion[0].DESCRIPCION %></p>
               

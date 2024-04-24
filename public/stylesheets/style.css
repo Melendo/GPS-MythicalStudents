@@ -244,7 +244,6 @@ footer {
   align-items: center; 
   min-height: 10vw;
   margin: 0 auto; 
-  margin-right: 2vw; 
 }
 /* Estilo para cuando se pasa el ratón por encima del botón */
 .contenedor-cuestionario-button:hover:hover {
@@ -253,10 +252,42 @@ footer {
 }
 
 .contenedor-cuestionario-button .imagen_icono {
-  width: 4vw; /* Ancho de la imagen */
+  width: 80px; /* Ancho de la imagen */
   height: auto; /* Altura automática para mantener la proporción */
-  margin-right: 2vw; /* Espacio a la derecha de la imagen */
-  margin-left: 2vw; /* Espacio a la izquierda de la imagen */
+  margin-right: 20px; /* Espacio a la derecha de la imagen */
+  margin-left: 20px; /* Espacio a la izquierda de la imagen */
+}
+
+@media (max-width: 1100px) {
+  #logo {
+    width: 300px;
+    max-width: 100%;
+
+    height: auto;
+    margin-bottom: 2px; 
+  }
+}
+
+@media (max-width: 770px) {
+  #logo {
+
+    max-width: 100%;
+    align-items: center;
+    height: auto;
+    margin-left: 30vw;
+    margin-bottom: 2px;
+  }
+}
+
+@media (max-width: 680px) {
+  #logo {
+
+    max-width: 100%;
+    align-items: center;
+    height: auto;
+    margin-left: 25vw;
+    margin-bottom: 2px;
+  }
 }
 
 /*--------------------------------------------------------*/
