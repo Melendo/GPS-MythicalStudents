@@ -47,7 +47,7 @@ router.get('/', function (req, res, next) {
                 return res.status(500).json({ error: "Error al obtener las colecciones de la base de datos" });
             }
             con.release();
-            res.render('mostrarColecciones', { user: user, title: 'MYTHICAL MINGLE', colecciones: colecciones });
+            res.status(200).render('mostrarColecciones', { user: user, title: 'MYTHICAL MINGLE', colecciones: colecciones });
         });
     });
 });
